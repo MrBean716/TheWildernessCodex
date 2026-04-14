@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS 60 Attack Pure PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#3a6bc4;--ac-light:#6090e0;--ac-dim:#1a3d8a;
+  --ac-bg:rgba(58,107,196,0.11);--ac-border:rgba(58,107,196,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#6090e0;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#3a6bc4;border-color:#3a6bc4;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #3a6bc4;color:#6090e0;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a6bc4;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#6090e0;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#6090e0;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#1a3d8a;margin:1.25rem 0 0.5rem;}
+a{color:#6090e0;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#3a6bc4,transparent);}
+.phase-label{color:#6090e0;}
+.battle-head{background:rgba(58,107,196,0.07);}
+.battle-num{border-color:var(--ac-border);color:#6090e0;}
+.you{color:#6090e0;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#1a3d8a;}
+.tip-n{color:#1a3d8a;}
+.ornament{color:#1a3d8a;}
+footer .orn{color:#1a3d8a;}
+::-webkit-scrollbar-thumb{background:#1a3d8a;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#1a3d8a,transparent);}
+.eyebrow span{color:#1a3d8a;}
+h1{text-shadow:0 0 60px rgba(58,107,196,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#1a3d8a;}
+.tier-badge{background:var(--ac-bg);color:#6090e0;border:1px solid var(--ac-border);}
+.card-slot{color:#1a3d8a;}
+.rot-label{color:#1a3d8a;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#6090e0;margin-bottom:3px;}
+.step.hl{background:rgba(58,107,196,0.14);border-color:var(--ac-border);color:#6090e0;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk cur">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(58,107,196,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Specialist Build</span></div>
+    <h1>The 60 Attack Pure</h1>
+    <p class="hero-build">60 Attack · 1 Defence · 99 Strength · Combat ~78–82</p>
+    <p class="hero-desc">The most popular 1-Defence pure. Dragon Scimitar grinds opponents down while Dragon Claws closes with a 4-hit burst that can deal 60–80 damage in under a tick.</p>
+    <span class="tier-badge">60 Attack Pure · Dragon Claws Specialist</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Attack</div><div class="stat-val">60</div><div class="stat-sub">Dragon Scimitar</div></div>
+      <div class="stat-card"><div class="stat-label">Strength</div><div class="stat-val">99</div><div class="stat-sub">Max damage</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~80</div><div class="stat-sub">±2 CB</div></div>
+      <div class="stat-card"><div class="stat-label">HP</div><div class="stat-val">~70</div><div class="stat-sub">Typical</div></div>
+      <div class="stat-card"><div class="stat-label">Claws Max</div><div class="stat-val">~80</div><div class="stat-sub">Good roll</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear & Specs</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fight Examples</button>
+    <button class="tab-btn" onclick="show('matchups',this)">Matchups</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips & Mistakes</button>
+    <button class="tab-btn" onclick="show('locations',this)">Where to Fight</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>The 60 Attack Pure</h2><p>The balanced 1-Defence pure — Dragon Scimitar sustained DPS meets Dragon Claws burst spec</p></div>
+
+    <p>The <strong>60 Attack Pure</strong> is the most popular 1-Defence pure build in OSRS. 60 Attack unlocks two crucial weapons: the <strong>Dragon Scimitar</strong> for sustained melee DPS and the <strong>Dragon Claws</strong> for one of the most powerful burst specs in the game. At 99 Strength and combat ~78, you hit opponents who have 60–75 HP — and the Dragon Claws spec can deal 60–80 total damage in four simultaneous hits.</p>
+    <p>Unlike the G Maul Pure, the Dragon Claws spec has a unique advantage: its four-hit spread makes it extremely difficult to prayer-block (even if prayed, the secondary hits still land), and its fast animation makes it harder for opponents to eat between the initial hit and the follow-up.</p><div class="info">Dragon Claws deal four hits: the first roll, then 50% of it, then 25%, then another 25%. If your first hit is 32, the total is 32+16+8+8 = 64. At 99 Strength on a 1-Defence opponent, first hits of 30–40 are common.</div><table class="data-table"><tr><th>Stat</th><th>60 Atk Pure</th><th>G Maul Pure</th><th>Zerker</th></tr><tr><td>Attack</td><td>60</td><td>60</td><td class="med">60</td></tr><tr><td>Defence</td><td class="hi">1</td><td class="hi">1</td><td class="med">45</td></tr><tr><td>Spec Weapon</td><td>Dragon Claws</td><td>Granite Maul</td><td>Dragon Claws</td></tr><tr><td>Spec Type</td><td>4-hit spread</td><td>0-tick instant</td><td>4-hit spread</td></tr><tr><td>Combat</td><td class="hi">~78–82</td><td class="hi">~78–82</td><td class="lo">~85–95</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear & Specs</h2><p>Best-in-slot gear at 1 Defence, 60 Attack</p></div>
+<h3>Core Setup</h3><div class="card-grid"><div class="card"><div class="card-slot">Head</div><div class="card-name">Berserker Helm</div><div class="card-note">45 Defence req — NOT available to this build. Use Obsidian Helm (no req, contributes to Obsidian set bonus) or a skill-relevant budget option.</div><span class="badge b-red">Cannot wear</span></div><div class="card"><div class="card-slot">Head (correct)</div><div class="card-name">Obsidian Helm</div><div class="card-note">No requirements. Part of Obsidian set bonus when using G Maul or another Obsidian weapon alongside Obsidian body/legs.</div><span class="badge b-ac">Best available</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Fighter Torso</div><div class="card-note">+4 Str bonus. Barbarian Assault reward. No Defence requirement. Cornerstone of this build's Strength setup.</div><span class="badge b-ac">Essential</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Obsidian Platelegs</div><div class="card-note">+2 Str bonus. No requirements. Best legs for 1-Defence builds.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Weapon</div><div class="card-name">Dragon Scimitar</div><div class="card-note">60 Attack req. 4-tick speed. Primary sustained DPS weapon. Pair with Dragon Defender.</div><span class="badge b-ac">Primary</span></div><div class="card"><div class="card-slot">Off-hand</div><div class="card-name">Dragon Defender</div><div class="card-note">+6 Attack, +3 Str bonus. Carried alongside scimitar for added accuracy and damage.</div><span class="badge b-gold">Standard</span></div><div class="card"><div class="card-slot">Spec Weapon</div><div class="card-name">Dragon Claws</div><div class="card-note">60 Attack req. 50% spec bar. Four-hit burst — the defining finishing weapon for this build.</div><span class="badge b-red">Finisher</span></div><div class="card"><div class="card-slot">Amulet</div><div class="card-name">Amulet of Torture</div><div class="card-note">+15 Str bonus. No Defence requirement. BIS. Budget: Amulet of Strength (+10 Str).</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Cape</div><div class="card-name">Fire Cape</div><div class="card-note">+4 Str bonus. No Defence requirement. Earned via TzTok-Jad.</div><span class="badge b-gold">Standard</span></div><div class="card"><div class="card-slot">Boots</div><div class="card-name">Granite Boots</div><div class="card-note">+4 Str bonus. 50 Strength req, no Defence req.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Ring</div><div class="card-name">Berserker Ring (i)</div><div class="card-note">+8 Slash bonus imbued. No Defence req.</div><span class="badge b-gold">Imbued</span></div></div><h3>Dragon Claws Spec Mechanic</h3><p>Dragon Claws use 50% of the spec bar per use. The spec fires four hits. Hit 1 is a normal damage roll. Hit 2 = half of Hit 1. Hit 3 = half of Hit 2. Hit 4 = same as Hit 3. This means the spec's total output scales heavily with the first hit.</p>    <div class="rotation"><div class="rot-label">Dragon Claws close</div><div class="steps"><span class="step ".rstrip()>Opponent at ~55 HP, food low</span><span class="arr">→</span><span class="step hl".rstrip()>Equip Dragon Claws</span><span class="arr">→</span><span class="step hl".rstrip()>F1 → Spec Bar</span><span class="arr">→</span><span class="step hl".rstrip()>Click opponent</span><span class="arr">→</span><span class="step good".rstrip()>4 hits land</span></div></div>
+<div class="tip">A first hit of 34 produces: 34+17+8+8 = 67 total. Against a 1-Defence opponent with ~55 HP who has eaten their last food, this is a reliable kill. The four-hit spread means even Protect from Melee only reduces one component.</div>
+  </div>
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p>Inventory for the 60 Attack Pure's mixed grind-and-spec playstyle</p></div>
+<div class="food-grid"><div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">Heals +22 HP + overheal</div><div class="food-use">Pre-fight overheal. Start fights above max HP — critical at 1 Defence.</div></div><div class="food-card"><div class="food-name">Shark</div><div class="food-heal">Heals +20 HP</div><div class="food-use">Standard. 7–9 per trip.</div></div><div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">Heals +18 HP (0-tick)</div><div class="food-use">Combo-eat essential. 4–6 per trip.</div></div></div><div class="food-grid"><div class="food-card"><div class="food-name">Super Attack Potion</div><div class="food-heal">Boosts Attack</div><div class="food-use">Drink before every fight. More scimitar accuracy = more consistent damage.</div></div><div class="food-card"><div class="food-name">Super Strength Potion</div><div class="food-heal">Boosts Strength</div><div class="food-use">Drink before every fight. Raises Dragon Claws spec max hit.</div></div><div class="food-card"><div class="food-name">Ranging Potion</div><div class="food-heal">Boosts Ranged</div><div class="food-use">If carrying MSB (i) for prayer bypass, drink before switching to ranged.</div></div><div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-heal">Restores Prayer</div><div class="food-use">1–2 doses for protection prayer uptime.</div></div><div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-heal">Run energy</div><div class="food-use">One dose — always.</div></div></div><div class="inventory">🐠 2× Anglerfish · 🐟 7× Shark · 🐟 4× Karambwan · ⚗️ Super Attack · ⚗️ Super Strength · ⚗️ Prayer Pot · ⚗️ Stamina · 🦞 Dragon Claws · 🏹 MSB (i) + Arrows (prayer bypass)</div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>Scimitar grind into Dragon Claws close</p></div>
+
+    <div class="phase"><div class="phase-label">Phase 1</div><h4>Opener</h4>    <div class="rotation"><div class="rot-label">Pre-fight</div><div class="steps"><span class="step hl".rstrip()>Anglerfish overheal</span><span class="arr">→</span><span class="step hl".rstrip()>Super Atk + Super Str</span><span class="arr">→</span><span class="step hl".rstrip()>Activate prayer</span><span class="arr">→</span><span class="step ".rstrip()>Engage — Scimitar</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Phase 2</div><h4>Scimitar Grind</h4>    <div class="rotation"><div class="rot-label">Mid-fight</div><div class="steps"><span class="step ".rstrip()>Scimitar auto-attacks</span><span class="arr">→</span><span class="step bad".rstrip()>HP below 35</span><span class="arr">→</span><span class="step hl".rstrip()>Combo eat</span><span class="arr">→</span><span class="step ".rstrip()>Watch opponent food</span></div></div>
+<p>Force opponent to eat by landing consistent damage. 99 Strength with scimitar hits 20–35 reliably against 1-Defence opponents. Wait until their food is almost gone.</p></div>
+    <div class="phase"><div class="phase-label">Phase 3</div><h4>Dragon Claws Close</h4>    <div class="rotation"><div class="rot-label">Dragon Claws spec</div><div class="steps"><span class="step ".rstrip()>Opponent ~55 HP, 1–2 food left</span><span class="arr">→</span><span class="step hl".rstrip()>Switch to Dragon Claws</span><span class="arr">→</span><span class="step hl".rstrip()>F1 → Spec</span><span class="arr">→</span><span class="step good".rstrip()>4-hit burst lands</span><span class="arr">→</span><span class="step ".rstrip()>Switch back to Scimitar if needed</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Prayer Bypass</div><h4>When They Pray Melee</h4>    <div class="rotation"><div class="rot-label">MSB (i) prayer switch</div><div class="steps"><span class="step bad".rstrip()>Protect Melee activated</span><span class="arr">→</span><span class="step hl".rstrip()>Equip MSB (i)</span><span class="arr">→</span><span class="step hl".rstrip()>F1 → Spec</span><span class="arr">→</span><span class="step good".rstrip()>2 arrows — unblocked</span><span class="arr">→</span><span class="step ".rstrip()>Return to Scimitar</span></div></div>
+</div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p>Five annotated fights for the 60 Attack Pure</p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">vs. 1-Def Pure — Scimitar + Claws</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Mirror bracket fight. You (combat 80) vs SwordFury (combat 78, Dragon Scimitar, Granite Maul).</div><div class="log-line"><span class="you">You</span> pot up, engage. Scimitar: <span class="dmg">29</span>, <span class="dmg">24</span>, <span class="dmg">33</span>. SwordFury has eaten 3 sharks.</div><div class="log-line"><span class="them">SwordFury</span> G Maul specs you: <span class="dmg">28 + 21</span>. You combo eat — back to 75 HP.</div><div class="log-line">SwordFury's spec bar is empty. 2 food left, ~50 HP.</div><div class="log-line"><span class="you">You</span> Dragon Claws: <span class="dmg">31+15+7+7</span> = 60. <span class="good-c">Kill from 50 HP.</span></div><div class="lesson"><strong>Lesson:</strong> Surviving the G Maul double spec (Anglerfish overheal helped) and waiting until their spec was gone before firing your own Claws is the perfect sequence. Your Claws cost 50% spec bar but arrived when they had no response.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">vs. Zerker — Punching Up</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">You (1-Def, combat 80) vs ZerkerBoss (45 Def, combat 88, Dragon Scimitar, Dragon Claws).</div><div class="log-line"><span class="you">You</span> open with MSB (i) spec — ZerkerBoss activates Protect Missiles too late: <span class="dmg">20 + 24</span>.</div><div class="log-line"><span class="them">ZerkerBoss</span> activates Protect Melee. You switch back to scimitar and swap prayer too.</div><div class="log-line">Trade hits — their 45 Defence reduces your scimitar hits to ~18 average. Longer grind needed.</div><div class="log-line"><span class="them">ZerkerBoss</span> Dragon Claws spec: <span class="dmg">26+13+6+6</span> = 51. You survive on 24 HP — Anglerfish overheal.</div><div class="log-line"><span class="you">You</span> combo eat. Spec bar intact. Their spec is gone. Dragon Claws: <span class="dmg">34+17+8+8</span> = 67. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> Their higher Defence made the grind phase harder, but the MSB opener dealt 44 unprotected damage before prayer activated. Surviving their Claws with overheal, then deploying your own Claws after theirs was spent, reversed the gear disadvantage.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">III</div><div class="battle-title">vs. Prayer Tank — Full Prayer Bypass</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Opponent activates Protect from Melee at fight start and never drops it.</div><div class="log-line"><span class="them">PrayBot</span> Protect Melee active. Scimitar and Claws deal 0.</div><div class="log-line"><span class="you">You</span> MSB (i) spec: <span class="dmg">18 + 22</span> = 40. Their prayer doesn't block ranged.</div><div class="log-line"><span class="them">PrayBot</span> switches to Protect Missiles. You switch to Scimitar.</div><div class="log-line">Scimitar: <span class="dmg">29</span>. They're at ~25 HP. One food left.</div><div class="log-line">Dragon Claws: <span class="dmg">27+13+6+6</span> = 52. <span class="good-c">Kill from 25 HP.</span></div><div class="lesson"><strong>Lesson:</strong> Prayer switching is the 60 Attack Pure's solution to prayer tanks. MSB forces them into a choice: drop Protect Melee (and take scimitar hits) or switch to Protect Missiles (and take the scimitar/claw hits). Either way you win if you read it correctly.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">IV</div><div class="battle-title">vs. Med-Level — Resource War</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">You (1-Def, combat 80) vs BandosMed (75/99/75, combat 104, Bandos, Abyssal Whip). They outrank you by 24 levels.</div><div class="log-line"><span class="them">BandosMed</span> activates Piety. Whip: <span class="dmg">27</span>. You're at 75 HP.</div><div class="log-line"><span class="you">You</span> scimitar: <span class="dmg">32</span>. Their 75 Defence barely reduces it at 99 Str.</div><div class="log-line">Trade hits. Their DDS spec: <span class="dmg">18+14</span>. Combo eat — back to 72 HP.</div><div class="log-line">BandosMed on 4 food left, ~55 HP. Activate Protect Melee.</div><div class="log-line"><span class="you">You</span> MSB spec bypass: <span class="dmg">21+18</span>. Down to ~16 HP. Dragon Claws: <span class="dmg">16+8+4+4</span> = 32. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> The 1-Defence pure's 99 Strength forces even 75-Defence accounts to eat frequently. Their DPS advantage was offset by your food management and Anglerfish overheal. The MSB prayer bypass at the end avoided their activated Protect Melee.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">V</div><div class="battle-title">Learning Death — Claws at Wrong Time</div><div class="outcome o-lose">Defeat</div></div><div class="battle-body"><div class="battle-setup">Classic early spec mistake.</div><div class="log-line"><span class="you">You</span> Dragon Claws spec at 75 HP opponent with 8 food. First hit: <span class="dmg">20</span>. Total: <span class="dmg">20+10+5+5</span> = 40.</div><div class="log-line">They combo eat through 40 damage — back to 75 HP. Your spec bar: 50% gone.</div><div class="log-line">Fight grinds. You run low on food first at 1 Defence.</div><div class="log-line"><span class="them">Opponent</span> Dragon Claws at 40 HP you: <span class="dmg">28+14+7+7</span> = 56. <span class="dmg">Dead.</span></div><div class="lesson"><strong>Lesson:</strong> A 20 first-hit Claws spec against a full-HP stocked opponent was the mistake. They ate through 40 total damage trivially. The same Claws spec when they're at 55 HP with 1 food left would have killed cleanly. First-hit matters — but timing matters more.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-matchups">
+    <div class="s-head"><h2>Matchups</h2><p>60 Attack Pure target assessment</p></div>
+<table class="data-table"><tr><th>Opponent</th><th>Strategy</th><th>Prayer</th><th>Difficulty</th></tr><tr><td>1-Def Pure</td><td>Scim grind, don't spec first, Claws close</td><td>Protect Melee</td><td class="hi">Favourable</td></tr><tr><td>G Maul Pure</td><td>Survive their spec with overheal, then Claws</td><td>Protect Melee</td><td class="hi">Favourable</td></tr><tr><td>Zerker (45 Def)</td><td>MSB opener, Claws after their spec burned</td><td>Protect Melee/Missiles</td><td class="med">Competitive</td></tr><tr><td>Med-Level</td><td>Force food drain, MSB prayer bypass</td><td>Protect Melee</td><td class="med">Winnable</td></tr><tr><td>Prayer Tank</td><td>MSB spec bypass, Claws when they drop prayer</td><td>Swap as needed</td><td class="med">Manageable</td></tr><tr><td>Endgame Mains</td><td>Escape immediately</td><td>Protect Item</td><td class="lo">Do not fight</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips & Mistakes</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>Never spec above 55 HP opponent with food.</strong> Dragon Claws with a 20 first-hit deals 40 total — they eat through it. Wait for 55 HP or below with 1–2 food left.</div></li><li><div class="tip-n">02</div><div><strong>Anglerfish overheal before every fight.</strong> At 1 Defence, a lucky 35-hit from any spec weapon is potentially lethal from base HP. Overheal is your safety margin.</div></li><li><div class="tip-n">03</div><div><strong>Pot both Super Attack AND Super Strength.</strong> Super Strength raises max hit. Super Attack raises accuracy. At 1 Defence where every fight is a race, both matter.</div></li><li><div class="tip-n">04</div><div><strong>MSB (i) is not optional.</strong> Any opponent who prays Melee throughout the fight completely shuts down your scimitar and Claws. The MSB prayer bypass is your answer.</div></li><li><div class="tip-n">05</div><div><strong>Count their food.</strong> You're waiting for the food depletion window to spec. If you can see their inventory (BH UI, or watching them eat), count down. Spec when they're on last food.</div></li><li><div class="tip-n">06</div><div><strong>Dragon Claws first hit decides everything.</strong> A 30+ first hit means 60+ total. A 15 first hit means 30 total. Pre-eat if their Claws bar is at 50% — anticipate the spec and eat to stay out of kill range.</div></li><li><div class="tip-n">07</div><div><strong>Never train Defence.</strong> 1-Defence is the entire premise of the build. Any XP is permanent. Check every quest reward, every training method, every XP lamp.</div></li></ul><div class="info">The 60 Attack Pure is arguably the best all-round 1-Defence build — you have the fast scimitar for grinding, the Dragon Claws for closing, and the option of adding MSB for prayer bypass. The only thing missing compared to a zerker is the defence level.</div>
+  </div>
+  <div class="tab-panel" id="p-locations">
+    <div class="s-head"><h2>Where to Fight</h2><p></p></div>
+
+    <h3>Clan Wars</h3><p>Drill Dragon Claws F1 equip + spec, MSB prayer reading switch, and combo eating. The Claws spec needs to be instant under pressure.</p>
+    <h3>Bounty Hunter</h3><p>Primary competitive environment. Matched targets. BH points imbue your Berserker Ring (i). Best bracket for this build.</p>
+    <h3>Edgeville Wilderness</h3><p>Other pures, zerkers, and mid-level accounts regularly appear here. Rich target pool at combat 78–82. Stay level 1–10 initially.</p>
+    <h3>Last Man Standing</h3><p>No gear advantage here but excellent for Dragon Claws timing and MSB switching mechanics.</p><div class="warn">At combat 80, you occasionally face 90–100 CB accounts. Always assess their gear — Bandos + Torture is manageable, Scythe/TBow is not your fight.</div>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Dragon Claws spec formula: Hit1 + Hit1/2 + Hit1/4 + Hit1/4. First hit determines total. Berserker Helm requires 45 Defence — not available to 1-Defence builds. Use Obsidian Helm.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
