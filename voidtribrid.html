@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Void Tribrid PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#1a5a8a;--ac-light:#2a80c0;--ac-dim:#0d3055;
+  --ac-bg:rgba(26,90,138,0.11);--ac-border:rgba(26,90,138,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#2a80c0;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#1a5a8a;border-color:#1a5a8a;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #1a5a8a;color:#2a80c0;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#1a5a8a;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#2a80c0;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#2a80c0;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#0d3055;margin:1.25rem 0 0.5rem;}
+a{color:#2a80c0;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#1a5a8a,transparent);}
+.phase-label{color:#2a80c0;}
+.battle-head{background:rgba(26,90,138,0.07);}
+.battle-num{border-color:var(--ac-border);color:#2a80c0;}
+.you{color:#2a80c0;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#0d3055;}
+.tip-n{color:#0d3055;}
+.ornament{color:#0d3055;}
+footer .orn{color:#0d3055;}
+::-webkit-scrollbar-thumb{background:#0d3055;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#0d3055,transparent);}
+.eyebrow span{color:#0d3055;}
+h1{text-shadow:0 0 60px rgba(26,90,138,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#0d3055;}
+.tier-badge{background:var(--ac-bg);color:#2a80c0;border:1px solid var(--ac-border);}
+.card-slot{color:#0d3055;}
+.rot-label{color:#0d3055;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#2a80c0;margin-bottom:3px;}
+.step.hl{background:rgba(26,90,138,0.14);border-color:var(--ac-border);color:#2a80c0;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk cur">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(26,90,138,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Void Build</span></div>
+    <h1>Void Tribrid</h1>
+    <p class="hero-build">42 Defence · All Three Void Helms · 94 Magic · Full Tribrid</p>
+    <p class="hero-desc">Three Void helms, one fight. The Void Mage Helm's +45% magic accuracy means Ice Barrage freezes land even through Protect from Magic — then Void Melee Helm for free Whip hits while frozen, Void Ranger for Blowpipe, Veng+AGS to close.</p>
+    <span class="tier-badge">Void Tribrid · Three-Style Void</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">42</div><div class="stat-sub">Void minimum</div></div>
+      <div class="stat-card"><div class="stat-label">Styles</div><div class="stat-val">3</div><div class="stat-sub">All helms</div></div>
+      <div class="stat-card"><div class="stat-label">Freeze</div><div class="stat-val">Through Protect Magic</div><div class="stat-sub">Void Mage +45%</div></div>
+      <div class="stat-card"><div class="stat-label">Close</div><div class="stat-val">Veng+AGS</div><div class="stat-sub">Kill combo</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~92</div><div class="stat-sub">±4 CB</div></div>
+      <div class="stat-card"><div class="stat-label">Req</div><div class="stat-val">94 Magic</div><div class="stat-sub">Barrage + Veng</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fights</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>Void Tribrid</h2><p>All three Void helms — Melee, Ranger, and Mage — full tribrid on a Void framework</p></div>
+
+    <p>The <strong>Void Tribrid</strong> uses all three Void helmets — Melee, Ranger, and Mage — cycling between them mid-fight. The Void Mage Helm's +45% magic accuracy makes Ice Barrage freezes land reliably without heavy Magic investment, and the freeze converts into free melee or ranged hits while the opponent is locked in place.</p>
+    <p>The Void Tribrid is the most mechanically demanding Void build — but produces the most powerful output. Freezing an opponent, switching to Void Melee Helm for free Whip hits while they're frozen, then responding to their prayer update with Blowpipe or a re-freeze creates a damage pattern no single protection prayer can block.</p><div class="tip">The Void Mage Helm's +45% magic accuracy applies even through Protect from Magic — the spell deals 0 damage but the FREEZE still lands. This makes Void Tribrid freeze attempts far more reliable than other builds: even a protected opponent gets frozen.</div>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear</h2><p>Three Void helms and full set</p></div>
+<div class="card-grid"><div class="card"><div class="card-slot">Head (ranged)</div><div class="card-name">Void Ranger Helm</div><div class="card-note">Ranged set bonus.</div><span class="badge b-ac">Ranged</span></div><div class="card"><div class="card-slot">Head (melee)</div><div class="card-name">Void Melee Helm</div><div class="card-note">Melee set bonus.</div><span class="badge b-ac">Melee</span></div><div class="card"><div class="card-slot">Head (magic)</div><div class="card-name">Void Mage Helm</div><div class="card-note">+45% magic accuracy. Freeze reliably.</div><span class="badge b-blue">Magic/Freeze</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Elite Void Top</div><div class="card-note">Set piece. Always on.</div><span class="badge b-red">Always on</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Elite Void Robe</div><div class="card-note">Set piece. Always on.</div><span class="badge b-red">Always on</span></div><div class="card"><div class="card-slot">Gloves</div><div class="card-name">Void Knight Gloves</div><div class="card-note">Required. Always on.</div><span class="badge b-red">Always on</span></div><div class="card"><div class="card-slot">Melee weapon</div><div class="card-name">Abyssal Whip</div><div class="card-note">75 Atk. Primary melee.</div><span class="badge b-gold">Melee</span></div><div class="card"><div class="card-slot">Ranged weapon</div><div class="card-name">Toxic Blowpipe</div><div class="card-note">75 Ranged. Primary ranged.</div><span class="badge b-gold">Ranged</span></div><div class="card"><div class="card-slot">Magic</div><div class="card-name">Ice Barrage</div><div class="card-note">94 Magic. Freeze + freeze through Protect Magic.</div><span class="badge b-blue">Freeze</span></div><div class="card"><div class="card-slot">Spec</div><div class="card-name">AGS / Dragon Claws</div><div class="card-note">75/60 Atk. Kill combo.</div><span class="badge b-red">Spec</span></div><div class="card"><div class="card-slot">Utility</div><div class="card-name">Vengeance</div><div class="card-note">94 Magic. Veng+spec burst.</div><span class="badge b-red">Kill combo</span></div></div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>Full Void Tribrid sequence</p></div>
+
+    <div class="phase"><div class="phase-label">Opener</div><h4>Freeze Then Melee</h4>    <div class="rotation"><div class="rot-label">Freeze opener</div><div class="steps"><span class="step hl".rstrip()>Cast Veng during approach</span><span class="arr">→</span><span class="step hl".rstrip()>Equip Void Mage Helm</span><span class="arr">→</span><span class="step hl".rstrip()>Ice Barrage — freeze lands (even through Protect Magic)</span><span class="arr">→</span><span class="step hl".rstrip()>Immediately Void Melee Helm + Whip</span><span class="arr">→</span><span class="step good".rstrip()>They prayed Protect Magic — melee unblocked</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Mid-Fight</div><h4>Three-Style Loop</h4>    <div class="rotation"><div class="rot-label">Tribrid prayer loop</div><div class="steps"><span class="step hl".rstrip()>Protect Melee → Void Ranger + Blowpipe</span><span class="arr">→</span><span class="step hl".rstrip()>Protect Missiles → Void Melee + Whip</span><span class="arr">→</span><span class="step good".rstrip()>Protect Magic → Melee or Ranged (both unblocked)</span><span class="arr">→</span><span class="step hl".rstrip()>Re-freeze when available</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Close</div><h4>Veng+Spec</h4>    <div class="rotation"><div class="rot-label">Kill combo</div><div class="steps"><span class="step ".rstrip()>Veng active</span><span class="arr">→</span><span class="step ".rstrip()>Let hit land</span><span class="arr">→</span><span class="step hl".rstrip()>Recoil + AGS/Claws spec</span><span class="arr">→</span><span class="step good".rstrip()>80–100+ burst</span></div></div>
+</div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p></p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">Full Tribrid Sequence — Void Framework</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">You (Void Tribrid, ~92 CB) vs MaxedOpponent who fights defensively with prayer switching.</div><div class="log-line">Approach. Veng cast. Ice Barrage: <span class="dmg">26</span>. Frozen. Opponent prayed Magic — didn't matter.</div><div class="log-line">Void Melee Helm + Whip. Piety. Whip hits while frozen: <span class="dmg">34, 29</span>.</div><div class="log-line">Unfreeze. Protect Melee. Void Ranger Helm + Blowpipe: <span class="dmg">27, 24</span>.</div><div class="log-line">Protect Missiles. Void Melee Helm. Whip: <span class="dmg">31</span>.</div><div class="log-line">Veng triggers. AGS: <span class="dmg">58</span>. Veng: <span class="dmg">22</span>. <span class="good-c">80 burst. Kill from 62 HP.</span></div><div class="lesson"><strong>Lesson:</strong> The freeze landed through Protect Magic — 2 free Whip hits dealt 63 damage while the opponent was frozen. The subsequent prayer exchanges never found a safe prayer: Blowpipe bypassed Protect Melee, Whip bypassed Protect Missiles. The Veng+AGS combo closed a fight already decided by the freeze opener.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">vs. Standard Void Pure — Adding Freeze</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Both Void accounts. You have Void Mage Helm (tribrid); they're standard hybrid.</div><div class="log-line">Extended style exchange. Roughly even.</div><div class="log-line">You equip Void Mage Helm. Ice Barrage — freeze (they prayed Missiles). Freeze still lands.</div><div class="log-line">Void Melee Helm + Whip through their Protect Missiles: <span class="dmg">32, 27</span>.</div><div class="log-line">They're at 40 HP. Your Claws: <span class="dmg">29+14+7+7</span> = 57. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> The freeze was the differentiator between two nearly identical hybrid builds. The standard Void Pure had no answer for the freeze — they prayed Missiles, the freeze still landed, and 5 free ticks of Whip hits created a health gap they couldn't recover from.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>Void Mage Helm freezes land through Protect from Magic.</strong> This is the defining advantage of Void Tribrid over non-Void tribrids. +45% magic accuracy means freezes are highly reliable even against protected opponents.</div></li><li><div class="tip-n">02</div><div><strong>The freeze opener is your strongest sequence.</strong> Freeze → immediate Void Melee Helm swap → they prayed Magic so melee unblocked → 5 free Whip ticks. Practise the helm swap to be under 1 tick.</div></li><li><div class="tip-n">03</div><div><strong>Full Void Pure guide covers hybrid fundamentals.</strong> See void.html before attempting tribrid. The two-style rotation must be automatic before adding the magic helm.</div></li><li><div class="tip-n">04</div><div><strong>Vengeance + AGS is still the kill combo.</strong> Regardless of how the fight unfolds, it ends with Veng recoil + spec. Pre-cast during approach, re-cast after triggering.</div></li><li><div class="tip-n">05</div><div><strong>Three helms means three inventory slots.</strong> You'll carry Void Ranger Helm, Void Melee Helm, and Void Mage Helm in your inventory alongside food and potions. Plan inventory carefully.</div></li></ul>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Void Mage Helm provides +45% magic accuracy — Ice Barrage freezes land through Protect from Magic (0 damage but freeze still applies). Ice Barrage requires 94 Magic and Desert Treasure I. Vengeance requires Lunar Diplomacy. All four Void pieces must be worn simultaneously.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

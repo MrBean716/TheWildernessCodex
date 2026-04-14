@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Obby Mauler PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+  /* Obby Mauler accent — deep crimson/lava */
+  --ob:#c43c1e;--ob-light:#e06040;--ob-dim:#7a2410;
+  --ob-bg:rgba(196,60,30,0.11);--ob-border:rgba(196,60,30,0.4);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+
+/* ── NAV ── */
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+
+/* ── WRAPPER ── */
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(196,60,30,0.09) 0%,transparent 65%);pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;background:linear-gradient(to right,transparent,var(--ob-dim),transparent);}
+.eyebrow span{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.3em;color:var(--ob-dim);text-transform:uppercase;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 0 60px rgba(196,60,30,0.25),0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;color:var(--ob-dim);text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;background:var(--ob-bg);color:var(--ob-light);border:1px solid var(--ob-border);text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+
+/* ── STAT ROW ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{color:var(--ob-light);border-color:var(--ob-border);background:var(--ob-bg);transform:translateY(-1px);}
+.tab-btn.active{color:#fff;background:var(--ob);border-color:var(--ob);font-weight:600;}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+
+/* ── SECTION HEAD ── */
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+
+/* ── TYPOGRAPHY ── */
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:var(--ob-light);letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--ob-dim);margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{color:var(--ob-light);text-decoration:none;}
+a:hover{color:var(--gold-light);}
+
+/* ── CALLOUTS ── */
+.tip,.warn,.info,.danger,.ob-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.ob-note{background:var(--ob-bg);border-left:3px solid var(--ob);color:var(--ob-light);}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.ob-note::before{content:'✦ OBBY MAULER SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:var(--ob-light);}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card:hover{border-color:var(--ob-border);background:var(--ob-bg);}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--ob-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-ob{background:var(--ob-bg);color:var(--ob-light);border:1px solid var(--ob-border);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+
+/* ── ROTATION ── */
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ob-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(196,60,30,0.05);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:var(--ob-bg);border-color:var(--ob-border);color:var(--ob-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.step.blue{background:rgba(26,61,107,0.2);border-color:rgba(74,144,217,0.35);color:#9ac4f0;}
+.arr{color:var(--ob-dim);font-size:0.82rem;}
+
+/* ── FOOD GRID ── */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--ob-light);margin-bottom:3px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+
+/* ── PHASE ── */
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;background:linear-gradient(to bottom,var(--ob),transparent);}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--ob-light);text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+
+/* ── BATTLE ── */
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{background:rgba(196,60,30,0.07);border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--ob-border);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;color:var(--ob-light);flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:var(--ob-bg);color:var(--ob-light);border:1px solid var(--ob-border);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.you{color:var(--ob-light);font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.dmg{color:#d47070;font-weight:700;}
+.good{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.lesson strong{color:var(--ob-dim);}
+
+/* ── TIPS LIST ── */
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(196,60,30,0.08);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--ob-dim);min-width:21px;padding-top:2px;font-weight:600;}
+
+/* ── INVENTORY ── */
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+
+/* ── DATA TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ob-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(196,60,30,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;} .lo{color:#d47070;} .med{color:var(--ob-light);}
+
+/* ── ORNAMENT ── */
+.ornament{text-align:center;color:var(--ob-dim);font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--ob-dim);opacity:0.4;display:block;margin-bottom:0.6rem;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+::-webkit-scrollbar-thumb{background:var(--ob-dim);border-radius:3px;}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk cur">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="eyebrow"><span>Specialist Build</span></div>
+    <h1>The Obby Mauler</h1>
+    <p class="hero-build">1 Attack · 1 Defence · 99 Strength · Combat ~40–50</p>
+    <p class="hero-desc">The most extreme PvP account in OSRS. One Attack, one Defence, ninety-nine Strength. The Granite Maul fires 0-tick specs that arrive before any opponent can respond — wielded by a character at combat level so low they fight opponents whose maximum HP is half yours.</p>
+    <span class="tier-badge">Obby Mauler · Most Extreme Pure Build</span>
+
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Attack</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Strength</div><div class="stat-val">99</div><div class="stat-sub">Only offensive stat</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~40–50</div><div class="stat-sub">Ultra low bracket</div></div>
+      <div class="stat-card"><div class="stat-label">HP</div><div class="stat-val">~70</div><div class="stat-sub">If HP trained</div></div>
+      <div class="stat-card"><div class="stat-label">G Maul Max</div><div class="stat-val">~57</div><div class="stat-sub">At 99 Str + BIS</div></div>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('mechanics',this)">G Maul Mechanics</button>
+    <button class="tab-btn" onclick="show('builds',this)">Build Variants</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fight Examples</button>
+    <button class="tab-btn" onclick="show('matchups',this)">Matchups</button>
+    <button class="tab-btn" onclick="show('fkeys',this)">F-Keys & Setup</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips & Mistakes</button>
+    <button class="tab-btn" onclick="show('locations',this)">Where to Fight</button>
+  </div>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>The Obby Mauler Philosophy</h2><p>Why 1 Attack, 1 Defence, 99 Strength is the most asymmetric account in OSRS PvP</p></div>
+
+    <p>The <strong>Obby Mauler</strong> — short for Obsidian Mauler — is the most radically streamlined PvP build in OSRS. Its design is pure reduction: strip every stat that isn't Strength to its absolute minimum, put all levelling investment into a single offensive number, and use a weapon that requires no Attack level to wield.</p>
+
+    <p>The result is a character at combat level 40–50 that hits like a level 90 account. Opponents in its combat range have 30–45 HP at most. The Obby Mauler has 99 Strength. The disparity is the strategy.</p>
+
+    <h3>The Three Pillars</h3>
+    <ul>
+      <li><strong>1 Attack</strong> — never trained. Keeps combat level as low as mathematically possible. The Granite Maul requires no Attack level — it is the only viable melee spec weapon usable at 1 Attack.</li>
+      <li><strong>1 Defence</strong> — never trained. Keeps combat level low. The account wears leather armour or the Obsidian set, which has no Defence requirement.</li>
+      <li><strong>99 Strength</strong> — the sole investment. Every resource, every hour spent training, goes here. At 99 Strength with maximum Strength bonus gear, the Granite Maul special attack can hit <strong>57 damage</strong> in a single hit.</li>
+    </ul>
+
+    <h3>The Combat Level Arithmetic</h3>
+    <p>Combat level is calculated from Attack, Strength, Defence, Hitpoints, Prayer, Magic, and Ranged. With 1 Attack, 1 Defence, and 99 Strength, the base melee combat contribution is:</p>
+    <ul>
+      <li>Melee CB = (Attack + Strength) × 0.325 = (1 + 99) × 0.325 = 32.5</li>
+      <li>Total CB ≈ 32 before adding HP and Prayer contributions</li>
+      <li>With 1 Prayer and base 10 HP: combat level ≈ 36</li>
+      <li>With 52 Prayer and 70 HP: combat level ≈ 52</li>
+    </ul>
+    <p>At combat 40, opponents have 35–45 HP. Your 99 Strength makes the Granite Maul capable of one-shotting many of them with a single special attack. This is the foundational power of the build.</p>
+
+    <div class="ob-note">The Obsidian armour set (Obsidian helm, platebody, platelegs) provides a unique set bonus when worn together: +10% melee accuracy and +10% melee damage when wielding an Obsidian weapon. Combined with the Granite Maul (also from TzHaar), this bonus applies to both the auto-attack and the special attack — making Obsidian gear the best-in-slot choice for Obby Mauler builds, despite having no Defence requirement and being usable at any Defence level.</div>
+
+    <h3>What Makes This Different From Other Pures</h3>
+    <table class="data-table">
+      <tr><th>Build</th><th>Attack</th><th>Defence</th><th>Combat Range</th><th>Primary Weapon</th><th>One-Shot Capable?</th></tr>
+      <tr><td>Obby Mauler</td><td class="hi">1</td><td class="hi">1</td><td class="hi">~40–52</td><td>Granite Maul</td><td class="hi">Yes — frequently</td></tr>
+      <tr><td>1-Def Pure (60 Atk)</td><td class="med">60</td><td class="hi">1</td><td class="med">~75–82</td><td>Dragon Scimitar + G Maul</td><td class="med">With double spec</td></tr>
+      <tr><td>Zerker</td><td class="med">60</td><td class="med">45</td><td class="lo">~82–95</td><td>Dragon Scimitar + Claws</td><td class="med">With Veng + spec</td></tr>
+      <tr><td>Med-Level</td><td class="lo">75</td><td class="lo">75</td><td class="lo">~104</td><td>Abyssal Whip + DDS</td><td class="lo">Rarely</td></tr>
+    </table>
+
+    <h3>Limitations to Be Aware Of</h3>
+    <p>The Obby Mauler is not without serious limitations. It fights in the lowest combat bracket — which means most encounters are against F2P players, low-level pures, and low-level main accounts. The bracket is very dependent on finding prey: the account is devastating against the right targets and largely irrelevant against defence accounts with prayer and 99 HP. Understanding who to fight and who to walk away from is the primary skill of an Obby Mauler player.</p>
+
+    <div class="warn">The Obby Mauler is not a strong Wilderness progression account. It dominates in edge PKing and F2P worlds but has very limited applications in mid-to-deep Wilderness where opponents regularly have 75+ HP and protection prayers. Know your theatre of operation before committing to this build.</div>
+  </div>
+
+  <!-- ═══ G MAUL MECHANICS ═══ -->
+  <div class="tab-panel" id="p-mechanics">
+    <div class="s-head"><h2>Granite Maul Mechanics</h2><p>The 0-tick special attack explained in full — how it works, why it's unique, and how to execute it correctly</p></div>
+
+    <h3>What Makes the G Maul Special</h3>
+    <p>Every other special attack in OSRS fires at the beginning of your next attack cycle — you activate the spec bar and wait for your character's next swing, which then deals the spec hit. The Granite Maul is different. Its special attack fires as a <strong>zero-tick additional attack</strong> on top of your existing attack cycle, not instead of it.</p>
+    <p>This means: on the tick your character swings for any reason, you can right-click the Granite Maul and select "Use Special Attack" to fire an additional Granite Maul hit on the same (or immediately following) tick. The opponent receives two hits so close together they cannot eat between them.</p>
+
+    <h3>The 0-Tick Technical Explanation</h3>
+    <p>In OSRS, a "0-tick attack" means the attack happens on tick 0 — the same tick the interaction was triggered. Normally your character's weapon attacks on a fixed cycle (the whip attacks every 4 ticks, the scimitar every 4 ticks). The G Maul spec inserts an additional hit <strong>outside this cycle</strong>, with zero ticks of delay from when you right-click it.</p>
+    <p>The practical result is the "G Maul stack" — the combination of a preceding auto-attack or weapon hit followed immediately by one or two G Maul specs arriving so fast that the opponent's response window is effectively zero.</p>
+
+    <div class="ob-note">The G Maul spec does not use a percentage-based special attack bar in the traditional sense. It has its own charge system — each spec drains approximately 50% of its special energy bar, which means you can fire two specs in rapid succession (using 100% of the maul's own bar), then wait for it to recharge before speccing again. The recharge is roughly 30 seconds for a full bar.</div>
+
+    <h3>The Two-Spec Burst</h3>
+    <p>The defining technique of the Obby Mauler is firing two G Maul specs back to back in rapid succession:</p>
+
+    <div class="rotation">
+      <div class="rot-label">Standard double G Maul spec</div>
+      <div class="steps">
+        <div class="step">Any hit lands on opponent (auto or weapon)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Right-click G Maul → "Use Special Attack"</div>
+        <div class="arr">→</div>
+        <div class="step hl">Spec #1 fires (e.g. 32 damage)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Right-click G Maul → "Use Special Attack" again</div>
+        <div class="arr">→</div>
+        <div class="step hl">Spec #2 fires (e.g. 28 damage)</div>
+        <div class="arr">→</div>
+        <div class="step good">60 total damage, ~1 tick window</div>
+      </div>
+    </div>
+
+    <h3>Why Opponents Cannot Eat Through It</h3>
+    <p>Eating food takes one game tick (0.6 seconds). The G Maul double spec fires two hits within approximately one game tick total — or at worst across two consecutive ticks. Against a target at 50 HP, two specs hitting 28 and 26 total 54 damage. The target would need to eat two separate food items in two consecutive ticks to survive — and their first eat only heals 20 HP, meaning if the second spec arrives before their second eat, they die.</p>
+    <p>At the Obby Mauler's combat level, opponents have 30–45 HP. A single G Maul spec at 99 Strength can frequently one-shot them outright. This is not a corner case — it is the standard outcome.</p>
+
+    <h3>The Obsidian Set Bonus</h3>
+    <p>Wearing the full Obsidian set (Obsidian helm, platebody, platelegs) while wielding an Obsidian weapon gives <strong>+10% melee accuracy and +10% melee damage</strong>. The Granite Maul counts as an Obsidian weapon for this purpose. Combined with 99 Strength and the Berserker Necklace, the damage output is the highest available at 1 Attack level.</p>
+
+    <div class="rotation">
+      <div class="rot-label">Max hit calculation context (approximate)</div>
+      <div class="steps">
+        <div class="step">99 Strength</div>
+        <div class="arr">→</div>
+        <div class="step hl">Super Strength Potion (+14 levels)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Obsidian set bonus (+10%)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Berserker Necklace (+20% vs Obsidian)</div>
+        <div class="arr">→</div>
+        <div class="step good">G Maul spec max hit ~57</div>
+      </div>
+    </div>
+
+    <h3>Berserker Necklace Interaction</h3>
+    <p>The <strong>Berserker Necklace</strong> gives +20% damage specifically when wielding an Obsidian weapon — including the Granite Maul. This is a multiplicative damage boost on top of the Obsidian set bonus. At 99 Strength, Berserker Necklace is the single most impactful amulet slot item for this build. It does <strong>not</strong> improve accuracy — the +20% is purely damage. Since the G Maul already has high base accuracy at 99 Strength against low-defence targets, this trade is worthwhile.</p>
+
+    <div class="tip">The Berserker Necklace + Obsidian set + G Maul spec is the maximum damage configuration for this build. At 99 Strength with a Super Strength Potion active, the G Maul spec maximum hit reaches approximately 57 damage. Against opponents with 35–45 HP, a single spec frequently ends the fight.</div>
+  </div>
+
+  <!-- ═══ BUILD VARIANTS ═══ -->
+  <div class="tab-panel" id="p-builds">
+    <div class="s-head"><h2>Build Variants</h2><p>The main Obby Mauler configurations and how each stat choice affects your combat level and target bracket</p></div>
+
+    <p>The core of the Obby Mauler never changes — 1 Attack, 1 Defence, 99 Strength. What varies is how many additional stats are trained, and crucially, whether they're trained at all. Every stat you add beyond the core raises your combat level, shifting you into a bracket with healthier, better-geared opponents. This is a trade-off you must consciously decide.</p>
+
+    <h3>Variant 1 — Pure Core (Minimum Combat, ~CB 36–42)</h3>
+    <p>The most extreme version. Train only Strength to 99. Keep everything else at 1 or base. Hitpoints levels up passively with Strength training (you gain HP XP alongside combat XP), but you can minimise this.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Attack</div><div class="card-name">1</div><div class="card-note">Never trained. The Granite Maul is wielded at any Attack level.</div></div>
+      <div class="card"><div class="card-slot">Strength</div><div class="card-name">99</div><div class="card-note">All training goes here. Maximum damage output.</div></div>
+      <div class="card"><div class="card-slot">Defence</div><div class="card-name">1</div><div class="card-note">Never trained. Wears leather armour or Obsidian set.</div></div>
+      <div class="card"><div class="card-slot">HP</div><div class="card-name">~45–55</div><div class="card-note">Gained passively through Strength training. No dedicated HP training.</div></div>
+      <div class="card"><div class="card-slot">Prayer</div><div class="card-name">1</div><div class="card-note">No prayer training. Saves combat levels. No protection prayers available.</div></div>
+      <div class="card"><div class="card-slot">Combat</div><div class="card-name">~36–42</div><div class="card-note">The lowest possible bracket. Opponents have 20–35 HP. The G Maul frequently one-shots in a single spec.</div></div>
+    </div>
+
+    <h3>Variant 2 — Prayer Mauler (CB ~44–52)</h3>
+    <p>Adds Prayer to the core build, unlocking protection prayers and Burst of Strength/Superhuman Strength. Costs combat levels but adds survivability and a damage boost.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Prayer</div><div class="card-name">31–44</div><div class="card-note">31 for Protect from Melee/Missiles/Magic. 44 for all three. Adding prayer is +4–5 combat levels but dramatically improves survivability.</div></div>
+      <div class="card"><div class="card-slot">Prayer Bonus</div><div class="card-name">Burst/Superhuman</div><div class="card-note">Burst of Strength (13 Prayer) and Superhuman Strength (31 Prayer) add a flat damage multiplier on top of your 99 Strength base. Worth including.</div></div>
+      <div class="card"><div class="card-slot">Combat</div><div class="card-name">~44–52</div><div class="card-note">Slightly higher bracket. Opponents have 30–45 HP. Prayer blocking makes longer fights survivable.</div></div>
+    </div>
+
+    <h3>Variant 3 — Ranged Switch Mauler (CB ~52–62)</h3>
+    <p>Adds Ranged training (typically to 60–70) to allow a ranging switch. This enables the account to harass opponents at range while they're not yet in G Maul distance, and provides a secondary attack style when opponents activate Protect from Melee.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Ranged</div><div class="card-name">60–70</div><div class="card-note">Unlocks Magic Shortbow (50 Ranged) and Rune Crossbow (61 Ranged). Adds a style switch option when opponents pray melee.</div></div>
+      <div class="card"><div class="card-slot">Combat Impact</div><div class="card-name">+8–15 CB</div><div class="card-note">Significant combat level increase. Opponents in this bracket are tougher. Only worth it if you're comfortable managing two styles.</div></div>
+      <div class="card"><div class="card-slot">Ranged Style</div><div class="card-name">Magic Shortbow (i)</div><div class="card-note">50 Ranged. Spec fires 2 arrows simultaneously. Best prayer-bypass tool at this Ranged level. Imbue via BH points.</div></div>
+    </div>
+
+    <h3>Hitpoints Management</h3>
+    <p>HP is the most interesting stat to manage on an Obby Mauler. HP levels increase passively as you gain Strength XP — you cannot avoid it. But you can manage <em>how much</em> HP you have through your training method:</p>
+    <ul>
+      <li><strong>Nightmare Zone (NMZ)</strong> — train Strength here for the best XP/hour. NMZ gives 4:1 Strength to HP XP ratio when using the Absorption potion method — you minimise HP gain while maximising Strength gains.</li>
+      <li><strong>Pest Control</strong> — also gives combat XP at a reduced HP rate. Another option for minimising HP gains.</li>
+      <li><strong>Normal combat</strong> — gives a 1:3 ratio of HP to Strength XP. Significantly raises your HP faster, pushing your combat level up.</li>
+    </ul>
+
+    <div class="ob-note">Some Obby Mauler players deliberately keep HP low (30–40 HP) to maintain the lowest possible combat level. This is a valid strategy but makes every fight extremely risky — you can be one-shot by most opponents you face. The trade-off is fighting people with 20–30 HP who the G Maul kills reliably in one spec. Most competitive builds balance HP around 50–60.</div>
+
+    <h3>Comparing the Variants</h3>
+    <table class="data-table">
+      <tr><th>Variant</th><th>Combat Level</th><th>Prayer</th><th>Ranged</th><th>Risk Level</th><th>Best For</th></tr>
+      <tr><td>Pure Core</td><td class="hi">~36–42</td><td class="lo">None</td><td class="lo">None</td><td class="lo">High</td><td>F2P, ultra low bracket</td></tr>
+      <tr><td>Prayer Mauler</td><td class="med">~44–52</td><td class="med">31–44</td><td class="lo">None</td><td class="med">Medium</td><td>Edge PKing, balanced</td></tr>
+      <tr><td>Range Switch</td><td>~52–62</td><td class="med">44</td><td class="med">60–70</td><td class="med">Medium</td><td>Prayer bypass capability</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══ GEAR ═══ -->
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear</h2><p>Maximum Strength bonus at 1 Attack and 1 Defence — and the unique Obsidian set bonus interaction</p></div>
+
+    <p>With 1 Attack and 1 Defence, your gear options are the most restricted of any build in this codex. You cannot wear most weapons, helmets, or armour. What you <em>can</em> wear is specifically chosen for maximum Strength bonus within those constraints — and the Obsidian set is purpose-built for exactly this account type.</p>
+
+    <h3>Primary Setup — Full Obsidian with Berserker Necklace</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-slot">Head</div>
+        <div class="card-name">Obsidian Helmet</div>
+        <div class="card-note">No level requirements. Part of the Obsidian set that triggers the +10% melee accuracy and damage bonus when all three pieces are worn with an Obsidian weapon. Essential for the set bonus.</div>
+        <span class="badge b-ob">Set piece</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Body</div>
+        <div class="card-name">Obsidian Platebody</div>
+        <div class="card-note">No level requirements. Set piece for the Obsidian set bonus. Provides reasonable defensive stats at 1 Defence.</div>
+        <span class="badge b-ob">Set piece</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Legs</div>
+        <div class="card-name">Obsidian Platelegs</div>
+        <div class="card-note">No level requirements. Completes the Obsidian three-piece set. All three must be worn for the set bonus to apply.</div>
+        <span class="badge b-ob">Set piece</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Weapon</div>
+        <div class="card-name">Granite Maul</div>
+        <div class="card-note">The only viable weapon for this build. No Attack requirement. Counts as an Obsidian weapon for set bonus purposes. Its special attack is the entire offensive strategy.</div>
+        <span class="badge b-ob">Core weapon</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Amulet</div>
+        <div class="card-name">Berserker Necklace</div>
+        <div class="card-note">+20% damage bonus when wielding an Obsidian weapon. Interacts with the G Maul directly. The single most important amulet slot item for damage output. No Attack or Defence requirement.</div>
+        <span class="badge b-ob">BIS</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Boots</div>
+        <div class="card-name">Climbing Boots</div>
+        <div class="card-note">+2 Strength bonus. 1 GP from Tenzing (Troll Stronghold quest). No requirements. Best budget boots. Granite Boots (+4 Strength) require 50 Strength and no Defence — also available at 99 Strength.</div>
+        <span class="badge b-green">Budget</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Boots (upgrade)</div>
+        <div class="card-name">Granite Boots</div>
+        <div class="card-note">+4 Strength bonus. Requires 50 Strength, no Defence. Best available boots for this build at a reasonable cost.</div>
+        <span class="badge b-gold">Upgrade</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Gloves</div>
+        <div class="card-name">Leather Gloves (budget)</div>
+        <div class="card-note">With 1 Defence you cannot access Barrows Gloves. Leather Gloves or Hardleather Gloves are fine. The glove slot is the weakest available to this build — minimal Strength bonus options.</div>
+        <span class="badge b-gray">Limited options</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Cape</div>
+        <div class="card-name">Fire Cape</div>
+        <div class="card-note">+4 Strength bonus. No Defence requirement. Requires defeating TzTok-Jad, which becomes very achievable with 99 Strength and Range. Best cape for this build. Obsidian Cape is a decent budget alternative.</div>
+        <span class="badge b-gold">Standard</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Cape (budget)</div>
+        <div class="card-name">Obsidian Cape</div>
+        <div class="card-note">No requirements. Reasonable all-around stats. Available from TzHaar shops or Grand Exchange. Use until you have a Fire Cape.</div>
+        <span class="badge b-green">Budget</span>
+      </div>
+      <div class="card">
+        <div class="card-slot">Ring</div>
+        <div class="card-name">Berserker Ring (i)</div>
+        <div class="card-note">+8 Slash bonus imbued. No Defence requirement. Imbue via NMZ or BH points. Significant accuracy upgrade. Unimbued Berserker Ring gives +4 — worth imbuing before other investments.</div>
+        <span class="badge b-gold">Imbued</span>
+      </div>
+    </div>
+
+    <div class="ob-note">The Obsidian set bonus activates only when the Obsidian helm, platebody, and platelegs are all worn simultaneously alongside an Obsidian weapon. The Granite Maul counts as an Obsidian weapon. Remove any of the three armour pieces and the entire +10% accuracy and damage bonus drops to zero. The Berserker Necklace's +20% damage bonus also requires an Obsidian weapon — both bonuses apply simultaneously for devastating combined output.</div>
+
+    <h3>Why No Dragon Items?</h3>
+    <p>Dragon equipment generally requires higher stats to wield or wear. Dragon boots require 60 Defence. Dragon platelegs require 60 Defence. Dragon gloves (as part of Barrows Gloves system) require Recipe for Disaster completion which is incompatible with a 1-Defence account at meaningful gear levels. The Obsidian set specifically exists to fill this void for low-requirement characters — it provides real defensive stats and the set bonus makes it offensively superior to anything else available at 1 Defence.</p>
+
+    <h3>Budget Setup (New Account or Low GP)</h3>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Head</div><div class="card-name">Obsidian Helmet</div><div class="card-note">Still use this — the set bonus is worth more than any alternative.</div></div>
+      <div class="card"><div class="card-slot">Body</div><div class="card-name">Obsidian Platebody</div><div class="card-note">Keep the set intact.</div></div>
+      <div class="card"><div class="card-slot">Legs</div><div class="card-name">Obsidian Platelegs</div><div class="card-note">Keep the set intact.</div></div>
+      <div class="card"><div class="card-slot">Amulet</div><div class="card-name">Amulet of Strength</div><div class="card-note">+10 Strength bonus. Cheap and effective. Use until you obtain a Berserker Necklace.</div></div>
+      <div class="card"><div class="card-slot">Boots</div><div class="card-name">Climbing Boots</div><div class="card-note">1 GP. Fine for starting out.</div></div>
+      <div class="card"><div class="card-slot">Cape</div><div class="card-name">Obsidian Cape</div><div class="card-note">No requirements, reasonable stats. Budget cape until Fire Cape.</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOD ═══ -->
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p>What to bring, when to eat, and why your low HP changes all the rules</p></div>
+
+    <p>Food management on an Obby Mauler is unlike any other build in this codex. At 50–60 HP with 1 Defence, you're fragile beyond most build types. However, the fights you're in at combat 40–52 are extremely short — most last 3–10 ticks. You rarely need more than 5–6 food items per trip because you either kill in the first two ticks or you run.</p>
+
+    <h3>Food Choices</h3>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-name">Shark</div><div class="food-heal">+20 HP</div><div class="food-use">Standard. At 50 HP, a shark heals 40% of your total HP in one item. Bring 5–7 per trip.</div></div>
+      <div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">+18 HP (0-tick)</div><div class="food-use">Combo-eat food. Essential even at this level. Always bring 4–5.</div></div>
+      <div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">+22 HP + overheal</div><div class="food-use">Overheal above max HP. Critical for this build — starting a fight 20+ HP above maximum is the margin between surviving a spec and dying to one.</div></div>
+      <div class="food-card"><div class="food-name">Cooked Karambwan</div><div class="food-heal">+18 HP</div><div class="food-use">Alternative to sharks for combo eating. Same 0-tick property.</div></div>
+    </div>
+
+    <h3>Potions</h3>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-name">Super Strength Potion</div><div class="food-use">Absolutely mandatory. At 99 Strength, a Super Strength sip adds ~14 effective levels — roughly 4–6 extra max hit on the G Maul spec. This is the difference between a 47 and a 53 max hit. Never fight without it.</div></div>
+      <div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-use">Only if running Prayer (31+). Bring 1 dose for Protect prayers or Superhuman Strength uptime. At this combat level, prayer points drain slowly since fights are so short.</div></div>
+      <div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-use">One dose. Escape tool. Fights at this combat level happen in the open where running matters — always carry one dose.</div></div>
+    </div>
+
+    <h3>Combo Eating on an Obby Mauler</h3>
+    <p>At 50 HP with 1 Defence, your effective HP pool against most weapons is only a few hits. Opponents at the same combat level have similar fragility — but yours is exploitable by <em>their</em> specials too. Against an opponent with a Dragon Scimitar (even at combat 35), you must eat before they can land two to three hits.</p>
+
+    <div class="rotation">
+      <div class="rot-label">Obby Mauler combo eat — critical threshold</div>
+      <div class="steps">
+        <div class="step bad">HP drops to 25 or below</div>
+        <div class="arr">→</div>
+        <div class="step hl">Click Shark (+20 HP)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Immediately click Karambwan (+18 HP)</div>
+        <div class="arr">→</div>
+        <div class="step good">+38 HP in 1 tick — back to ~63 HP</div>
+      </div>
+    </div>
+
+    <div class="rotation">
+      <div class="rot-label">Anglerfish pre-fight overheal</div>
+      <div class="steps">
+        <div class="step hl">Eat Anglerfish before engaging</div>
+        <div class="arr">→</div>
+        <div class="step good">HP pushed to ~72 (20 above max)</div>
+        <div class="arr">→</div>
+        <div class="step">Drink Super Strength Potion</div>
+        <div class="arr">→</div>
+        <div class="step hl">Activate prayer if using</div>
+        <div class="arr">→</div>
+        <div class="step">Engage</div>
+      </div>
+    </div>
+
+    <h3>Inventory Template</h3>
+    <div class="inventory">
+      🐠 2× Anglerfish (pre-fight overheal) &nbsp;|&nbsp; 🐟 5× Shark &nbsp;|&nbsp; 🐟 4× Karambwan &nbsp;|&nbsp; ⚗️ 1× Super Strength Potion (2–4 dose) &nbsp;|&nbsp; ⚗️ 1× Prayer Potion (1 dose, if using prayer) &nbsp;|&nbsp; ⚗️ 1× Stamina Potion &nbsp;|&nbsp; Remaining slots: extra sharks or second karambwan stack &nbsp;|&nbsp; 🏹 Magic Shortbow (i) + arrows (if ranging switch build)
+    </div>
+
+    <div class="tip">Because fights are so short at this combat level, you'll often return from a trip with most of your food. The goal is to bring enough to survive 2–3 multi-fight encounters — not to carry a full 28-slot inventory of food. Lean inventory lets you carry more utility items (extra Anglerfish for overhealing, second potion dose).</div>
+  </div>
+
+  <!-- ═══ ROTATIONS ═══ -->
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Combat Rotations</h2><p>The G Maul's 0-tick spec timing, when to fire, and how to handle extended fights</p></div>
+
+    <p>The Obby Mauler has the simplest combat rotation of any build in this codex — but executing it perfectly under pressure is harder than it sounds. The G Maul spec must fire correctly, the Anglerfish overheal must be active, and the decision of when to fight vs when to walk away must be made in under a second.</p>
+
+    <div class="phase">
+      <div class="phase-label">Phase 1 — Pre-Fight</div>
+      <h4>Before Every Engagement</h4>
+      <div class="rotation">
+        <div class="rot-label">Pre-fight setup</div>
+        <div class="steps">
+          <div class="step hl">Eat Anglerfish (overheal)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Drink Super Strength Potion</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Superhuman Strength prayer (if 31+ Prayer)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Verify G Maul spec bar is full (not recently used)</div>
+          <div class="arr">→</div>
+          <div class="step">Engage target</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 2 — The Opener</div>
+      <h4>First Two Ticks — Make Them Count</h4>
+      <p>At this combat level, you want to fire the G Maul spec as quickly as possible. Against opponents with 30–40 HP, your first spec may kill instantly. There is no "grinding phase" — this is an all-in opener build.</p>
+      <div class="rotation">
+        <div class="rot-label">Immediate G Maul opener — vs. low HP opponent</div>
+        <div class="steps">
+          <div class="step">Engage (character starts auto-attacking)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Right-click G Maul → Special Attack</div>
+          <div class="arr">→</div>
+          <div class="step hl">Spec #1 fires</div>
+          <div class="arr">→</div>
+          <div class="step hl">Right-click G Maul → Special Attack again</div>
+          <div class="arr">→</div>
+          <div class="step hl">Spec #2 fires</div>
+          <div class="arr">→</div>
+          <div class="step good">Two specs arrive before opponent can eat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 3 — Extended Fight</div>
+      <h4>Against Opponents Who Survive the Opener</h4>
+      <p>Some opponents — particularly those with 40+ HP and food — will survive your opening specs. At this point the fight transitions to a grind, which is where this build is weakest. Without a proper auto-attack weapon at 1 Attack, your sustained DPS between specs is low.</p>
+      <div class="rotation">
+        <div class="rot-label">Extended fight — after spec bar depleted</div>
+        <div class="steps">
+          <div class="step bad">Both specs fired, opponent still alive</div>
+          <div class="arr">→</div>
+          <div class="step">Auto-attack with G Maul (lower DPS, no spec)</div>
+          <div class="arr">→</div>
+          <div class="step">Watch HP — combo eat at 25 HP</div>
+          <div class="arr">→</div>
+          <div class="step hl">Wait for spec bar to recharge (~30s)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Double spec again when bar is full</div>
+        </div>
+      </div>
+      <div class="warn">If your opponent has significantly more food than you, consider escaping after your initial specs fail and waiting for a better matchup. The Obby Mauler is designed for short decisive fights, not sustained grinding — you will lose most extended fights against stocked opponents at 1 Defence.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 4 — Prayer Switch Defence</div>
+      <h4>When Opponents Activate Protection Prayers (Prayer Mauler variant)</h4>
+      <p>If you have 44+ Prayer and an opponent activates Protect from Melee, your G Maul specs deal 0 damage. With the Ranged Switch variant (60–70 Ranged), you can switch to a Magic Shortbow (i) spec to bypass their prayer.</p>
+      <div class="rotation">
+        <div class="rot-label">Prayer bypass — ranged switch (if applicable)</div>
+        <div class="steps">
+          <div class="step bad">Opponent activates Protect from Melee</div>
+          <div class="arr">→</div>
+          <div class="step hl">Equip Magic Shortbow (i)</div>
+          <div class="arr">→</div>
+          <div class="step hl">F1 → spec bar → click special</div>
+          <div class="arr">→</div>
+          <div class="step good">Two arrows hit before prayer swap</div>
+          <div class="arr">→</div>
+          <div class="step">Switch back to G Maul when they drop prayer</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Escape Rotation</h3>
+    <div class="rotation">
+      <div class="rot-label">When to cut losses and run</div>
+      <div class="steps">
+        <div class="step bad">Opponent has more food and 40+ HP after your specs</div>
+        <div class="arr">→</div>
+        <div class="step hl">Drink Stamina Potion</div>
+        <div class="arr">→</div>
+        <div class="step">Sprint away — do not tank hits you don't need to take</div>
+        <div class="arr">→</div>
+        <div class="step">Eat while running if chased</div>
+        <div class="arr">→</div>
+        <div class="step hl">Protect Item if cornered and about to die</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BATTLES ═══ -->
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p>Six annotated fights showing Obby Mauler combat from ideal one-shots to learning losses</p></div>
+
+    <!-- FIGHT 1 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">I</div>
+        <div class="battle-title">vs. F2P Rune Armour Player — The Perfect Kill</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (Obby Mauler, combat 42, 99 Strength, full Obsidian + Berserker Necklace) vs F2P main FreeWorld99 (combat 50, rune armour, rune scimitar, ~40 HP). Classic target — they have rune defence but your G Maul doesn't care about defence at 99 Strength.</div>
+        <div class="log-line"><span class="you">You</span> <span>overheal with Anglerfish, drink Super Strength. Engage with G Maul auto-attack.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>right-click G Maul → Special Attack. Spec #1:</span> <span class="dmg">38</span><span>. FreeWorld99 is at ~2 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>right-click G Maul → Special Attack again immediately. Spec #2:</span> <span class="dmg">12</span><span>.</span> <span class="good">Kill before they could eat. Total fight: 2 ticks.</span></div>
+        <div class="lesson"><strong>This is the ideal fight.</strong> The 38-damage first spec arrived before their eating animation could resolve. The second spec finished a target already effectively dead. Their rune armour provided zero protection against 99 Strength — the Obsidian set bonus and Berserker Necklace multiplied the base Strength into a number rune defence cannot meaningfully reduce at this HP pool. This is the fight the Obby Mauler was built for.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 2 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">II</div>
+        <div class="battle-title">vs. Low-Level Pure — Spec Recharge Strategy</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (combat 42) vs SlayerPure (combat 45, 60 Attack, 70 Strength, 1 Defence, Dragon Scimitar, ~38 HP). They have a faster attack speed with the scimitar. Your G Maul spec needs to land before they can chip you down.</div>
+        <div class="log-line"><span class="you">You</span> <span>overheal to 72 HP. Engage immediately. Right-click G Maul spec #1:</span> <span class="dmg">31</span><span>. SlayerPure is at ~7 HP. They try to eat a Lobster.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #2 arrives before their eat resolves:</span> <span class="dmg">17</span><span>.</span> <span class="good">Kill. Their Lobster eat was 1 tick too slow.</span></div>
+        <div class="lesson"><strong>The timing window:</strong> Their eat animation and the second G Maul spec arrived near-simultaneously. The Anglerfish overheal meant you had 72 HP going in — their Scimitar hits during the fight dealt about 12 damage before you killed them. Without the overheal you'd have been at 60 HP at most, making the fight much closer. Always overheal.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 3 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">III</div>
+        <div class="battle-title">vs. Prayer Tank — Prayer Bypass with Ranged Switch</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (Ranged Switch Mauler variant, 60 Ranged, combat 52, MSB spec available) vs PrayBot44 (combat 52, 44 Prayer, activates Protect from Melee immediately). Your G Maul specs deal 0 through Protect Melee.</div>
+        <div class="log-line"><span class="them">PrayBot44</span> <span>activates Protect from Melee before you engage.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>switch to Magic Shortbow (i) immediately. MSB spec:</span> <span class="dmg">19 + 22</span><span>. 41 damage before they can switch to Protect Missiles. They drop to ~5 HP.</span></div>
+        <div class="log-line"><span class="them">PrayBot44</span> <span>switches to Protect Missiles. You switch back to G Maul.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #1 through their Protect Missiles (melee is unblocked by Missiles prayer):</span> <span class="dmg">34</span><span>.</span> <span class="good">Kill.</span></div>
+        <div class="lesson"><strong>The prayer bypass rotation works:</strong> PrayBot44's Protect Melee was a hard counter to your G Maul — until you switched to ranged. The MSB spec fired before they could update to Protect Missiles, dealing 41 damage through their prayer. Then swapping back to melee while they prayed Missiles let the G Maul land freely. This is exactly why the Ranged Switch variant exists.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 4 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">IV</div>
+        <div class="battle-title">vs. Another Obby Mauler — Mirror Match</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: Both players are Obby Maulers, combat 42, 99 Strength, full Obsidian gear. Mirror matches are decided by who specs first and who overheal was higher going in.</div>
+        <div class="log-line"><span class="them">ObbyEnemy</span> <span>specs immediately:</span> <span class="dmg">36</span><span>. You're at 36 HP (you overhealed to 72 HP — saved you).</span></div>
+        <div class="log-line"><span class="you">You</span> <span>combo eat (+38 HP → 74 HP). Your turn to spec.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #1:</span> <span class="dmg">41</span><span>. ObbyEnemy is at ~9 HP — they didn't overheal.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #2:</span> <span class="dmg">22</span><span>.</span> <span class="good">Kill.</span></div>
+        <div class="lesson"><strong>The Anglerfish overheal was everything.</strong> ObbyEnemy's 36-damage spec that would have killed most Obby Maulers at base 50 HP left you alive because you were at 72 HP. You ate, healed, and your own specs killed them because they were at base HP without an overheal. In mirror matches, whoever overheal more wins. It's that simple.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 5 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">V</div>
+        <div class="battle-title">Escape — vs. Stocked Pure with Full Food</div>
+        <div class="outcome o-esc">Escaped</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You engage WellStocked (combat 44, 70 Strength, 8 food, 44 HP). Your specs deal 28 and 22 — they combo eat through both and are back to full HP. You have 3 food left.</div>
+        <div class="log-line"><span class="you">You</span> <span>specs hit</span> <span class="dmg">28 + 22</span><span> = 50 total. WellStocked combo eats — back to 44 HP. They ate 38 HP worth in one tick.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>spec bar is empty. Your auto-attacks deal 8–15 per hit — not threatening.</span></div>
+        <div class="log-line"><span class="them">WellStocked</span> <span>is landing</span> <span class="dmg">14</span><span>,</span> <span class="dmg">18</span><span>,</span> <span class="dmg">11</span><span> per hit on your 1 Defence. You drop to 28 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>recognise the fight is lost — combo eat, drink Stamina, sprint away.</span></div>
+        <div class="log-line"><span class="good">Escaped with 2 sharks remaining. Gear safe.</span></div>
+        <div class="lesson"><strong>This is the correct decision.</strong> The Obby Mauler loses extended fights against well-stocked opponents at 1 Defence. Once the specs are gone and the opponent has survived with food to spare, you're trading a slow-auto-attacking maul vs their weapon at 1 Defence. The numbers don't work. Escape after failed specs is not a loss — it's proper matchup reading. Come back with a full spec bar and find a better target.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 6 - LOSS -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">VI</div>
+        <div class="battle-title">Learning Death — Speccing Without Overheal</div>
+        <div class="outcome o-lose">Defeat</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You forgot to eat your Anglerfish before engaging. You're at base 52 HP. Opponent (combat 44, 60 Strength) lands a lucky 28 before your spec fires.</div>
+        <div class="log-line"><span class="them">Opponent</span> <span>auto-attacks before your spec fires:</span> <span class="dmg">28</span><span>. You're at 24 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #1:</span> <span class="dmg">33</span><span>. Opponent at ~9 HP — they combo eat. Back to 47 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>G Maul spec #2 while you're at 24 HP:</span> <span class="dmg">18</span><span>. Not enough — they're at 29 HP with food.</span></div>
+        <div class="log-line"><span class="them">Opponent</span> <span>hits you for</span> <span class="dmg">19</span><span> while your spec bar recharges. Dead at 5 HP.</span></div>
+        <div class="lesson"><strong>The Anglerfish overheal would have won this fight.</strong> At 72 HP (overhealed), that initial 28 hit leaves you at 44 HP — alive and able to spec safely. At 52 HP base, it dropped you to 24 HP — a number where you're one hit from death while trying to fire specs. The overheal isn't comfort, it's the margin of error that allows your specs to land without dying on the same tick. Never skip it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MATCHUPS ═══ -->
+  <div class="tab-panel" id="p-matchups">
+    <div class="s-head"><h2>Matchup Guide</h2><p>Who to fight, who to avoid, and how to handle every common opponent at ultra-low combat</p></div>
+
+    <h3>Your Target Profile</h3>
+    <p>The Obby Mauler is a specialist. It does not fight everything in the Wilderness — it hunts specific target types where its extreme Strength-to-combat-level ratio creates an overwhelming advantage. Before engaging anyone, mentally check three things:</p>
+    <ol>
+      <li><strong>Do they have more than 45 HP?</strong> If yes, your specs might not one-shot, and you need to assess their food supply.</li>
+      <li><strong>Do they have protection prayers active?</strong> If yes and you have no Ranged switch, walk away.</li>
+      <li><strong>Do they have significantly more food than you?</strong> If yes, you will lose an extended fight at 1 Defence.</li>
+    </ol>
+
+    <h3>vs. F2P Players and Low-Level Mains</h3>
+    <p><strong>Highly favourable — these are your ideal targets.</strong> F2P players and low-level mains in the Wilderness rarely have protection prayers, typically carry 3–5 food items at most, and have 30–45 HP at the combat levels you'll encounter them. The G Maul double spec frequently kills in one to two ticks.</p>
+    <ul>
+      <li>Engage immediately — don't hesitate or they'll log out</li>
+      <li>Spec in the first tick — delay gives them time to eat or run</li>
+      <li>Overheal is critical — their scimitars hit reliably through 1 Defence</li>
+    </ul>
+
+    <h3>vs. Low-Level Pures (Similar Combat Level)</h3>
+    <p><strong>Coin flip — depends on HP and food.   </strong> A 60 Attack pure at combat 45 has similar combat level but potentially higher HP (if they've trained more) and better auto-attack capability with the Dragon Scimitar. The fight comes down to who specs first and who overhealed more.</p>
+    <ul>
+      <li>Spec immediately on engagement — delay is always bad for you</li>
+      <li>Anglerfish overheal is the deciding factor in mirror-bracket fights</li>
+      <li>If they have a prayer book open, expect prayer blocking</li>
+    </ul>
+
+    <h3>vs. Prayer-Using Opponents</h3>
+    <p><strong>Hard counter without the Ranged switch — mostly avoidable with it.</strong> An opponent with Protect from Melee active takes 0 damage from your G Maul specs. This completely shuts down your primary strategy. Without a Ranged switch, your only options are to leave or wait for their prayer to drain naturally (very slow at low combat).</p>
+    <ul>
+      <li>Core Obby Mauler (no Ranged): simply walk away from anyone with overhead prayer</li>
+      <li>Ranged Switch Mauler: MSB spec through their Protect Melee, then G Maul when they drop it</li>
+      <li>If they're consistently praying, they've specifically prepared for you — don't give them the satisfaction of an extended fight</li>
+    </ul>
+
+    <h3>vs. High-Defence Accounts (75+ Defence)</h3>
+    <p><strong>Unfavourable — high defence reduces your spec's damage meaningfully.</strong> Against 75 Defence with full rune or dragon armour, your G Maul spec max hit is reduced and accuracy is lower. The fight may drag out past your spec bar recharge, at which point your 1 Defence becomes the deciding factor.</p>
+    <ul>
+      <li>Only engage if they have low HP and minimal food</li>
+      <li>Two spec volleys (4 specs total across two full bar charges) should close most fights even with high defence if you can survive that long</li>
+      <li>If they have 60+ HP and full food, leave</li>
+    </ul>
+
+    <h3>vs. Higher-Level Accounts (75+ Combat)</h3>
+    <p><strong>Generally avoid.</strong> Accounts 30+ combat levels above you have significantly higher HP (70–99 HP), better gear, potentially Piety, and the resources to outlast you at 1 Defence. An occasional lucky kill is possible, but this is not your hunting ground.</p>
+    <div class="danger">Any player with 75+ combat and full food supply will outlast an Obby Mauler in an extended fight. Your 1 Defence means every hit they land at 75 Strength or above deals near-full damage. The Obby Mauler dominates its specific bracket — outside that bracket, run.</div>
+
+    <h3>Matchup Summary Table</h3>
+    <table class="data-table">
+      <tr><th>Opponent Type</th><th>Combat Range</th><th>Strategy</th><th>Outcome</th></tr>
+      <tr><td>F2P / low-level main</td><td>30–50 CB</td><td>Spec immediately, overheal</td><td class="hi">Highly favourable</td></tr>
+      <tr><td>Similar-CB pure</td><td>40–55 CB</td><td>First spec, Anglerfish margin</td><td class="med">Coin flip / skill</td></tr>
+      <tr><td>Prayer tank (prayed)</td><td>40–60 CB</td><td>MSB switch or leave</td><td class="med">Hard without ranged</td></tr>
+      <tr><td>High-defence main</td><td>50–70 CB</td><td>Only if low HP and low food</td><td class="lo">Risky</td></tr>
+      <tr><td>Mid-level account</td><td>80–110 CB</td><td>Escape immediately</td><td class="lo">Do not fight</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══ F-KEYS ═══ -->
+  <div class="tab-panel" id="p-fkeys">
+    <div class="s-head"><h2>F-Keys & Interface Setup</h2><p>The G Maul spec is a right-click action — here's the exact sequence and how to execute it reliably under pressure</p></div>
+
+    <p>The Obby Mauler has the simplest F-key setup of any build in this codex — but the one action that matters, the G Maul right-click spec, must be executed faster and more reliably than anything else in OSRS PvP. A 0.3-second delay costs you the fight.</p>
+
+    <h3>F-Key Layout</h3>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-name">F1</div><div class="food-use">Attack tab / Special Attack bar. Less critical for this build since G Maul spec is right-clicked, not via spec bar. Useful for checking spec charge level.</div></div>
+      <div class="food-card"><div class="food-name">F2</div><div class="food-use">Inventory. Where you click food, Anglerfish, and potions. Most-used tab — you'll be opening this constantly.</div></div>
+      <div class="food-card"><div class="food-name">F3</div><div class="food-use">Prayer tab. Activate Protect from Melee, Superhuman Strength, escape-related prayers. Critical for Prayer Mauler variant.</div></div>
+      <div class="food-card"><div class="food-name">F4</div><div class="food-use">Spellbook (rarely needed unless using magic). Generally unused by this build.</div></div>
+      <div class="food-card"><div class="food-name">Esc</div><div class="food-use">Close/back. Fast navigation between tabs.</div></div>
+    </div>
+
+    <h3>The G Maul Right-Click Spec — Exact Sequence</h3>
+    <p>Unlike most spec weapons which use the spec bar (F1 → click spec bar), the Granite Maul special attack is right-clicked directly on the weapon. This is faster in execution but requires precise right-clicking:</p>
+
+    <div class="rotation">
+      <div class="rot-label">G Maul double spec — full execution sequence</div>
+      <div class="steps">
+        <div class="step">G Maul is equipped (already in weapon slot)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Right-click G Maul in weapon slot (or inventory if switching)</div>
+        <div class="arr">→</div>
+        <div class="step hl">Select "Use Special Attack" from menu</div>
+        <div class="arr">→</div>
+        <div class="step good">Spec #1 fires instantly</div>
+        <div class="arr">→</div>
+        <div class="step hl">Right-click G Maul again immediately</div>
+        <div class="arr">→</div>
+        <div class="step hl">Select "Use Special Attack" again</div>
+        <div class="arr">→</div>
+        <div class="step good">Spec #2 fires</div>
+      </div>
+    </div>
+
+    <h3>Where to Right-Click: Equipment Slot vs Inventory</h3>
+    <p>You have two options for right-clicking the G Maul:</p>
+    <ul>
+      <li><strong>Equipment slot (weapon tab)</strong> — the G Maul appears in your weapon slot. Right-clicking this is the fastest method because it doesn't require opening your inventory first. Requires F5 to be on the Equipment tab, then right-clicking the weapon graphic.</li>
+      <li><strong>Inventory slot</strong> — if you keep the G Maul in a fixed inventory slot, you can F2 (inventory) then right-click it there. This is slightly slower but more comfortable for players used to clicking inventory items.</li>
+    </ul>
+    <p>Try both methods in Clan Wars and choose the one that produces more consistent results under pressure. Most experienced Obby Mauler players right-click the weapon in the equipment slot.</p>
+
+    <h3>Inventory Organisation</h3>
+    <ul>
+      <li><strong>Slots 1–2 (top left)</strong> — Anglerfish and Sharks adjacent to each other. First thing you click before and during fights.</li>
+      <li><strong>Slots 3–4</strong> — Karambwans adjacent to sharks for instant combo-eat access.</li>
+      <li><strong>Slot 5</strong> — Super Strength Potion. Used once at fight start. Consistent position.</li>
+      <li><strong>Slot 6</strong> — Prayer Potion (if using). Adjacent to Strength potion.</li>
+      <li><strong>Slot 7</strong> — Stamina Potion. Escape tool, clicked deliberately.</li>
+      <li><strong>If using Ranged switch</strong> — MSB (i) and arrows in fixed adjacent slots. Right side of inventory for clarity separation from food.</li>
+    </ul>
+
+    <div class="tip">Right-clicking in OSRS opens the context menu at your cursor position. The "Use Special Attack" option will always be in the same position in the menu for the Granite Maul. With enough Clan Wars practice, your right hand learns the motion — right-click, move mouse down two options, left-click — without conscious thought. This muscle memory is the entire mechanical skill of the Obby Mauler.</div>
+
+    <h3>Speed Drill — Clan Wars Practice</h3>
+    <p>The specific movement to drill is: engage opponent → right-click weapon slot → click Use Special Attack → right-click weapon slot → click Use Special Attack. Repeat this 100 times on a stationary target in Clan Wars until your hands do it automatically at speed. The window is approximately 1.2 seconds (two game ticks) to complete both specs before an opponent with fast reactions can eat through the first one.</p>
+  </div>
+
+  <!-- ═══ TIPS ═══ -->
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips & Common Mistakes</h2><p>What separates a skilled Obby Mauler from someone who simply has 99 Strength</p></div>
+
+    <h3>The Obby Mauler Commandments</h3>
+    <ul class="tips-list">
+      <li><div class="tip-n">01</div><div><strong>Never train Attack or Defence. Ever.</strong> One Attack level raises your combat from ~42 to ~55. One Defence level raises it similarly. Both reduce the core advantage of the build: fighting far below your actual damage potential. Verify every XP reward, quest lamp, and training method before committing. This cannot be undone.</div></li>
+      <li><div class="tip-n">02</div><div><strong>Anglerfish overheal before every single fight.</strong> At 50 HP base, a lucky 40-hit from an opponent with 65 Strength kills you outright. At 72 HP (overhealed), the same hit leaves you at 32 HP — survivable with a combo eat. The Anglerfish is not comfort food — it's the margin of safety that lets your specs land without dying on the same tick.</div></li>
+      <li><div class="tip-n">03</div><div><strong>Super Strength Potion before every fight, no exceptions.</strong> At 99 Strength, a Super Strength sip raises your effective Strength by ~14 levels and adds approximately 4–6 max hit to the G Maul spec. The difference between a 47 max hit and a 53 max hit is the difference between a one-spec kill and needing two specs. Pot up before you spec.</div></li>
+      <li><div class="tip-n">04</div><div><strong>Spec immediately on engagement.</strong> Unlike zerker or 1-def pure accounts that have a "grind phase," the Obby Mauler should spec as fast as possible after the fight starts. Your best window is the first tick — before the opponent has activated any prayer or eaten any food. Delay helps them, not you.</div></li>
+      <li><div class="tip-n">05</div><div><strong>Walk away from anyone with Protect from Melee active.</strong> Your G Maul deals zero damage through the prayer. Unless you have a Ranged switch, there is nothing to be done. Recognise the prayer icon above their head and disengage. Fighting into Protect Melee as a no-Ranged Obby Mauler is a guaranteed waste of time and food.</div></li>
+      <li><div class="tip-n">06</div><div><strong>Know your spec bar status at all times.</strong> After two specs, your G Maul needs ~30 seconds to fully recharge. If you engage a second fight immediately after depleting the bar, you have no finishing tool. Between fights, check the spec bar. Wait for a full recharge before hunting the next target.</div></li>
+      <li><div class="tip-n">07</div><div><strong>The Berserker Necklace + Obsidian set + G Maul interaction is non-negotiable.</strong> Don't substitute the Berserker Necklace for an Amulet of Torture. The Amulet of Torture gives +15 Strength bonus (a flat add). The Berserker Necklace gives +20% Obsidian weapon damage (a multiplier applied after all bonuses). At 99 Strength, the multiplicative Berserker Necklace adds more total damage than the additive Torture.</div></li>
+      <li><div class="tip-n">08</div><div><strong>Train Strength via NMZ for minimum HP gains.</strong> NMZ Absorption method gives 4:1 Strength to HP XP. If you train on normal monsters, you get a 3:1 HP to Strength ratio — meaning far more HP (and thus combat levels) per Strength level. NMZ is slower XP/hour but results in a lower final combat level, which is the entire point of the build.</div></li>
+      <li><div class="tip-n">09</div><div><strong>Escape after failed specs — don't grind.</strong> The Obby Mauler is not a sustained DPS account. Without specs, your G Maul auto-attack at 1 Attack is slower to kill than even a rune scimitar. If your double spec fails and the opponent has food left, the correct play is almost always to escape and recharge, not to keep swinging.</div></li>
+      <li><div class="tip-n">10</div><div><strong>Pick your fights carefully.</strong> The Obby Mauler is the most specialised account in this codex — it dominates a narrow range of fights. Learn to identify the specific matchups you win (low-HP, low-food, no-prayer opponents in the 30–55 combat range) and ignore everything outside that range. Discipline in target selection is the meta-skill of this build.</div></li>
+    </ul>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Mistakes That Kill Obby Maulers</h3>
+    <div class="danger">Accidentally training Attack or Defence. Even one level of either permanently raises your combat level and reduces the build's core advantage. Never accept an XP reward without verifying the skill. Never train on NPCs without confirming your attack style is set to "Strength" not "Controlled" (Controlled trains Attack and Defence as well). Check the attack style panel every session.</div>
+    <div class="warn">Engaging without overheal. Fighting at base 50 HP makes you vulnerable to a single good hit from any opponent. Overheal to 72 HP with Anglerfish before every fight. This is not optional.</div>
+    <div class="warn">Spec reuse before the bar recharges. After two G Maul specs, attempting to spec again before the bar is full will fire a non-spec auto-attack instead — but many players mistake this for a spec and wonder why the hit was lower. Wait for the bar (check F1 or the weapon slot). A full recharge takes about 30 seconds.</div>
+    <div class="warn">Using Amulet of Torture instead of Berserker Necklace. The Torture's flat +15 Strength is outperformed by the Berserker Necklace's +20% multiplicative Obsidian bonus at 99 Strength. This is counterintuitive because the Torture is the "better" amulet on most builds — but the unique Obsidian interaction makes the Berserker Necklace superior specifically for this account.</div>
+    <div class="warn">Fighting in the wrong bracket. An Obby Mauler at combat 42 fighting a 90 CB account with 99 HP and Bandos is not a winnable fight under any conditions. Know your target bracket — it's narrow, but inside it, the build is devastating.</div>
+  </div>
+
+  <!-- ═══ LOCATIONS ═══ -->
+  <div class="tab-panel" id="p-locations">
+    <div class="s-head"><h2>Where to Fight</h2><p>The best locations for Obby Mauler PKing and the correct approach for each environment</p></div>
+
+    <h3>Clan Wars — Practice First</h3>
+    <p>Drill the G Maul right-click double spec until it's completely automatic. You need to be able to fire both specs within two game ticks reliably. In Clan Wars, focus specifically on:</p>
+    <ul>
+      <li>The right-click → "Use Special Attack" → right-click → "Use Special Attack" sequence at maximum speed</li>
+      <li>Overheal + pot timing before engaging</li>
+      <li>Combo eating from 25 HP or below</li>
+    </ul>
+    <p>The mechanical complexity of the Obby Mauler is low compared to other builds, but the execution of the G Maul spec must be flawless. A fumbled right-click that fires a non-spec auto-attack instead of a spec costs you fights that should have been clean kills.</p>
+
+    <h3>Edgeville F2P Worlds — Primary Hunting Ground</h3>
+    <p>The Obby Mauler's natural habitat. F2P Edgeville Wilderness attracts low-level players who:</p>
+    <ul>
+      <li>Have 30–45 HP — prime G Maul spec range</li>
+      <li>Rarely use protection prayers</li>
+      <li>Carry 3–5 food items, not 10–12</li>
+      <li>Don't expect to be one-shot by a combat 42 account</li>
+    </ul>
+    <p>The surprise factor is real — players looking at your combat level expect manageable damage. They see combat 42 and don't activate prayers. Your G Maul spec hits for 35–50 before they've processed what's happening.</p>
+
+    <h3>P2P Edgeville (Low-Level Wilderness)</h3>
+    <p>Members worlds have more varied opponents but also more lucrative kills. Low-level accounts training prayer, questing, or clue-scrolling in low Wilderness are excellent targets — they often carry noted supplies or valuable items for their quest and have minimal combat preparation.</p>
+
+    <div class="tip">Be aware that members worlds have many more accounts with protection prayers at all combat levels — the Prayer Mauler variant or Ranged Switch becomes more necessary in P2P compared to F2P where prayer usage is rarer at low levels.</div>
+
+    <h3>Bounty Hunter</h3>
+    <p>Bounty Hunter matches you with a target near your combat level. For an Obby Mauler at CB 42–52, targets are consistently in the low-level bracket where the build excels. BH points also buy Magic Shortbow (i) imbuements — useful if building the Ranged Switch variant. Good risk-free practice environment before F2P edge PKing.</p>
+
+    <h3>Last Man Standing (LMS)</h3>
+    <p>LMS isn't ideal for the Obby Mauler because standardised gear means no Obsidian set bonus — the build's primary advantage is neutered. However, LMS is still useful for practicing the right-click spec sequence and combo eating under pressure. The mechanics transfer even if the damage numbers don't.</div>
+
+    <h3>Who NOT to Hunt</h3>
+    <ul>
+      <li><strong>Anyone with 75+ combat</strong> — they have too much HP and too much food supply</li>
+      <li><strong>Players visibly using overhead protection prayers</strong> — Protect Melee = 0 damage from your specs. Leave unless you have Ranged switch</li>
+      <li><strong>High-level PKers hunting for kills</strong> — they're looking for you specifically and are prepared for your strategy</li>
+      <li><strong>Accounts with visibly expensive gear</strong> — implies high bankroll, full food, and prayer awareness</li>
+    </ul>
+
+    <h3>Building the Account — Recommended Path</h3>
+    <ol>
+      <li><strong>Strength to 70–80 via controlled methods</strong> (NMZ or Pest Control to minimise HP gain)</li>
+      <li><strong>Obtain Obsidian set</strong> — buy from GE or TzHaar shop. No requirements. Do this early.</li>
+      <li><strong>Obtain Berserker Necklace</strong> — buy from GE. Significant damage upgrade.</li>
+      <li><strong>Strength to 99</strong> — NMZ Absorption method. Slow but minimal HP gain.</li>
+      <li><strong>Decide on Prayer level</strong> — 1 (lowest CB) vs 31–44 (protection prayers, a few CB levels higher)</li>
+      <li><strong>Drill G Maul spec in Clan Wars</strong></li>
+      <li><strong>Begin F2P edge PKing</strong> — start with cheap gear until mechanics are solid</li>
+    </ol>
+
+    <h3>Connecting to Other Builds</h3>
+    <p>The Obby Mauler is a terminal build for most players — its design is so specialised that "graduating" to another build requires essentially starting a new account. If you want to explore other PvP styles, the <a href="pure.html">1-Defence Pure guide</a> is the natural next step — the G Maul spec knowledge transfers directly, and training Attack to 60 opens far more options without completely changing the core philosophy. The two builds share the 1 Defence ceiling and the G Maul finishing mechanic; the difference is just the addition of a Dragon Scimitar for sustained damage.</div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  <span class="orn">· · ✦ · ·</span>
+  All mechanics accurate to standard OSRS. Berserker Necklace provides +20% damage specifically when wielding an Obsidian weapon. Obsidian set bonus (+10% melee accuracy and damage) requires all three pieces equipped with an Obsidian weapon. G Maul spec bar recharges independently of the main spec bar. Training Attack or Defence permanently alters combat level calculations — verify all XP sources before training.
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+</body>
+</html>

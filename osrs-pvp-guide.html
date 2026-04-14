@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Med-Level PvP Guide — 75/99/75</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #8a6e2f;
+    --dark: #0d0b08;
+    --dark2: #151209;
+    --dark3: #1e1a10;
+    --dark4: #252016;
+    --parchment: #f5ead6;
+    --parchment2: #ede0c4;
+    --red: #8b2020;
+    --red-bright: #c0392b;
+    --green: #2d6a2d;
+    --green-bright: #3a9e3a;
+    --blue: #1a3d6b;
+    --blue-bright: #4a90d9;
+    --text: #e8dcc8;
+    --text-dim: #9e8e72;
+    --border: rgba(201,168,76,0.25);
+    --border-bright: rgba(201,168,76,0.6);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* Radial glow at top */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    text-align: center;
+    padding: 5rem 0 3rem;
+    position: relative;
+  }
+
+  .hero-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .hero-ornament::before,
+  .hero-ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+
+  .hero-ornament span {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--gold-light);
+    line-height: 1.2;
+    text-shadow: 0 0 60px rgba(201,168,76,0.3), 0 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 0.5rem;
+    animation: fadeIn 1s ease both;
+  }
+
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeIn 1s ease 0.2s both;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+    animation: fadeIn 1s ease 0.4s both;
+  }
+
+  .stat-pills {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease 0.6s both;
+  }
+
+  .stat-pill {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  .stat-pill span {
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  /* ─── NAV ─── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,11,8,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    margin: 0 -2rem;
+    padding: 0 2rem;
+  }
+
+  .nav-inner {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0.75rem 0;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.15rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.1s;
+  }
+
+  .nav-btn:hover {
+    color: var(--gold-light);
+    border-color: var(--border-bright);
+    background: rgba(201,168,76,0.08);
+    transform: translateY(-1px);
+  }
+  .nav-btn.active {
+    color: var(--dark);
+    background: var(--gold);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    display: none;
+    animation: fadeIn 0.4s ease both;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    padding: 3rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header p {
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin: 2rem 0 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; color: var(--text); }
+
+  strong { color: var(--gold-light); font-weight: 600; }
+
+  /* ─── CALLOUT BOXES ─── */
+  .tip, .warning, .info {
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .tip {
+    background: rgba(45,106,45,0.12);
+    border-left: 3px solid #3a9e3a;
+    color: #8ecb8e;
+  }
+
+  .warning {
+    background: rgba(139,32,32,0.12);
+    border-left: 3px solid #8b2020;
+    color: #d47070;
+  }
+
+  .info {
+    background: rgba(26,61,107,0.2);
+    border-left: 3px solid #4a90d9;
+    color: #9ac4f0;
+  }
+
+  .tip::before { content: '⚔ TIP'; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; display: block; margin-bottom: 4px; color: #3a9e3a; }
+  .warning::before { content: '⚠ WARNING'; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; display: block; margin-bottom: 4px; color: #c04040; }
+  .info::before { content: '◆ NOTE'; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; display: block; margin-bottom: 4px; color: #4a90d9; }
+
+  /* ─── GEAR GRID ─── */
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 1rem 0;
+  }
+
+  .gear-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .gear-card:hover {
+    border-color: var(--border-bright);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .gear-slot {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 4px;
+  }
+
+  .gear-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+
+  .gear-note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  .gear-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  .badge-budget { background: rgba(45,106,45,0.2); color: #6db56d; border: 1px solid rgba(45,106,45,0.4); }
+  .badge-mid { background: rgba(26,61,107,0.25); color: #7ab0e0; border: 1px solid rgba(74,144,217,0.3); }
+  .badge-bis { background: rgba(139,32,32,0.2); color: #d47070; border: 1px solid rgba(139,32,32,0.4); }
+  .badge-key { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid var(--border-bright); }
+
+  /* ─── ROTATION BOXES ─── */
+  .rotation {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .rotation-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 12px;
+  }
+
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .step {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-size: 0.88rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .step.highlight {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--border-bright);
+    color: var(--gold-light);
+  }
+
+  .step-arrow { color: var(--gold-dim); font-size: 0.9rem; }
+
+  /* ─── BATTLE LOG ─── */
+  .battle {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .battle-header {
+    background: rgba(201,168,76,0.08);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .battle-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .battle-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    flex: 1;
+  }
+
+  .battle-outcome {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .outcome-win { background: rgba(45,106,45,0.2); color: #6db56d; border: 1px solid rgba(45,106,45,0.4); }
+  .outcome-loss { background: rgba(139,32,32,0.2); color: #d47070; border: 1px solid rgba(139,32,32,0.4); }
+  .outcome-escaped { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid var(--border-bright); }
+
+  .battle-body { padding: 1.25rem 1.5rem; }
+
+  .battle-setup {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .log-line {
+    font-size: 0.92rem;
+    line-height: 2;
+    padding: 2px 0;
+  }
+
+  .you { color: #7ab0e0; font-weight: 600; }
+  .them { color: #e8a84c; font-weight: 600; }
+  .dmg { color: #d47070; font-weight: 700; }
+  .good { color: #6db56d; font-weight: 600; }
+  .action { color: var(--text); }
+
+  .battle-lesson {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .battle-lesson strong { color: var(--gold-dim); }
+
+  /* ─── STAT TABLE ─── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin: 1.25rem 0;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .stat-val {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    line-height: 1.1;
+  }
+
+  .stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ─── FOOD GRID ─── */
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 1rem 0;
+  }
+
+  .food-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+  }
+
+  .food-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .food-heal {
+    font-size: 0.82rem;
+    color: #6db56d;
+    margin-bottom: 4px;
+  }
+
+  .food-use {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* ─── TIPS LIST ─── */
+  .tips-list {
+    list-style: none;
+    margin: 1rem 0;
+  }
+
+  .tips-list li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .tips-list li:last-child { border-bottom: none; }
+
+  .tip-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold-dim);
+    min-width: 24px;
+    padding-top: 2px;
+    font-weight: 600;
+  }
+
+  /* ─── FKEY TABLE ─── */
+  .fkey-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin: 1rem 0;
+  }
+
+  .fkey-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .fkey-key {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border-bright);
+    border-radius: 4px;
+    padding: 3px 8px;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  .fkey-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  /* ─── ORNAMENTAL DIVIDER ─── */
+  .ornament {
+    text-align: center;
+    color: var(--gold-dim);
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    opacity: 0.4;
+    margin: 2rem 0;
+  }
+
+  /* ─── INVENTORY BLOCK ─── */
+  .inventory {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 2;
+    font-style: italic;
+  }
+
+  /* ─── PHASE BLOCK ─── */
+  .phase {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .phase-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .phase h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark2); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .hero h1 { font-size: 1.8rem; }
+    .stat-pills { gap: 0.5rem; }
+    .stat-pill { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+    .nav-btn { font-size: 0.6rem; padding: 0.9rem 0.75rem; }
+    .battle-title { font-size: 0.82rem; }
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .footer .ornament { font-size: 0.7rem; margin-bottom: 0.75rem; }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--gold-light); text-decoration: underline; }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.4rem; color: var(--text); }
+</style>
+</head>
+<style>
+.site-top-nav{position:sticky;top:0;z-index:300;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.22);}
+.site-top-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.site-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:#c9a84c;text-decoration:none;padding:0.85rem 1.2rem 0.85rem 0;margin-right:1.2rem;border-right:1px solid rgba(201,168,76,0.22);white-space:nowrap;}
+.site-logo:hover{color:#e8c97a;}
+.site-nav-links-wrap{position:relative;flex:1;min-width:0;}
+.site-nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.site-nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.site-nav-lnk:hover{color:var(--gold-light);}
+.site-nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.site-nav-links::-webkit-scrollbar{display:none;}
+.site-nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#c9a84c;background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.site-nav-links-wrap.at-end::after{opacity:0;}
+.site-nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#c9a84c;background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.site-nav-links-wrap.at-start::before{opacity:0;}
+.site-nav-links-wrap.scrolled::before{opacity:1;}
+.site-nav-lnk{background:none;border:none;border-bottom:2px solid transparent;color:#9e8e72;font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.85rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.site-nav-lnk:hover{color:#e8c97a;}
+.site-nav-lnk.cur{color:#e8c97a;border-bottom-color:#c9a84c;}
+</style>
+<nav class="site-top-nav">
+  <div class="site-top-inner">
+    <a class="site-logo" href="index.html">The Wilderness Codex</a>
+    <div class="site-nav-links-wrap"><div class="site-nav-links">
+        <a href="index.html" class="site-nav-lnk">Home</a>
+        <a href="main.html" class="site-nav-lnk">Main</a>
+        <a href="maxmain.html" class="site-nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="site-nav-lnk cur">Med-Level</a>
+        <a href="60defmed.html" class="site-nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="site-nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="site-nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="site-nav-lnk">Endgame</a>
+        <a href="zerker.html" class="site-nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="site-nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="site-nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="site-nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="site-nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="site-nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="site-nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="site-nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="site-nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="site-nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="site-nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="site-nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="site-nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="site-nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="site-nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="site-nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="site-nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="site-nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="site-nav-lnk">Void Pure</a>
+        <a href="void2.html" class="site-nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="site-nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="site-nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="site-nav-lnk">13 Def</a>
+        <a href="initiate.html" class="site-nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="site-nav-lnk">30 Def</a>
+        <a href="40def.html" class="site-nav-lnk">40 Def</a>
+        <a href="50def.html" class="site-nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="site-nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="site-nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="site-nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="site-nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="site-nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="site-nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="site-nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="site-nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="site-nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="site-nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="site-nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="site-nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-ornament"><span>Old School RuneScape</span></div>
+    <h1>Med-Level PvP<br>Master Guide</h1>
+    <p class="hero-sub">75 Attack · 99 Strength · 75 Defence</p>
+    <p class="hero-desc">The complete beginner-to-intermediate handbook for mid-level player-versus-player combat. Accurate mechanics, real rotations, and honest fight examples.</p>
+    <div class="stat-pills">
+      <div class="stat-pill"><span>~104</span> Combat Level</div>
+      <div class="stat-pill"><span>~37</span> Max Hit (Whip)</div>
+      <div class="stat-pill"><span>~85</span> Hitpoints</div>
+      <div class="stat-pill"><span>~74</span> Max DDS Spec</div>
+    </div>
+  </div>
+
+  <!-- STICKY NAV -->
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" onclick="show('overview', this)">Overview</button>
+      <button class="nav-btn" onclick="show('build', this)">The Build</button>
+      <button class="nav-btn" onclick="show('gear', this)">Gear & Switches</button>
+      <button class="nav-btn" onclick="show('food', this)">Food & Pots</button>
+      <button class="nav-btn" onclick="show('rotations', this)">Rotations</button>
+      <button class="nav-btn" onclick="show('fkeys', this)">F-Keys & Setup</button>
+      <button class="nav-btn" onclick="show('battles', this)">Fight Examples</button>
+      <button class="nav-btn" onclick="show('tips', this)">Tips & Mistakes</button>
+      <button class="nav-btn" onclick="show('locations', this)">Where to Fight</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════ OVERVIEW ═══════════ -->
+  <div class="section active" id="s-overview">
+    <div class="section-header">
+      <h2>Overview</h2>
+      <p>Understanding the build and why it works in PvP</p>
+    </div>
+
+    <p>The <strong>75/99/75</strong> build occupies a powerful niche in OSRS PvP. You have enough attack level to equip the iconic Abyssal Whip, a maxed Strength level for serious damage, and enough Defence to wear dragon and barrows armour. You're neither a fragile pure nor an overlevelled main — you're a midway juggernaut.</p>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-label">Attack</div><div class="stat-val">75</div><div class="stat-sub">Whip, hasta</div></div>
+      <div class="stat-card"><div class="stat-label">Strength</div><div class="stat-val">99</div><div class="stat-sub">Max damage</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">75</div><div class="stat-sub">Dragon, barrows</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~104</div><div class="stat-sub">CB level</div></div>
+      <div class="stat-card"><div class="stat-label">HP</div><div class="stat-val">~85</div><div class="stat-sub">Typical level</div></div>
+      <div class="stat-card"><div class="stat-label">Max Hit</div><div class="stat-val">~37</div><div class="stat-sub">Whip + Piety</div></div>
+    </div>
+
+    <h3>Why This Build?</h3>
+    <p>The 99 Strength is the centrepiece. High Strength means every hit roll is shifted toward bigger numbers — your average hits are higher, your maximums are higher, and even your unlucky rolls deal respectable damage. Combined with Piety prayer, you'll be landing consistent 20s and 30s with the whip, and the Dragon Dagger special attack closes fights quickly.</p>
+    <p>The 75 Defence is what separates you from pures. You can equip Fighter Torso, Neitiznot helm, Barrows gloves, Dragon boots, and eventually Bandos — all top-tier defensive and offensive gear. You'll tank hits that would destroy a pure.</p>
+
+    <div class="tip">At combat level ~104, you sit in a range where you'll frequently encounter other mid-level accounts, under-levelled pures, and occasionally higher-level mains. Learning to identify your matchup quickly is a core skill.</div>
+
+    <h3>How PvP Works — The Basics</h3>
+    <p>Every game tick in OSRS is <strong>0.6 seconds</strong>. Combat is a series of tick-based attack cycles. The whip attacks every 4 ticks (2.4 seconds). Understanding this timing is fundamental to:</p>
+    <ul>
+      <li><strong>Eating at the right time</strong> — you can eat food between attack ticks without losing damage</li>
+      <li><strong>Switching gear</strong> — equipment can be swapped mid-fight on the same tick as an attack</li>
+      <li><strong>Prayer flicking</strong> — protection prayers can be turned on and off per-tick</li>
+    </ul>
+
+    <div class="info">Don't worry about advanced tick manipulation yet. Focus on the fundamentals: keep Piety on, combo eat below 30 HP, and save your Dragon Dagger specs for the finish.</div>
+  </div>
+
+  <!-- ═══════════ BUILD ═══════════ -->
+  <div class="section" id="s-build">
+    <div class="section-header">
+      <h2>The Build</h2>
+      <p>Stat targets, skill requirements, and what to unlock first</p>
+    </div>
+
+    <h3>Core Stats</h3>
+    <p>These are the minimum required stats. Everything else is optional but beneficial.</p>
+
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-slot">Required</div>
+        <div class="gear-name">75 Attack</div>
+        <div class="gear-note">Unlocks Abyssal Whip and Abyssal Dagger. The whip is your primary weapon.</div>
+        <span class="gear-badge badge-key">Essential</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Required</div>
+        <div class="gear-name">99 Strength</div>
+        <div class="gear-note">Maximum melee damage output. The defining feature of this build.</div>
+        <span class="gear-badge badge-key">Essential</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Required</div>
+        <div class="gear-name">75 Defence</div>
+        <div class="gear-note">Unlocks Dragon armour, Barrows gloves (via RFD), and Bandos.</div>
+        <span class="gear-badge badge-key">Essential</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Recommended</div>
+        <div class="gear-name">70 Prayer</div>
+        <div class="gear-note">Unlocks Piety — the single most important prayer for this build. Don't skip it.</div>
+        <span class="gear-badge badge-mid">Important</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Recommended</div>
+        <div class="gear-name">44+ Prayer</div>
+        <div class="gear-note">Minimum for Protect from Melee. Required at 44, Piety at 70.</div>
+        <span class="gear-badge badge-mid">Important</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Optional</div>
+        <div class="gear-name">55 Slayer</div>
+        <div class="gear-note">Unlocks Abyssal Whip via Abyssal demons. Can be bought on GE however.</div>
+        <span class="gear-badge badge-budget">Optional</span>
+      </div>
+    </div>
+
+    <h3>Quest Requirements</h3>
+    <p>Certain quests unlock gear that is near-essential for this build:</p>
+    <ul>
+      <li><strong>Recipe for Disaster (all subquests)</strong> — Barrows gloves. The best-in-slot gloves for this build. Do it.</li>
+      <li><strong>Fremennik Trials</strong> — Helm of Neitiznot (requires Fremennik Isles too). Best budget helmet.</li>
+      <li><strong>Dragon Slayer I</strong> — Rune platebody access. Needed if you want the Fighter Torso route.</li>
+      <li><strong>Legends' Quest</strong> — Amulet of Fury (charged with onyx). Significant HP and stat bonuses.</li>
+      <li><strong>Monkey Madness I</strong> — Dragon scimitar access (until you get the whip).</li>
+    </ul>
+
+    <h3>Why NOT Higher Attack?</h3>
+    <p>You might wonder: why stop at 75 Attack? The answer is <strong>combat level efficiency</strong>. Going from 75 to 80 Attack costs you combat levels, pushing you toward higher-level opponents without a proportional gain in damage. Strength is far more valuable per combat level than Attack at this stage. The whip's attack bonus is already excellent at 75.</p>
+
+    <div class="tip">If you want to add Vengeance (the "Veng" spell that recoils damage back at attackers), you'll need 94 Magic and completion of the Lunar Diplomacy quest. This is a significant investment and not required for beginners — but it's a powerful addition once you have the other fundamentals mastered.</div>
+  </div>
+
+  <!-- ═══════════ GEAR ═══════════ -->
+  <div class="section" id="s-gear">
+    <div class="section-header">
+      <h2>Gear & Switches</h2>
+      <p>Three tiers of equipment from budget to best-in-slot, plus weapon switching</p>
+    </div>
+
+    <h3>Budget Setup <span class="gear-badge badge-budget" style="vertical-align:middle">~500k–1M GP</span></h3>
+    <p>This is where you start. Every piece is accessible and effective. Don't let anyone tell you budget gear can't get kills — it absolutely can.</p>
+
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-slot">Head</div>
+        <div class="gear-name">Helm of Neitiznot</div>
+        <div class="gear-note">Best budget helm. Excellent defence, +3 Strength, and a Prayer bonus.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Body</div>
+        <div class="gear-name">Fighter Torso</div>
+        <div class="gear-note">+4 Strength bonus, no Defence requirement beyond 40. Huge value for zero GP cost (Barbarian Assault).</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Legs</div>
+        <div class="gear-name">Dragon Platelegs</div>
+        <div class="gear-note">Solid defence at a fair price. Obsidian platelegs are a strong alternative (+2 Str bonus).</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Weapon</div>
+        <div class="gear-name">Abyssal Whip</div>
+        <div class="gear-note">Your primary weapon. Fast, accurate, and widely available on the Grand Exchange.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Off-hand</div>
+        <div class="gear-name">Dragon Defender</div>
+        <div class="gear-note">Essential for whip users. Provides Attack and Strength bonuses while giving a melee accuracy boost.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Boots</div>
+        <div class="gear-name">Dragon Boots</div>
+        <div class="gear-note">Best value melee boots. +4 Strength bonus. Borderline mandatory.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Gloves</div>
+        <div class="gear-name">Barrows Gloves</div>
+        <div class="gear-note">Requires Recipe for Disaster. Best-in-slot gloves for melee. +12 Attack, +12 Strength bonus.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Cape</div>
+        <div class="gear-name">Fire Cape</div>
+        <div class="gear-note">Best cape until Infernal. +4 Strength bonus and good defence. Requires defeating TzTok-Jad.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Amulet</div>
+        <div class="gear-name">Amulet of Fury</div>
+        <div class="gear-note">Huge bonuses to all combat styles plus HP. Best affordable amulet for this build.</div>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Ring</div>
+        <div class="gear-name">Berserker Ring (i)</div>
+        <div class="gear-note">Imbued version gives +8 Slash bonus. Imbue with 650k NMZ points or BH points.</div>
+      </div>
+    </div>
+
+    <h3>Mid Tier <span class="gear-badge badge-mid" style="vertical-align:middle">~5–20M GP</span></h3>
+
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-slot">Body</div>
+        <div class="gear-name">Bandos Chestplate</div>
+        <div class="gear-note">Better all-around stats than the torso. +6 Strength bonus. Significant upgrade for tanking.</div>
+        <span class="gear-badge badge-mid">Upgrade</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Legs</div>
+        <div class="gear-name">Bandos Tassets</div>
+        <div class="gear-note">Best-in-slot melee legs. +2 Strength bonus with excellent defence bonuses. First big upgrade to save for.</div>
+        <span class="gear-badge badge-mid">Upgrade</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Amulet</div>
+        <div class="gear-name">Amulet of Torture</div>
+        <div class="gear-note">Best-in-slot melee amulet. +15 Strength bonus. Only upgrade over Fury if you have the budget.</div>
+        <span class="gear-badge badge-bis">BIS</span>
+      </div>
+      <div class="gear-card">
+        <div class="gear-slot">Cape</div>
+        <div class="gear-name">Infernal Cape</div>
+        <div class="gear-note">+8 Strength bonus, better all-round stats. Requires defeating Tzkal-Zuk. Major time investment.</div>
+        <span class="gear-badge badge-bis">BIS</span>
+      </div>
+    </div>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Spec Weapon: Dragon Dagger (P++)</h3>
+    <p>The <strong>Dragon Dagger (P++)</strong> is your secondary weapon. Its special attack fires two simultaneous hits at 25% spec bar each — two clicks fires four total hits. This is how you finish opponents who've burned their food. It's cheap, reliable, and one of the best PvP spec weapons available to you at this combat level.</p>
+
+    <div class="rotation">
+      <div class="rotation-label">Standard DDS Spec Sequence</div>
+      <div class="steps">
+        <div class="step">Continue whipping</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Switch to DDS (F1 / inventory)</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">First special (2 hits)</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Second special (2 more hits)</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Switch back to whip</div>
+      </div>
+    </div>
+
+    <div class="tip">Each DDS spec hit can reach around 18–22 damage on this build. In the best case, all four hits land for a combined ~74 damage — enough to kill someone from 70+ HP when stacked with a whip hit. Don't burn specs early; save them for the finish.</div>
+
+    <div class="warning">The Armadyl Godsword (AGS) is sometimes mentioned as a spec weapon for 75 Attack builds. It requires 75 Attack and can hit very high (50+ on a good roll), but it costs hundreds of millions of GP. It's a legitimate late-game upgrade but never something beginners should prioritise or expect to use.</div>
+  </div>
+
+  <!-- ═══════════ FOOD ═══════════ -->
+  <div class="section" id="s-food">
+    <div class="section-header">
+      <h2>Food & Potions</h2>
+      <p>What to bring, when to eat, and the combo-eat technique that saves lives</p>
+    </div>
+
+    <h3>Food Options</h3>
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="food-name">Shark</div>
+        <div class="food-heal">Heals +20 HP</div>
+        <div class="food-use">The standard. Affordable and widely available. Bring 8–10 as your main food source.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Karambwan</div>
+        <div class="food-heal">Heals +18 HP</div>
+        <div class="food-use">The combo-eat food. Eats in 0 ticks alongside another food. Bring 4–6 always.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Manta Ray</div>
+        <div class="food-heal">Heals +22 HP</div>
+        <div class="food-use">Slightly better than shark. Use for deep wilderness trips where every HP matters.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Anglerfish</div>
+        <div class="food-heal">Heals +22 HP + overheal</div>
+        <div class="food-use">Can heal above your max HP. Useful for opening a fight at 107 HP instead of 85 HP.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Saradomin Brew</div>
+        <div class="food-heal">Heals +16 HP per dose</div>
+        <div class="food-use">Boosts HP but reduces Attack, Strength, and Defence. Use cautiously — always re-pot after.</div>
+      </div>
+    </div>
+
+    <h3>Potions</h3>
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="food-name">Super Combat Potion</div>
+        <div class="food-use">Boosts Attack, Strength, and Defence simultaneously. Drink at the start of every fight. Don't leave without one.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Prayer Potion</div>
+        <div class="food-use">Restores Prayer points. Bring 1–2 doses for Piety uptime in longer fights.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Stamina Potion</div>
+        <div class="food-use">Restores and preserves run energy in the Wilderness. One dose can save your life when escaping.</div>
+      </div>
+      <div class="food-card">
+        <div class="food-name">Super Restore</div>
+        <div class="food-use">Better than a prayer potion when you've been hit by a Saradomin Brew (also restores stats).</div>
+      </div>
+    </div>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Combo Eating — The Most Critical Technique</h3>
+    <p>Karambwan has a unique property: it is consumed in <strong>0 ticks</strong>. This means you can click a shark on one tick, then immediately click a karambwan on the same tick — and your character eats both in rapid succession. The result is <strong>~38 HP healed in a single game tick</strong>. This is your emergency heal and your panic button.</p>
+
+    <div class="rotation">
+      <div class="rotation-label">Combo Eat — Standard</div>
+      <div class="steps">
+        <div class="step">Drop below 30 HP</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click Shark</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Immediately click Karambwan</div>
+        <div class="step-arrow">→</div>
+        <div class="step good">+38 HP in ~1 tick</div>
+      </div>
+    </div>
+
+    <div class="rotation">
+      <div class="rotation-label">Combo Eat — Critical (very low HP)</div>
+      <div class="steps">
+        <div class="step">Under 20 HP</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click Shark</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click Karambwan</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Click second Shark</div>
+        <div class="step-arrow">→</div>
+        <div class="step good">+58 HP across 2 ticks</div>
+      </div>
+    </div>
+
+    <div class="warning">Do NOT eat Saradomin Brew first in a combo sequence. It reduces your combat stats right when you need your strength most. Brew last if at all, and immediately re-pot.</div>
+
+    <h3>Standard Inventory Template</h3>
+    <div class="inventory">
+      🐟 8× Shark &nbsp;|&nbsp; 🐟 5× Karambwan &nbsp;|&nbsp; ⚗️ 1× Super Combat (4 dose) &nbsp;|&nbsp; ⚗️ 1× Prayer Potion (2–4 dose) &nbsp;|&nbsp; ⚗️ 1× Stamina Potion (1 dose) &nbsp;|&nbsp; 🗡️ Dragon Dagger (P++) &nbsp;|&nbsp; 💰 Looting Bag (if going into deep Wilderness) &nbsp;|&nbsp; Remaining slots: extra sharks or a second Karambwan stack
+    </div>
+
+    <div class="tip">Practise the combo eat in Clan Wars before taking it into the Wilderness. Click it until it's muscle memory. In a real fight you'll have half a second to react — there's no time to think about the order.</div>
+  </div>
+
+  <!-- ═══════════ ROTATIONS ═══════════ -->
+  <div class="section" id="s-rotations">
+    <div class="section-header">
+      <h2>Combat Rotations</h2>
+      <p>The exact sequence of actions for every phase of a fight</p>
+    </div>
+
+    <p>A rotation is the sequence of clicks and actions you take during a fight. Good rotations are about maximising damage output while keeping your HP safe. Every fight has three phases: the opening, the grind, and the close.</p>
+
+    <div class="phase">
+      <div class="phase-label">Phase 1</div>
+      <h4>The Opening — First 10 Seconds</h4>
+      <p>Before engaging, prepare your buffs. This is non-negotiable.</p>
+      <div class="rotation">
+        <div class="rotation-label">Opening rotation</div>
+        <div class="steps">
+          <div class="step highlight">Drink Super Combat</div>
+          <div class="step-arrow">→</div>
+          <div class="step highlight">Activate Piety (70 Prayer)</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Click opponent to attack</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Whip auto-attack begins</div>
+        </div>
+      </div>
+      <div class="info">If you're starting a fight near a banker (like Edgeville), pot up before entering the Wilderness. In Bounty Hunter, pot the moment you've accepted the assignment.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 2</div>
+      <h4>The Grind — Mid-Fight</h4>
+      <p>The whip does its work. Your job here is to manage HP and watch for openings.</p>
+      <div class="rotation">
+        <div class="rotation-label">Mid-fight discipline</div>
+        <div class="steps">
+          <div class="step">Whip auto-attacks</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Watch your HP</div>
+          <div class="step-arrow">→</div>
+          <div class="step highlight">Eat below 40 HP</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Combo eat below 25 HP</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Watch opponent's HP</div>
+        </div>
+      </div>
+      <p>You should eat at roughly 40% of your max HP — around 35 HP on this build. Don't eat at 70 HP (wasteful), and don't wait until 10 HP (dangerous). Aim to stay in the 35–60 HP range during a grind.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 3</div>
+      <h4>The Close — DDS Spec Dump</h4>
+      <p>When your opponent is around 40–50 HP and has eaten most of their food, it's time to finish with DDS specs. Don't spec before this — a spec at 80 HP is almost always wasted.</p>
+      <div class="rotation">
+        <div class="rotation-label">DDS spec close</div>
+        <div class="steps">
+          <div class="step">Opponent at ~50 HP</div>
+          <div class="step-arrow">→</div>
+          <div class="step highlight">Switch to DDS</div>
+          <div class="step-arrow">→</div>
+          <div class="step highlight">Spec click #1 (2 hits)</div>
+          <div class="step-arrow">→</div>
+          <div class="step highlight">Spec click #2 (2 hits)</div>
+          <div class="step-arrow">→</div>
+          <div class="step">Switch back to whip if needed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Defensive Rotation — When You're Taking a Beating</h3>
+    <div class="rotation">
+      <div class="rotation-label">Panic tanking sequence</div>
+      <div class="steps">
+        <div class="step">Drop below 30 HP</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Combo eat (Shark + Karambwan)</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Check prayer — activate Protect Melee if off</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Keep attacking</div>
+      </div>
+    </div>
+
+    <h3>Escape Rotation — Knowing When to Run</h3>
+    <p>Running is not failure. Running with your gear intact means you can fight again. If you're down to 3 or fewer food items and your opponent still has plenty, the fight is likely lost.</p>
+    <div class="rotation">
+      <div class="rotation-label">Escape sequence</div>
+      <div class="steps">
+        <div class="step">3 or fewer food left</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Activate Stamina Potion</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Sprint toward safety</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Eat while running if chased</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Protect Item if near death</div>
+      </div>
+    </div>
+
+    <div class="tip">Protect Item prayer saves your most valuable equipped item on death. If you can only choose one prayer in a desperate situation, choose this over Protect from Melee.</div>
+
+    <h3>Advanced: Prayer Flicking</h3>
+    <p>Once you've mastered the basics, work toward prayer flicking. This means activating Protect from Melee exactly one tick before your opponent hits — blocking the damage — then turning it off to preserve prayer points. Done correctly, you can massively outlast opponents without running out of prayer.</p>
+    <div class="rotation">
+      <div class="rotation-label">Basic prayer flicking (melee vs melee)</div>
+      <div class="steps">
+        <div class="step">Watch opponent's attack animation</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Turn Protect Melee ON (1 tick before hit)</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Damage blocked</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Turn Protect Melee OFF</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Repeat on next attack cycle</div>
+      </div>
+    </div>
+
+    <div class="warning">Prayer flicking takes significant practice. Learn it in Clan Wars with zero pressure. It's not beginner-required — but it separates good PKers from great ones.</div>
+  </div>
+
+  <!-- ═══════════ F-KEYS ═══════════ -->
+  <div class="section" id="s-fkeys">
+    <div class="section-header">
+      <h2>F-Keys & Interface Setup</h2>
+      <p>Essential hotkey configuration for fast, efficient PvP play</p>
+    </div>
+
+    <p>PvP in OSRS is decided in fractions of seconds. Clicking through the interface with your mouse is far too slow. <strong>F-Keys</strong> let you switch between interface tabs instantly — inventory, prayer, spellbook, equipment — without moving your mouse away from the action. Configuring them before your first fight is not optional.</p>
+
+    <h3>Recommended F-Key Layout</h3>
+    <div class="fkey-grid">
+      <div class="fkey-card"><div class="fkey-key">F1</div><div class="fkey-label">Attack / Spec Bar</div></div>
+      <div class="fkey-card"><div class="fkey-key">F2</div><div class="fkey-label">Inventory</div></div>
+      <div class="fkey-card"><div class="fkey-key">F3</div><div class="fkey-label">Prayer Tab</div></div>
+      <div class="fkey-card"><div class="fkey-key">F4</div><div class="fkey-label">Spellbook</div></div>
+      <div class="fkey-card"><div class="fkey-key">F5</div><div class="fkey-label">Equipment Tab</div></div>
+      <div class="fkey-card"><div class="fkey-key">Esc</div><div class="fkey-label">Close / Back</div></div>
+    </div>
+
+    <p>To configure F-Keys in OSRS: open <strong>Settings → Controls</strong> and assign the function keys to the tabs above. OSRS has a built-in F-key system — use it.</p>
+
+    <h3>How F-Keys Work in Practice</h3>
+    <p>During a fight you'll need to access your inventory (food, potions, spec weapon), prayer (Piety, protection prayers), and the special attack bar — all within the same 0.6-second tick window. The typical flow looks like this:</p>
+
+    <div class="rotation">
+      <div class="rotation-label">Spec weapon switch sequence (with F-keys)</div>
+      <div class="steps">
+        <div class="step">Whip auto-attacking</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">F2 — open inventory</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click DDS in inventory to equip</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">F1 — open spec bar</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click special attack button</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Click opponent</div>
+      </div>
+    </div>
+
+    <div class="rotation">
+      <div class="rotation-label">Prayer activation mid-fight</div>
+      <div class="steps">
+        <div class="step">Opponent winds up attack</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">F3 — prayer tab</div>
+        <div class="step-arrow">→</div>
+        <div class="step highlight">Click Protect from Melee</div>
+        <div class="step-arrow">→</div>
+        <div class="step">F2 — back to inventory</div>
+        <div class="step-arrow">→</div>
+        <div class="step">Continue eating / attacking</div>
+      </div>
+    </div>
+
+    <h3>Interface Layout Tips</h3>
+    <ul>
+      <li>Keep your <strong>most-used food (sharks) in the top-left of your inventory</strong> — it's the easiest to click quickly.</li>
+      <li>Put your <strong>Karambwans directly next to your sharks</strong> for fast combo eating.</li>
+      <li>Keep the <strong>DDS in a fixed inventory slot</strong> so you can muscle-memory click it.</li>
+      <li>Put your <strong>Super Combat potion in slot 1</strong> so it's always in the same place at the start of a fight.</li>
+      <li>The <strong>Stamina potion</strong> can go in any corner — you'll click it deliberately, not reactively.</li>
+    </ul>
+
+    <div class="tip">Spend 20 minutes in Clan Wars just practising switching between tabs with F-keys and clicking food. The physical speed of your hands matters in PvP. Drilling this before your first real fight will save you many deaths.</div>
+  </div>
+
+  <!-- ═══════════ BATTLES ═══════════ -->
+  <div class="section" id="s-battles">
+    <div class="section-header">
+      <h2>Fight Examples</h2>
+      <p>Annotated play-by-play scenarios showing real rotations in action</p>
+    </div>
+
+    <p>Each scenario below uses fictional character names but accurate game mechanics. "Tick" = 0.6 seconds. Damage numbers are realistic for this build.</p>
+
+    <!-- FIGHT 1 -->
+    <div class="battle">
+      <div class="battle-header">
+        <div class="battle-num">I</div>
+        <div class="battle-title">vs. Undergeared Opponent — The Clean Kill</div>
+        <div class="battle-outcome outcome-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">
+          Setup: You have full budget gear, DDS, 10 sharks, 6 karambwans, Super Combat, Piety. Opponent (username: RuneNoob67) is wearing Rune armour with a Rune scimitar. They're likely newer to PvP. Combat level similar — around 100.
+        </div>
+        <div class="log-line"><span class="you">You</span> <span class="action">pot up with Super Combat, activate Piety, and engage.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">land a</span> <span class="dmg">27</span> <span class="action">with your whip. RuneNoob67 eats a shark immediately.</span></div>
+        <div class="log-line"><span class="them">RuneNoob67</span> <span class="action">hits you for</span> <span class="dmg">12</span><span class="action">. You're at 73 HP — no need to eat yet.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">land</span> <span class="dmg">31</span><span class="action">. RuneNoob67 is around 45 HP. He eats again.</span></div>
+        <div class="log-line"><span class="them">RuneNoob67</span> <span class="action">hits a</span> <span class="dmg">18</span><span class="action">. You're at 55 HP. Still comfortable — sit on it, don't eat.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">land</span> <span class="dmg">24</span><span class="action">. He's around 40 HP and appears to have eaten his last shark.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">— time to close. Switch to DDS via F2. First special:</span> <span class="dmg">19 + 15</span><span class="action">. RuneNoob67 is at ~6 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">click the second special before he can react:</span> <span class="dmg">8 + 0</span><span class="action">. First hit kills him.</span> <span class="good">KILL. Loot collected.</span></div>
+        <div class="battle-lesson"><strong>What went right:</strong> You didn't eat unnecessarily at 73 HP. You waited until the opponent was near-foodless before speccing. The DDS finished the job from 40 HP without wasting both spec charges mid-fight.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 2 -->
+    <div class="battle">
+      <div class="battle-header">
+        <div class="battle-num">II</div>
+        <div class="battle-title">vs. Mirror Match — Close Fight Won by Combo Eat</div>
+        <div class="battle-outcome outcome-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">
+          Setup: You encounter another 75/99/75 player (username: WildernessWarlord) with similar gear. Both of you have Bandos, whips, and DDS. Tight fight — every HP matters.
+        </div>
+        <div class="log-line"><span class="them">WildernessWarlord</span> <span class="action">attacks first with a</span> <span class="dmg">26</span><span class="action">. You're at 59 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">hit back for</span> <span class="dmg">30</span><span class="action">. He eats one shark. The grind begins.</span></div>
+        <div class="log-line"><span class="action">Several ticks of trading blows. Both in the 50–70 HP range. Neither pulling away.</span></div>
+        <div class="log-line"><span class="them">WildernessWarlord</span> <span class="action">lands a brutal</span> <span class="dmg">36</span><span class="action">. You drop to</span> <span class="dmg">22 HP</span><span class="action">. Critical.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">immediately combo eat — F2, click shark, click karambwan. Back to</span> <span class="good">60 HP</span><span class="action"> in one tick.</span></div>
+        <div class="log-line"><span class="them">WildernessWarlord</span> <span class="action">hits a</span> <span class="dmg">22</span><span class="action"> on the tick you ate — you're at 38 HP but alive.</span></div>
+        <div class="log-line"><span class="action">You notice WildernessWarlord is at ~55 HP and appears to be running low on food — he ate twice just now.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">eat one shark (back to 58 HP) then immediately switch to DDS. First spec:</span> <span class="dmg">22 + 17</span><span class="action">. He's at ~16 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">fire second spec:</span> <span class="dmg">13 + 6</span><span class="action">. Kill confirmed at 19 total damage.</span> <span class="good">Victory.</span></div>
+        <div class="battle-lesson"><strong>What won it:</strong> The combo eat at 22 HP was the turning point. Without it, his next hit would likely have killed you before you could respond. When opponents are playing mirrors, whoever manages HP better wins. Single-eating there (one shark = +20 HP = 42 HP) leaves you dangerously close — the combo eat created a safe margin.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 3 -->
+    <div class="battle">
+      <div class="battle-header">
+        <div class="battle-num">III</div>
+        <div class="battle-title">vs. Low-Level Pure — Staying Calm</div>
+        <div class="battle-outcome outcome-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">
+          Setup: A 1-Defence pure (combat level 80) rushes you at Edgeville with a Magic Shortbow (i). They have 99 Ranged and 99 Strength but 1 Defence. Their plan is to quickly dump range damage then switch to melee.
+        </div>
+        <div class="log-line"><span class="them">Pure</span> <span class="action">opens with ranged, hitting</span> <span class="dmg">28</span><span class="action">. Your 75 Defence doesn't help much here — switch to</span> <span class="good">Protect from Missiles</span> <span class="action">immediately.</span></div>
+        <div class="log-line"><span class="them">Pure</span> <span class="action">fires again —</span> <span class="action">blocked by your prayer. You take</span> <span class="dmg">0</span><span class="action">.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">close the gap and engage with whip. Hit a</span> <span class="dmg">34</span><span class="action">. They only have ~60 HP with 1 Defence.</span></div>
+        <div class="log-line"><span class="them">Pure</span> <span class="action">switches to Dragon Dagger and specs — hits</span> <span class="dmg">18 + 11</span><span class="action"> through Protect from Missiles (melee hits aren't blocked). You're at 36 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">combo eat (back to 74 HP) and switch to</span> <span class="good">Protect from Melee</span><span class="action">.</span></div>
+        <div class="log-line"><span class="them">Pure</span> <span class="action">has no food (pures often bring minimal supplies). They try to whip — you block it.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">hit</span> <span class="dmg">29</span> <span class="action">then spec with DDS:</span> <span class="dmg">21 + 16</span><span class="action">. Kill.</span> <span class="good">Victory.</span></div>
+        <div class="battle-lesson"><strong>Key lesson:</strong> Against pures, always check what style they're using and match your protection prayer accordingly. They will switch styles to bypass your prayer — when they switch, you switch. Your 75 Defence and food supply is a massive advantage over their 1 Defence glass cannon build.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 4 -->
+    <div class="battle">
+      <div class="battle-header">
+        <div class="battle-num">IV</div>
+        <div class="battle-title">vs. Maxed Main — Strategic Escape</div>
+        <div class="battle-outcome outcome-escaped">Escaped</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">
+          Setup: You're PKing at level 18 Wilderness when a maxed main (126 combat, Scythe of Vitur) targets you. Scythe hits three times per attack. This fight is unwinnable. Objective: escape with your gear.
+        </div>
+        <div class="log-line"><span class="them">MaxMane</span> <span class="action">lands a Scythe hit:</span> <span class="dmg">42 + 31 + 28</span><span class="action"> — three hits at once. You drop to</span> <span class="dmg">-16 HP</span><span class="action">... dead instantly.</span></div>
+        <div class="log-line"><span class="action">Wait — rewind. You spotted his Scythe as he approached. You had 1 tick to react.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">immediately activate</span> <span class="good">Protect Item</span> <span class="action">and start running south. Stamina potion already drunk.</span></div>
+        <div class="log-line"><span class="them">MaxMane</span> <span class="action">hits you once for</span> <span class="dmg">41</span> <span class="action">while pursuing. Combo eat — back to 60 HP.</span></div>
+        <div class="log-line"><span class="them">MaxMane</span> <span class="action">is slowed — can't close the gap with your stamina active.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">cross the level-20 Wilderness boundary. MaxMane gives up chase.</span></div>
+        <div class="log-line"><span class="good">Escaped with full gear intact. Lost 7 sharks and 3 karambwans. Alive to fight another day.</span></div>
+        <div class="battle-lesson"><strong>The lesson:</strong> Recognising unwinnable fights instantly is a skill. The moment you see a Scythe, Twisted Bow, or a 126 combat level, your only goal is escape. Protect Item means you keep your most valuable piece on death even if they catch you. Never try to fight back — you waste ticks you need to run.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 5 -->
+    <div class="battle">
+      <div class="battle-header">
+        <div class="battle-num">V</div>
+        <div class="battle-title">vs. Another Med-Level — Loss Due to Mistakes</div>
+        <div class="battle-outcome outcome-loss">Defeat</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">
+          Setup: A mirror match you should have won. This is a learning fight where mistakes are highlighted so you know what NOT to do.
+        </div>
+        <div class="log-line"><span class="action">Fight begins. You forget to drink your Super Combat potion.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">hit</span> <span class="dmg">18</span> <span class="action">(unpotted). Opponent hits</span> <span class="dmg">29</span><span class="action">.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">panic-eat at 67 HP (unnecessary — wasting a shark early).</span></div>
+        <div class="log-line"><span class="action">Mid-fight you get impatient and DDS spec at full opponent HP. Two specs deal</span> <span class="dmg">12 + 8 + 6 + 14</span><span class="action"> = 40 damage. He eats one shark and you've burned all your spec.</span></div>
+        <div class="log-line"><span class="action">No more spec bar. Now it's just whip vs whip and you're behind on food already.</span></div>
+        <div class="log-line"><span class="them">Opponent</span> <span class="action">saves his spec, grind continues.</span></div>
+        <div class="log-line"><span class="you">You</span> <span class="action">drop to 20 HP. Panic eat TWO sharks separately instead of combo eating — slow recovery, still low.</span></div>
+        <div class="log-line"><span class="them">Opponent</span> <span class="action">DDS specs you for</span> <span class="dmg">24 + 19</span><span class="action"> while you're at 28 HP.</span> <span class="dmg">Dead.</span></div>
+        <div class="battle-lesson"><strong>Three mistakes killed this fight:</strong> (1) Forgot to pot — lost roughly 20% damage output the whole fight. (2) Panic-ate too early, wasting food when still safe. (3) Burned spec at the wrong time — specs should close kills, not open fights. Every one of these is a habit that Clan Wars practice eliminates.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TIPS ═══════════ -->
+  <div class="section" id="s-tips">
+    <div class="section-header">
+      <h2>Tips & Common Mistakes</h2>
+      <p>The habits that separate winning PKers from learning ones</p>
+    </div>
+
+    <h3>Top 10 Rules for This Build</h3>
+    <ul class="tips-list">
+      <li><div class="tip-num">01</div><div><strong>Piety is mandatory.</strong> Activate it before every single fight. Piety boosts Attack by ~20%, Strength by ~23%, and Defence by ~25%. Fighting without it is like fighting in half your gear.</div></li>
+      <li><div class="tip-num">02</div><div><strong>Combo eat below 30 HP, not 60 HP.</strong> Eating too early wastes food. Eating too late gets you killed. Find the range (30–40 HP) and stay disciplined about it.</div></li>
+      <li><div class="tip-num">03</div><div><strong>Save your spec.</strong> DDS specs exist to close fights, not open them. An opponent at 100 HP can just eat through your spec. Save it for when they're at 40–50 HP with no food left.</div></li>
+      <li><div class="tip-num">04</div><div><strong>Always pot up before engaging.</strong> Super Combat at the start of every fight. If you forget, you're dealing 20% less damage for the entire fight — that directly causes deaths.</div></li>
+      <li><div class="tip-num">05</div><div><strong>Know when to run.</strong> Three food left against someone with eight? The math doesn't work in your favour. Run with your gear and come back better stocked.</div></li>
+      <li><div class="tip-num">06</div><div><strong>Protect Item beats Protect from Melee in a death scenario.</strong> If you're at 5 HP with one food left, you're probably dying. Switch to Protect Item — you'll keep your most expensive piece of gear.</div></li>
+      <li><div class="tip-num">07</div><div><strong>Check their gear before engaging.</strong> A Twisted Bow, Scythe, or high-level weapon means this is an unwinnable fight. Don't let pride kill you. Turn around.</div></li>
+      <li><div class="tip-num">08</div><div><strong>Match protection prayers to combat style.</strong> Melee attacking you? Protect from Melee. Ranging you? Protect from Missiles. Mage? Protect from Magic. Switching prayers when opponents switch styles is vital.</div></li>
+      <li><div class="tip-num">09</div><div><strong>Always bring a Stamina Potion.</strong> One dose. It costs almost nothing. In an escape scenario it is the single most valuable item in your inventory — it can give you the speed advantage needed to reach the Wilderness border.</div></li>
+      <li><div class="tip-num">10</div><div><strong>Losing teaches more than winning.</strong> After every death, ask yourself what cost you the fight. Was it forgotten potions? Speccing too early? Bad combo eat timing? Fix one thing at a time. Deaths are tuition.</div></li>
+    </ul>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Common Beginner Mistakes</h3>
+
+    <div class="warning">
+      <strong>Eating at full or near-full HP.</strong> If you're at 80 HP and you eat a shark, you healed maybe 5 HP because you were nearly full. That's a wasted item. Only eat when you actually need it (below ~40 HP, or combo-eat below 30 HP).
+    </div>
+    <div class="warning">
+      <strong>Forgetting Piety mid-fight.</strong> If your Prayer runs out mid-fight and you don't notice, you're suddenly dealing 23% less damage. Check your prayer orb during fights. This is where prayer potions matter.
+    </div>
+    <div class="warning">
+      <strong>Spec dumping at fight start.</strong> Your opponent is at full HP with full food. Even a perfect DDS spec barely dents their food supply. You've just wasted your entire spec bar. Wait.
+    </div>
+    <div class="warning">
+      <strong>Standing still vs. rangers.</strong> If a ranger is kiting you (keeping distance and shooting), close the gap by running directly at them. You can't be hit by ranged at melee range if you're close enough. Don't stand there taking free arrows.
+    </div>
+    <div class="warning">
+      <strong>Skulling accidentally.</strong> Attacking another player in the Wilderness gives you a skull — you'll lose all items on death (unless you use Protect Item). Know exactly when skulling applies before you attack.
+    </div>
+  </div>
+
+  <!-- ═══════════ LOCATIONS ═══════════ -->
+  <div class="section" id="s-locations">
+    <div class="section-header">
+      <h2>Where to Fight</h2>
+      <p>Choosing the right PvP location for your experience level</p>
+    </div>
+
+    <h3>Clan Wars (Free-for-all Portal)</h3>
+    <p>Zero risk. Food respawns. You can fight endlessly without losing anything. This is <strong>the training ground</strong>. Spend your first hours here drilling combo eating, F-key switching, and prayer activation until they're automatic. There's no legitimate reason to skip Clan Wars practice.</p>
+    <div class="tip">Clan Wars is also the best place to test new gear setups before risking them in the Wilderness. Try out your DDS spec timing, practice eating rotations, and get used to the speed of PvP without the pressure of losing your items.</div>
+
+    <h3>Bounty Hunter</h3>
+    <p>Located north of Edgeville. You're assigned a target to hunt, and another player is hunting you. This is a managed PvP environment with its own reward currency (BH points) used to imbue rings. Good for practice with some structure and stakes.</p>
+    <p>Key rules: You only have to fight your assigned target. You can ignore other players. Risk is controlled. Good for transitioning from Clan Wars into real combat.</p>
+
+    <h3>Edgeville Wilderness (Level 1–10)</h3>
+    <p>The most common beginner PvP zone. Level 1 Wilderness means you can only be attacked by players within 3 combat levels of you. At level ~104, that means you'll face roughly levels 101–107. Very manageable matchups.</p>
+    <p>You can bank quickly at Edgeville, restock, and return. Keep your risk low: leave behind anything you can't afford to lose. A standard risk for a beginner is around 500k–1M GP worth of gear.</p>
+
+    <h3>Edgeville Ditch (Deep Side)</h3>
+    <p>Once you've got basic fights down, push into level 10–30 Wilderness for players who've ventured further in. More risk, more reward. Potential for better loot. Don't go here until your rotations and combo eating are reliable.</p>
+
+    <h3>Deep Wilderness (Level 30+)</h3>
+    <p>Level 30 Wilderness allows anyone within 30 combat levels to attack you. At your level that opens you up to level 74–134 combats. This is high-risk territory. Only go deep when you're confident and intentionally hunting specific targets.</p>
+
+    <div class="warning">Deep Wilderness means losing expensive gear if you die. Don't take items you're not willing to lose. The looting bag is essential here — fill it before trying to get a kill or bank. Items in the looting bag are protected if you're killed.</div>
+
+    <h3>Risk Management</h3>
+    <p>As a beginner, your goal is not to maximise profit — it's to learn the game without going broke. A sensible progression:</p>
+    <ol>
+      <li><strong>Week 1:</strong> Clan Wars only. No risk, pure practice.</li>
+      <li><strong>Week 2–3:</strong> Bounty Hunter with budget gear. 100–300k risk.</li>
+      <li><strong>Month 1+:</strong> Edgeville Wilderness with mid-tier gear. 500k–1M risk.</li>
+      <li><strong>Experienced:</strong> Deep Wilderness with full mid/BIS setup. Appropriate risk for your bankroll.</li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <div class="ornament">· · ✦ · ·</div>
+    All game mechanics referenced are accurate to standard OSRS. Damage numbers are realistic ranges for this build. Always verify current item prices and availability on the Grand Exchange before purchasing gear.
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('s-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script>
+(function(){
+  var wrap=document.querySelector('.site-nav-links-wrap');
+  var links=document.querySelector('.site-nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Pure Ranger PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#2e7d32;--ac-light:#4caf50;--ac-dim:#1b5e20;
+  --ac-bg:rgba(46,125,50,0.11);--ac-border:rgba(46,125,50,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#4caf50;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#2e7d32;border-color:#2e7d32;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #2e7d32;color:#4caf50;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#2e7d32;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#4caf50;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#4caf50;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#1b5e20;margin:1.25rem 0 0.5rem;}
+a{color:#4caf50;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#2e7d32,transparent);}
+.phase-label{color:#4caf50;}
+.battle-head{background:rgba(46,125,50,0.07);}
+.battle-num{border-color:var(--ac-border);color:#4caf50;}
+.you{color:#4caf50;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#1b5e20;}
+.tip-n{color:#1b5e20;}
+.ornament{color:#1b5e20;}
+footer .orn{color:#1b5e20;}
+::-webkit-scrollbar-thumb{background:#1b5e20;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#1b5e20,transparent);}
+.eyebrow span{color:#1b5e20;}
+h1{text-shadow:0 0 60px rgba(46,125,50,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#1b5e20;}
+.tier-badge{background:var(--ac-bg);color:#4caf50;border:1px solid var(--ac-border);}
+.card-slot{color:#1b5e20;}
+.rot-label{color:#1b5e20;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#4caf50;margin-bottom:3px;}
+.step.hl{background:rgba(46,125,50,0.14);border-color:var(--ac-border);color:#4caf50;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk cur">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(46,125,50,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Specialist Build</span></div>
+    <h1>The Pure Ranger</h1>
+    <p class="hero-build">1 Defence · 99 Ranged · Combat ~75–85</p>
+    <p class="hero-desc">Mobility as a weapon. The Toxic Blowpipe fires while you run — chip opponents down from range, kite melee attackers, and finish with MSB spec before they can close the gap.</p>
+    <span class="tier-badge">Pure Ranger · Mobility & Blowpipe Specialist</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Ranged</div><div class="stat-val">99</div><div class="stat-sub">Blowpipe</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Attack</div><div class="stat-val">1</div><div class="stat-sub">No melee</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~80</div><div class="stat-sub">±5 CB</div></div>
+      <div class="stat-card"><div class="stat-label">Speed</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">3 ticks</div><div class="stat-sub">Blowpipe</div></div>
+      <div class="stat-card"><div class="stat-label">Kiting</div><div class="stat-val">✓</div><div class="stat-sub">Fire while running</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear & Ammo</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fight Examples</button>
+    <button class="tab-btn" onclick="show('matchups',this)">Matchups</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips & Mistakes</button>
+    <button class="tab-btn" onclick="show('locations',this)">Where to Fight</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>The Pure Ranger</h2><p>1 Defence, 99 Ranged — pure ranged DPS with spec-weapon finishes</p></div>
+
+    <p>The <strong>Pure Ranger</strong> is a 1-Defence account built entirely around Ranged combat. At 99 Ranged with a <strong>Toxic Blowpipe</strong>, you fire every 3 ticks — faster than any melee weapon at the same combat level. The Blowpipe's rapid hits chip opponents down while the <strong>Magic Shortbow (i)</strong> special attack delivers two simultaneous arrows as a spec finish or prayer bypass.</p>
+    <p>The Pure Ranger's primary advantage is <strong>mobility</strong>: ranged weapons can fire while moving, allowing you to kite melee-focused opponents, maintain distance from threatening specs, and fire while escaping. It's a fundamentally different combat style to melee pures — you choose the range of engagement, not just the timing.</p><div class="tip">Unlike melee pures that must close to attack, a Pure Ranger can deal damage while running. Against a melee pure trying to close the gap, you can fire 3–5 Blowpipe shots while they're still sprinting toward you.</div><table class="data-table"><tr><th>Stat</th><th>Pure Ranger</th><th>1-Def Melee Pure</th></tr><tr><td>Primary Stat</td><td>99 Ranged</td><td>99 Strength</td></tr><tr><td>Attack Speed</td><td class="hi">3 ticks (Blowpipe)</td><td class="lo">4 ticks (Scimitar)</td></tr><tr><td>Engage Range</td><td class="hi">Can fire at distance</td><td class="lo">Must be in melee range</td></tr><tr><td>vs Protect Melee</td><td class="hi">Unaffected</td><td class="lo">Blocked completely</td></tr><tr><td>Combat Level</td><td class="hi">~75–85</td><td class="hi">~75–85</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear & Ammo</h2><p>Ranged BIS at 1 Defence — every slot matters for ranged accuracy and damage</p></div>
+<div class="card-grid"><div class="card"><div class="card-slot">Head</div><div class="card-name">Archer Helm</div><div class="card-note">Fremennik Trials required. Best 1-Defence ranged helm. Slight ranged bonus over alternatives.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Head (budget)</div><div class="card-name">Coif</div><div class="card-note">No requirements. Adequate ranged bonus. Use until Archer Helm available.</div><span class="badge b-green">Budget</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Karil's Leathertop</div><div class="card-note">No Defence requirement (70 Ranged req). Best ranged body at 1 Defence. Degrades — keep it repaired.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Body (alt)</div><div class="card-name">Black D'hide Body</div><div class="card-note">40 Defence req — NOT available. Blue D'hide (40 Def) also unavailable. Green D'hide (40 Def req) also blocked. Leather Body for strict 1-Def.</div><span class="badge b-red">Most d'hide requires 40 Def</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Karil's Leatherskirt</div><div class="card-note">No Defence requirement (70 Ranged req). Best ranged legs at 1 Defence.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Weapon</div><div class="card-name">Toxic Blowpipe</div><div class="card-note">75 Ranged req. 3-tick speed. Primary weapon. Charges with Zulrah scales + any dart. Dragon Darts for max damage.</div><span class="badge b-red">Primary</span></div><div class="card"><div class="card-slot">Spec Weapon</div><div class="card-name">Magic Shortbow (i)</div><div class="card-note">50 Ranged req. Two simultaneous arrows on spec. Prayer bypass or finisher.</div><span class="badge b-gold">Spec</span></div><div class="card"><div class="card-slot">Amulet</div><div class="card-name">Amulet of Anguish</div><div class="card-note">+15 Ranged strength. No Defence req. BIS ranged amulet.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Cape</div><div class="card-name">Ava's Accumulator</div><div class="card-note">50 Ranged, Animal Magnetism quest. +4 Ranged attack, auto-collects ammo. No Defence req.</div><span class="badge b-gold">Standard</span></div><div class="card"><div class="card-slot">Boots</div><div class="card-name">Ranger Boots</div><div class="card-note">No requirements. +4 Ranged attack. Best ranged boots for this build.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Ring</div><div class="card-name">Archers Ring (i)</div><div class="card-note">+8 Ranged attack imbued. No Defence req.</div><span class="badge b-gold">Imbued</span></div><div class="card"><div class="card-slot">Gloves</div><div class="card-name">Vambraces</div><div class="card-note">Basic ranged gloves. No Defence requirement. Best freely available ranged gloves at 1 Defence.</div><span class="badge b-gray">Standard</span></div></div><div class="warn">Most d'hide armour requires 40 Defence — unavailable to a 1-Defence pure. Karil's crossbow armour requires only 70 Ranged and no Defence, making it the best armour option. Always verify item requirements before buying.</div><h3>Dart Selection</h3><table class="data-table"><tr><th>Dart</th><th>Ranged Str Bonus</th><th>Cost</th><th>Best For</th></tr><tr><td>Dragon Darts</td><td> +35</td><td class="lo">Expensive</td><td class="hi">Max damage — use in all fights</td></tr><tr><td>Amethyst Darts</td><td> +28</td><td class="med">Moderate</td><td class="med">Good budget option</td></tr><tr><td>Rune Darts</td><td> +24</td><td class="hi">Cheap</td><td class="lo">Training/budget trips</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p></p></div>
+<div class="food-grid"><div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">Heals +22 HP + overheal</div><div class="food-use">Pre-fight overheal. At 1 Defence, extra HP keeps you alive through melee spec weapons.</div></div><div class="food-card"><div class="food-name">Shark</div><div class="food-heal">Heals +20 HP</div><div class="food-use">Standard. 8–10 per trip — ranged fights can last longer.</div></div><div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">Heals +18 HP (0-tick)</div><div class="food-use">Always carry 5–6.</div></div></div><div class="food-grid"><div class="food-card"><div class="food-name">Ranging Potion</div><div class="food-heal">Boosts Ranged</div><div class="food-use">Most important potion. Drink before every fight. Re-sip every 60 seconds.</div></div><div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-heal">Restores Prayer</div><div class="food-use">For Protect prayers and Rigour (74 Prayer).</div></div><div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-heal">Run energy</div><div class="food-use">Critical for this build — kiting and running requires sustained run energy.</div></div></div><div class="inventory">🐠 2× Anglerfish · 🐟 8× Shark · 🐟 5× Karambwan · ⚗️ Ranging Potion (4 dose) · ⚗️ Prayer Pot · ⚗️ Stamina · 🏹 MSB (i) + Rune Arrows · 💧 500+ Blowpipe scales + Dragon Darts</div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>Kite, chip, and close with MSB spec</p></div>
+
+    <div class="phase"><div class="phase-label">Phase 1</div><h4>Opener — Start at Distance</h4>    <div class="rotation"><div class="rot-label">Ranged opener</div><div class="steps"><span class="step hl".rstrip()>Anglerfish overheal</span><span class="arr">→</span><span class="step hl".rstrip()>Ranging Potion + Rigour</span><span class="arr">→</span><span class="step ".rstrip()>Maintain distance</span><span class="arr">→</span><span class="step hl".rstrip()>Blowpipe fires every 3 ticks</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Phase 2</div><h4>Kiting vs Melee Opponents</h4>    <div class="rotation"><div class="rot-label">Kite mechanic</div><div class="steps"><span class="step ".rstrip()>Melee opponent approaches</span><span class="arr">→</span><span class="step hl".rstrip()>Move 1 tile per tick</span><span class="arr">→</span><span class="step ".rstrip()>Blowpipe fires while moving</span><span class="arr">→</span><span class="step ".rstrip()>They can't reach melee range</span><span class="arr">→</span><span class="step good".rstrip()>Chip damage accumulates</span></div></div>
+<div class="tip">The 1-tile kite: move one tile away, fire, move one tile, fire. This keeps you just outside melee range while landing Blowpipe shots. Not all opponents can be kited — prayer users and ranged opponents require different tactics.</div></div>
+    <div class="phase"><div class="phase-label">Phase 3</div><h4>MSB Spec Close</h4>    <div class="rotation"><div class="rot-label">MSB finish</div><div class="steps"><span class="step ".rstrip()>Opponent low HP, food low</span><span class="arr">→</span><span class="step hl".rstrip()>Equip MSB (i)</span><span class="arr">→</span><span class="step hl".rstrip()>F1 → Spec</span><span class="arr">→</span><span class="step good".rstrip()>2 arrows fire simultaneously</span><span class="arr">→</span><span class="step ".rstrip()>Back to Blowpipe if needed</span></div></div>
+</div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p></p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">vs. 1-Def Melee Pure — Kiting Works</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">You (Pure Ranger, 99 Ranged, combat 82) vs ScimPure (99 Str, 60 Atk, 1 Def, combat 80).</div><div class="log-line"><span class="them">ScimPure</span> charges. You activate Rigour, pot up, start firing Blowpipe while running.</div><div class="log-line">You fire <span class="dmg">18</span>, <span class="dmg">24</span>, <span class="dmg">21</span> while kiting — they can't reach melee range.</div><div class="log-line"><span class="them">ScimPure</span> activates Protect Missiles. You move into melee range — now their scimitar can reach but your Blowpipe still fires.</div><div class="log-line">Trade hits. You combo eat at 35 HP.</div><div class="log-line">MSB spec when they're low: <span class="dmg">23+27</span> = 50. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> The kiting phase dealt ~63 damage before any melee contact. When they prayed Missiles you closed range — neither of you had a prayer advantage at melee range, but you'd already won the food economy.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">vs. Zerker — Ranged Through Protect Melee</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Zerker activates Protect Melee at fight start — your Blowpipe doesn't care.</div><div class="log-line"><span class="them">ZerkFighter</span> activates Protect Melee immediately.</div><div class="log-line"><span class="you">You</span> Blowpipe fires unblocked: <span class="dmg">26</span>, <span class="dmg">22</span>, <span class="dmg">19</span>. Through Protect Melee entirely.</div><div class="log-line"><span class="them">ZerkFighter</span> switches to Protect Missiles. You close to melee range but Blowpipe still reaches.</div><div class="log-line">Dragon Claws spec: <span class="dmg">24+12+6+6</span> = 48. You combo eat.</div><div class="log-line">MSB spec: <span class="dmg">19+28</span> = 47 from 52 HP. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> Ranged completely bypasses Protect Melee. The zerker's primary prayer did nothing. When they switched to Protect Missiles, you'd already dealt 67 Blowpipe damage — the food deficit was insurmountable.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">III</div><div class="battle-title">vs. Another Ranger — Prayer Race</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Mirror match — both have Blowpipes and Rigour.</div><div class="log-line">Both fire Blowpipes. Even DPS exchange.</div><div class="log-line">Opponent activates Protect Missiles — your Blowpipe deals 0.</div><div class="log-line"><span class="you">You</span> immediately switch to melee style (Dragon Scimitar if carrying one) or accept and close range.</div><div class="log-line">Extended fight — whoever manages prayers and food better wins.</div><div class="log-line"><span class="you">You</span> MSB spec when opponent is low food: <span class="dmg">31+24</span>. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> Ranger mirrors demand prayer reading. The moment they activate Protect Missiles, firing is wasted. Having a melee switch (even a cheap one) forces them into an impossible prayer situation.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">IV</div><div class="battle-title">vs. Mage Pure — Close Range is Key</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Pure Mage opponent — spells hit hard but you can close the distance.</div><div class="log-line"><span class="them">MagePure</span> activates Protect Magic before engaging. Spells fire regardless.</div><div class="log-line"><span class="you">You</span> close the gap immediately — at melee range, casting spells is harder and you can fire Blowpipe.</div><div class="log-line">Blowpipe chips through their cloth armour: <span class="dmg">28</span>, <span class="dmg">31</span>, <span class="dmg">25</span>.</div><div class="log-line"><span class="them">MagePure</span> tries Barrage freeze. You stay mobile.</div><div class="log-line">MSB spec: <span class="dmg">22+29</span> = 51. <span class="good-c">Kill from 44 HP.</span></div><div class="lesson"><strong>Lesson:</strong> Closing to melee range against a Mage Pure removes their safe-casting distance. Your cloth-punching Blowpipe tears through their low Defence rapidly. Moving constantly reduces freeze landing probability.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">V</div><div class="battle-title">Learning Death — Stopped Moving</div><div class="outcome o-lose">Defeat</div></div><div class="battle-body"><div class="battle-setup">Stopped kiting — gave up the Pure Ranger's main advantage.</div><div class="log-line"><span class="them">ScimPure</span> approaches. You stop moving to click food at 40 HP.</div><div class="log-line">They close the gap in the 2 ticks you stood still. Scimitar: <span class="dmg">33</span>.</div><div class="log-line">You try to eat and fire — scimitar lands again: <span class="dmg">28</span>. <span class="dmg">Dead from 40 HP.</span></div><div class="lesson"><strong>Lesson:</strong> Stopping movement to eat let them close the distance and remove your kiting advantage. On a Pure Ranger, eat ON THE MOVE — click food and immediately continue moving. Your survival depends on maintaining distance.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-matchups">
+    <div class="s-head"><h2>Matchups</h2><p></p></div>
+<table class="data-table"><tr><th>Opponent</th><th>Strategy</th><th>Note</th><th>Difficulty</th></tr><tr><td>Melee pure (any)</td><td>Kite, Blowpipe chip, MSB close</td><td>Protect Melee doesn't block ranged</td><td class="hi">Favourable</td></tr><tr><td>Zerker</td><td>Blowpipe through Protect Melee, MSB close</td><td>Ranged bypasses their main prayer</td><td class="hi">Favourable</td></tr><tr><td>Ranger mirror</td><td>Prayer reading, melee switch option</td><td>Who reads prayers faster wins</td><td class="med">Even</td></tr><tr><td>Mage Pure</td><td>Close gap, Blowpipe at melee range</td><td>Keep moving vs freeze attempts</td><td class="med">Manageable</td></tr><tr><td>Void Pure</td><td>Most challenging — they switch styles</td><td>Protect Missiles when they go ranged</td><td class="med">Challenging</td></tr><tr><td>Maxed mains</td><td>Escape while firing Blowpipe</td><td>Run-and-gun escape</td><td class="lo">Escape only</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips & Mistakes</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>Never stop moving unnecessarily.</strong> Every tick you stand still is a tick a melee opponent closes distance. Eat while moving. Always move.</div></li><li><div class="tip-n">02</div><div><strong>Blowpipe scales are limited — check before every trip.</strong> Running out of scales mid-fight removes your primary weapon. 500+ scales per trip minimum.</div></li><li><div class="tip-n">03</div><div><strong>Ranging Potion every fight, re-sip every 60 seconds.</strong> Ranged level directly affects both accuracy and max hit. A depleted Ranging Potion is equivalent to losing 10+ Ranged levels mid-fight.</div></li><li><div class="tip-n">04</div><div><strong>Protect Missiles from opponents is your hardest counter.</strong> Against sustained Protect Missiles, you deal 0 damage. Having a melee weapon as a switch (Dragon Scimitar) forces them into an impossible prayer situation.</div></li><li><div class="tip-n">05</div><div><strong>Rigour (74 Prayer) makes an enormous difference.</strong> +23% ranged damage and +20% accuracy from Rigour is a massive DPS increase. If you have 74 Prayer, Rigour should be active in every fight.</div></li><li><div class="tip-n">06</div><div><strong>Kite aggressively against melee opponents.</strong> Melee can't hit you at range. Every tick you kite safely is a free Blowpipe hit. Most melee pures at this combat level will never catch a focused kiter.</div></li></ul>
+  </div>
+  <div class="tab-panel" id="p-locations">
+    <div class="s-head"><h2>Where to Fight</h2><p></p></div>
+
+    <h3>Bounty Hunter</h3><p>Best bracket — matched targets. Pure Ranger is very effective here because prayer coverage at low combat levels is inconsistent among your targets.</p>
+    <h3>Edgeville Wilderness</h3><p>Open terrain for kiting. Level 1–10 Wilderness gives you space to manoeuvre and an Edgeville bank for fast restock. Kiting melee opponents in this zone is highly effective.</p>
+    <h3>Clan Wars</h3><p>Practice the kite mechanic extensively here. Learn exactly how many tiles you need to maintain to stay out of melee range while landing Blowpipe shots.</p><div class="tip">The Pure Ranger is one of the hardest builds to escape from as a melee player — you can deal damage while running. Take advantage of this both offensively (kiting) and defensively (firing while escaping).</div>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Blowpipe requires Zulrah scales — always check before trips. Most d'hide armour requires 40 Defence (not available to this build). Karil's armour requires 70 Ranged and no Defence — the correct choice. Rigour requires 74 Prayer and Lunar Diplomacy quest.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

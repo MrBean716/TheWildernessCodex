@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Void Pure PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+  /* Void accent — teal/cyan */
+  --vd:#2fb8a8;--vd-light:#5dd4c7;--vd-dim:#1a6e64;
+  --vd-bg:rgba(47,184,168,0.1);--vd-border:rgba(47,184,168,0.38);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+
+/* ── NAV ── */
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+
+/* ── WRAPPER ── */
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(47,184,168,0.08) 0%,transparent 65%);pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;background:linear-gradient(to right,transparent,var(--vd-dim),transparent);}
+.eyebrow span{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.3em;color:var(--vd-dim);text-transform:uppercase;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 0 60px rgba(47,184,168,0.2),0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;color:var(--vd-dim);text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;background:var(--vd-bg);color:var(--vd-light);border:1px solid var(--vd-border);text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+
+/* ── STAT ROW ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{color:var(--vd-light);border-color:var(--vd-border);background:var(--vd-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:var(--vd);border-color:var(--vd);font-weight:600;}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+
+/* ── SECTION HEAD ── */
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+
+/* ── TYPOGRAPHY ── */
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:var(--vd);letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--vd-dim);margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{color:var(--vd);text-decoration:none;}
+a:hover{color:var(--vd-light);}
+
+/* ── CALLOUTS ── */
+.tip,.warn,.info,.danger,.vd-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.vd-note{background:var(--vd-bg);border-left:3px solid var(--vd);color:var(--vd-light);}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.vd-note::before{content:'✦ VOID SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:var(--vd);}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card:hover{border-color:var(--vd-border);background:var(--vd-bg);}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--vd-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-vd{background:var(--vd-bg);color:var(--vd-light);border:1px solid var(--vd-border);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+
+/* ── ROTATION ── */
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--vd-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(47,184,168,0.05);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:var(--vd-bg);border-color:var(--vd-border);color:var(--vd-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.step.purple{background:rgba(155,111,199,0.15);border-color:rgba(155,111,199,0.35);color:#c9a6e8;}
+.arr{color:var(--vd-dim);font-size:0.82rem;}
+
+/* ── FOOD GRID ── */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--vd);margin-bottom:3px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+
+/* ── PHASE ── */
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;background:linear-gradient(to bottom,var(--vd),transparent);}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--vd);text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+
+/* ── BATTLE ── */
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{background:rgba(47,184,168,0.07);border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--vd-border);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;color:var(--vd);flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:var(--vd-bg);color:var(--vd-light);border:1px solid var(--vd-border);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.you{color:var(--vd-light);font-weight:600;}
+.them{color:#e8c97a;font-weight:600;}
+.dmg{color:#d47070;font-weight:700;}
+.good{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.lesson strong{color:var(--vd-dim);}
+
+/* ── TIPS LIST ── */
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(47,184,168,0.08);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--vd-dim);min-width:21px;padding-top:2px;font-weight:600;}
+
+/* ── INVENTORY ── */
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+
+/* ── DATA TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--vd-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(47,184,168,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;} .lo{color:#d47070;} .med{color:var(--vd-light);}
+
+/* ── ORNAMENT ── */
+.ornament{text-align:center;color:var(--vd-dim);font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--vd-dim);opacity:0.4;display:block;margin-bottom:0.6rem;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+::-webkit-scrollbar-thumb{background:var(--vd-dim);border-radius:3px;}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk cur">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="eyebrow"><span>Specialist Build</span></div>
+    <h1>The Void Pure</h1>
+    <p class="hero-build">42 Defence · 99 Ranged & Attack · Combat 75–90</p>
+    <p class="hero-desc">The hybrid specialist. Void Knight armour applies a flat 10% accuracy and damage bonus to any combat style you're using — making it the only armour set that scales with both melee and ranged at once. Mastered by tribrid players. Feared by prayer-switchers everywhere.</p>
+    <span class="tier-badge">Void Build · Hybrid & Tribrid Specialist</span>
+
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">42</div><div class="stat-sub">Void minimum</div></div>
+      <div class="stat-card"><div class="stat-label">Ranged</div><div class="stat-val">99</div><div class="stat-sub">Primary style</div></div>
+      <div class="stat-card"><div class="stat-label">Attack</div><div class="stat-val">75–99</div><div class="stat-sub">Build dependent</div></div>
+      <div class="stat-card"><div class="stat-label">Strength</div><div class="stat-val">99</div><div class="stat-sub">Max damage</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">85–95</div><div class="stat-sub">By variant</div></div>
+      <div class="stat-card"><div class="stat-label">Void Bonus</div><div class="stat-val">10%</div><div class="stat-sub">Acc + dmg</div></div>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('void_mechanic',this)">Void Mechanic</button>
+    <button class="tab-btn" onclick="show('builds',this)">Build Variants</button>
+    <button class="tab-btn" onclick="show('obtaining',this)">Obtaining Void</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear & Specs</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fight Examples</button>
+    <button class="tab-btn" onclick="show('matchups',this)">Matchups</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips & Mistakes</button>
+    <button class="tab-btn" onclick="show('locations',this)">Where to Fight</button>
+  </div>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>The Void Pure Philosophy</h2><p>Why Void Knight armour changes the rules of PvP at this combat level</p></div>
+
+    <p>A <strong>void pure</strong> is an account built around the <strong>Void Knight armour set</strong> — a unique set of armour obtained from the Pest Control minigame that applies a flat <strong>10% accuracy and 10% damage multiplier</strong> to whatever combat style you're using when wearing all four pieces. Unlike every other armour set in the game, Void scales with your offensive stats rather than adding a fixed bonus — which means at 99 Ranged with 99 Ranged Strength gear, the 10% bonus applies to a very large base number.</p>
+
+    <p>The void pure is fundamentally a <strong>hybrid account</strong>. Its power comes not from dominating in a single style, but from being dangerous in multiple styles simultaneously — and switching between them faster than opponents can update their protection prayers.</p>
+
+    <h3>What Makes Void Unique</h3>
+    <p>Every other armour set provides static bonuses — Bandos gives +6 Strength, Berserker Helm gives +3. These add a fixed number to your damage rolls. Void works differently:</p>
+    <ul>
+      <li><strong>Void Melee Helm</strong> (full set): +10% melee accuracy and melee damage multiplier</li>
+      <li><strong>Void Ranger Helm</strong> (full set): +10% ranged accuracy and +10% ranged damage</li>
+      <li><strong>Void Mage Helm</strong> (full set): +45% magic accuracy (no damage bonus for standard spells, but large accuracy boost)</li>
+      <li><strong>Elite Void Top/Bottom</strong> (upgraded): +12.5% ranged damage on top of the base set bonus, plus +2.5% magic damage</li>
+    </ul>
+    <p>The key requirement: <strong>all four pieces must be worn simultaneously</strong> — Void Top, Void Robe Bottom, Void Gloves, and the appropriate Void Helm. Remove any one piece and the entire bonus drops to zero.</p>
+
+    <div class="vd-note">Elite Void armour is the upgraded version of regular Void, obtained by spending additional Pest Control points to upgrade the top and bottom pieces. Elite Void provides +12.5% ranged damage (vs +10% for regular Void) and is considered strongly superior for ranged-focused void pures. It does not affect melee damage — melee stays at +10% accuracy and damage with regular or Elite Void.</div>
+
+    <h3>The Void Pure vs Other Builds</h3>
+    <table class="data-table">
+      <tr><th>Build</th><th>Def</th><th>Armour Type</th><th>Bonus Style</th><th>Multi-style?</th><th>CB Range</th></tr>
+      <tr><td>1-Def Pure</td><td class="lo">1</td><td>Leather/Black d'hide</td><td>Fixed Str bonus</td><td class="lo">Limited</td><td class="hi">75–85</td></tr>
+      <tr><td>Zerker</td><td class="med">45</td><td>Berserker Helm + Torso</td><td>Fixed Str bonus</td><td class="med">Moderate</td><td class="med">82–95</td></tr>
+      <tr><td>Void Pure</td><td class="med">42</td><td>Void Knight set</td><td>10% multiplier</td><td class="hi">Excellent</td><td class="med">85–95</td></tr>
+      <tr><td>Med-Level</td><td class="hi">75</td><td>Bandos/Dragon</td><td>Fixed bonuses</td><td class="med">Moderate</td><td>~104</td></tr>
+    </table>
+
+    <h3>Is the Void Pure Hard to Play?</h3>
+    <p>Yes — considerably harder than a zerker or 1-def pure. The void pure's power depends on <strong>style switching</strong>: changing between melee, ranged, and sometimes magic in a single fight while your opponent scrambles to update their protection prayer. Executing these switches within a single game tick (0.6 seconds) consistently is a high-skill demand. The reward is proportional — a well-played void pure is among the most threatening accounts in the 85–95 combat bracket.</p>
+
+    <div class="warn">Do not start a void pure as your first PvP account. The style-switching mechanics are complex and require strong foundational skills from simpler builds. Read the <a href="beginner.html">Beginner guide</a> and ideally the <a href="pure.html">1-Def Pure guide</a> first.</div>
+  </div>
+
+  <!-- ═══ VOID MECHANIC ═══ -->
+  <div class="tab-panel" id="p-void_mechanic">
+    <div class="s-head"><h2>The Void Mechanic Explained</h2><p>Exactly how the 10% bonus works, what it applies to, and when it's better or worse than alternatives</p></div>
+
+    <h3>How the Bonus Is Calculated</h3>
+    <p>In OSRS, damage is calculated by rolling a random number between 0 and your <strong>max hit</strong>. Accuracy determines how often rolls that would hit actually hit (versus being blocked by the opponent's defence). Void applies its 10% to both the accuracy roll and the max hit calculation.</p>
+    <p>For ranged specifically with <strong>Elite Void</strong>:</p>
+    <ul>
+      <li>Ranged accuracy is multiplied by 1.10 (10% bonus)</li>
+      <li>Ranged max hit is multiplied by 1.125 (12.5% bonus for Elite)</li>
+      <li>This applies to the final rolled number, meaning all gear bonuses, potion boosts, and prayer contributions are already factored in before Void's multiplier applies</li>
+    </ul>
+
+    <div class="vd-note">Because Void applies a percentage multiplier rather than a flat bonus, it scales up with the quality of everything else you wear. At 99 Ranged with Dragon Arrows and a Twisted Bow, the 10% boost applies to a much larger number than it would at 70 Ranged with a Magic Shortbow. This is why Void gets proportionally stronger as your stats improve — and why it's specifically paired with high Ranged levels on void pures.</div>
+
+    <h3>Void Melee vs BIS Melee Gear</h3>
+    <p>For melee, Void is generally <strong>inferior to Bandos + Torture + Fire Cape</strong> at high Strength levels. The 10% accuracy and damage from Void Melee is outperformed by the static +30–40 Strength bonus from BIS melee gear. This is why most void pures do not use the Void Melee Helm as their primary fighting setup — they use it as a switch for style-change situations or as a budget option.</p>
+    <p>However, at lower Strength bonus levels (budget gear, no Torture), Void Melee can be competitive or even preferable because the 10% scales with whatever bonuses you do have.</p>
+
+    <h3>Void Ranged vs Black D'Hide</h3>
+    <p>For ranged, the comparison is different. At 99 Ranged with Elite Void, the 12.5% ranged damage bonus from the full set significantly outperforms Black D'Hide's static defence bonuses. You're sacrificing ranged defence for ranged offence — which is exactly correct for a pure-style account whose goal is to kill before being killed.</p>
+
+    <h3>The Four-Piece Requirement</h3>
+    <p>This is the critical mechanical constraint of the void pure. The bonus only activates when all four Void pieces are worn simultaneously:</p>
+    <ul>
+      <li>Void Knight Top (or Elite Void Top)</li>
+      <li>Void Knight Robe Bottom (or Elite Void Robe Bottom)</li>
+      <li>Void Knight Gloves</li>
+      <li>Void Knight Melee/Ranger/Mage Helm (whichever style you're using)</li>
+    </ul>
+    <p>When switching combat styles mid-fight, you swap <strong>only the helmet</strong>. The body, bottom, and gloves stay on throughout the fight. This makes style switching significantly faster for a void pure than for other hybrid accounts — you change one item instead of four or five.</p>
+
+    <div class="tip">The single-helm switch is the biggest practical advantage of void in PvP. When a zerker switches from melee to ranged, they change helm, body, legs, amulet, and ring — five items. A void pure switches only the helm — one item. This speed advantage allows style switches inside a single game tick consistently.</div>
+
+    <h3>Regular Void vs Elite Void</h3>
+    <table class="data-table">
+      <tr><th>Version</th><th>Melee Bonus</th><th>Range Accuracy</th><th>Range Damage</th><th>Magic Accuracy</th><th>Pest Control Points</th></tr>
+      <tr><td>Regular Void</td><td class="med">+10% acc/dmg</td><td class="med">+10%</td><td class="med">+10%</td><td class="med">+45%</td><td class="hi">850 points</td></tr>
+      <tr><td>Elite Void</td><td class="med">+10% acc/dmg</td><td class="med">+10%</td><td class="hi">+12.5%</td><td class="hi">+2.5% dmg</td><td class="lo">850 + 400 upgrade</td></tr>
+    </table>
+    <p>For PvP purposes, Elite Void is strongly preferred. The 2.5% extra ranged damage over regular Void compounds across every hit you make. The upgrade costs 400 additional Pest Control points per piece (top and bottom separately).</p>
+  </div>
+
+  <!-- ═══ BUILDS ═══ -->
+  <div class="tab-panel" id="p-builds">
+    <div class="s-head"><h2>Build Variants</h2><p>The three main void pure configurations and exactly which stats each uses</p></div>
+
+    <p>All void pures share the same armour (Void Knight set) and Defence level (42), but differ significantly in their melee Attack level, Prayer investment, and whether they run a magic switch. Your choice shapes your combat level, preferred fighting style, and which opponents you can realistically beat.</p>
+
+    <h3>Variant 1 — The Ranger/Melee Hybrid (Most Common)</h3>
+    <p>The most popular void pure configuration. 75 Attack gives access to the Abyssal Whip alongside the Void Melee Helm, while 99 Ranged with Elite Void provides the primary ranged damage. Fighting switches between melee and ranged based on the opponent's overhead prayer.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Attack</div><div class="card-name">75</div><div class="card-note">Abyssal Whip (primary melee weapon) and access to AGS spec at this level. The most common Attack level for void pures.</div></div>
+      <div class="card"><div class="card-slot">Strength</div><div class="card-name">99</div><div class="card-note">Maximum. Essential for melee damage output. Never train this below max.</div></div>
+      <div class="card"><div class="card-slot">Ranged</div><div class="card-name">99</div><div class="card-note">Primary damage style. Toxic Blowpipe (fast, sustained) and Twisted Bow (if available) benefit most from Elite Void's 12.5% bonus.</div></div>
+      <div class="card"><div class="card-slot">Defence</div><div class="card-name">42</div><div class="card-note">Exactly 42 — the minimum requirement to wear all Void Knight armour pieces. Never exceed without rebuilding the account's design.</div></div>
+      <div class="card"><div class="card-slot">Magic</div><div class="card-name">55–94</div><div class="card-note">55 for High Alch. 94 for Vengeance (Lunar Diplomacy). Most builds target at least 75 for the Trident of the Swamp or ice rush freeze capability.</div></div>
+      <div class="card"><div class="card-slot">Prayer</div><div class="card-name">52–74</div><div class="card-note">52 for Smite. 70 for Piety (+23% melee Str) and Rigour (+23% ranged damage). Both Piety and Rigour are crucial — 74 Prayer is the recommended target.</div></div>
+      <div class="card"><div class="card-slot">HP</div><div class="card-name">~80</div><div class="card-note">Typical for this build. Higher than a 1-def pure but lower than a defence account. Anglerfish overheal is standard.</div></div>
+      <div class="card"><div class="card-slot">Combat</div><div class="card-name">~88–92</div><div class="card-note">Lands in a competitive bracket with other hybrid accounts. Most opponents in this range are zerkers or other pures.</div></div>
+    </div>
+
+    <h3>Variant 2 — The Blowpipe Rusher (60 Attack)</h3>
+    <p>Keeps Attack at 60 for the Dragon Scimitar and Dragon Claws spec, pairing them with a Toxic Blowpipe as the primary damage dealer. Lower combat level than the 75 Attack variant, with slightly less melee accuracy but significantly more spec weapon versatility.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Attack</div><div class="card-name">60</div><div class="card-note">Dragon Scimitar + Dragon Claws spec. Lower combat level allows fighting in a slightly weaker bracket where the Blowpipe damage is even more disproportionate.</div></div>
+      <div class="card"><div class="card-slot">Spec Weapon</div><div class="card-name">Dragon Claws</div><div class="card-note">4-hit burst spec (same as zerker). 60 Attack to wield. Best single finishing spec at this Attack level. Pairs with Vengeance for 80+ damage bursts.</div></div>
+      <div class="card"><div class="card-slot">Combat</div><div class="card-name">~84–88</div><div class="card-note">Slightly lower bracket. More consistent pure and zerker matchups. Less frequently encounters fully maxed accounts.</div></div>
+    </div>
+
+    <h3>Variant 3 — The Tribrid (Advanced)</h3>
+    <p>Adds a magic switch via Ice Burst/Barrage freeze alongside ranged and melee. The Void Mage Helm's +45% magic accuracy makes freezes land reliably without massive Magic investment. Freezing an opponent forces them to take damage while immobile — then switching styles prevents them from praying effectively.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Magic</div><div class="card-name">94</div><div class="card-note">Ice Barrage (94 Magic) + Vengeance. The freeze stops your opponent from running while you switch to melee or ranged for the kill.</div></div>
+      <div class="card"><div class="card-slot">Magic Alt</div><div class="card-name">70–82</div><div class="card-note">Ice Rush (70) or Ice Burst (82) as budget freeze options. Less damage than Barrage but the freeze mechanic is identical.</div></div>
+      <div class="card"><div class="card-slot">Combat Impact</div><div class="card-name">+3–8 CB</div><div class="card-note">Magic levels add combat levels. Budget accordingly — tribriding at 94 Magic adds ~8 CB compared to no Magic investment.</div></div>
+    </div>
+
+    <h3>Prayer Level Targets</h3>
+    <table class="data-table">
+      <tr><th>Level</th><th>Unlock</th><th>CB Impact</th><th>Priority</th></tr>
+      <tr><td>44</td><td>All three Protect prayers</td><td>+4 CB</td><td class="hi">Essential</td></tr>
+      <tr><td>52</td><td>Smite — drains opponent Prayer</td><td>+5 CB</td><td class="hi">Recommended</td></tr>
+      <tr><td>70</td><td>Piety — +23% Str, +20% Atk, +25% Def</td><td>+7 CB</td><td class="hi">Essential for melee DPS</td></tr>
+      <tr><td>74</td><td>Rigour — +23% Ranged damage, +20% acc</td><td>+7.5 CB</td><td class="hi">Essential for ranged DPS</td></tr>
+      <tr><td>77</td><td>Augury — +25% Magic acc, +3% dmg</td><td>+8 CB</td><td class="med">If running mage switch</td></tr>
+    </table>
+
+    <div class="info">Both Piety (melee) and Rigour (ranged) are important for a void pure because you're fighting in both styles. Train to 74 Prayer minimum. The combat level cost is real but the DPS from both prayers combined is enormous — Rigour alone adds roughly 18% ranged damage output.</div>
+  </div>
+
+  <!-- ═══ OBTAINING VOID ═══ -->
+  <div class="tab-panel" id="p-obtaining">
+    <div class="s-head"><h2>Obtaining Void Knight Armour</h2><p>How Pest Control works, point requirements, and the fastest strategy to get a full set</p></div>
+
+    <p>Void Knight armour is obtained exclusively through the <strong>Pest Control</strong> minigame on Void Knights' Outpost. There is no other source. You cannot buy it on the Grand Exchange. This is a significant time investment — obtaining a full Elite Void set takes hundreds of Pest Control games depending on your efficiency.</p>
+
+    <h3>Pest Control Requirements</h3>
+    <ul>
+      <li><strong>Combat level 40+</strong> — minimum to participate in the novice boat</li>
+      <li><strong>Combat level 70+</strong> — to board the intermediate boat (more efficient)</li>
+      <li><strong>Combat level 100+</strong> — veteran boat (fastest points per hour, but often requires solid combat stats to contribute)</li>
+      <li>No quest requirements to play Pest Control</li>
+    </ul>
+
+    <h3>Point Costs for Full Elite Void Set</h3>
+    <table class="data-table">
+      <tr><th>Item</th><th>Points Cost</th><th>Notes</th></tr>
+      <tr><td>Void Knight Top</td><td>200</td><td>Required for set bonus. Buy this first.</td></tr>
+      <tr><td>Void Knight Robe Bottom</td><td>200</td><td>Required for set bonus.</td></tr>
+      <tr><td>Void Knight Gloves</td><td>150</td><td>Required for set bonus. Buy alongside top/bottom.</td></tr>
+      <tr><td>Void Melee Helm</td><td>200</td><td>For melee switch.</td></tr>
+      <tr><td>Void Ranger Helm</td><td>200</td><td>Primary helm for ranged. Buy early.</td></tr>
+      <tr><td>Void Mage Helm</td><td>200</td><td>For magic freeze switch (if tribriding).</td></tr>
+      <tr><td>Elite Void Top upgrade</td><td>400</td><td>Upgrades regular top. Strongly recommended.</td></tr>
+      <tr><td>Elite Void Robe upgrade</td><td>400</td><td>Upgrades regular bottom. Strongly recommended.</td></tr>
+    </table>
+    <p><strong>Total for full Elite Void (all helms):</strong> 1,950 Pest Control points. At intermediate boat (~3–4 points per game), this is roughly 500–650 games. At veteran boat with efficient play, approximately 300–400 games.</p>
+
+    <h3>Recommended Purchase Order</h3>
+    <ol>
+      <li><strong>Void Ranger Helm + Void Top + Void Bottom + Void Gloves</strong> — Get the full ranged set working first. This is your primary fighting setup. (750 points)</li>
+      <li><strong>Void Melee Helm</strong> — Unlocks melee switching. (200 points)</li>
+      <li><strong>Elite Void Top upgrade</strong> — The biggest DPS increase per point. (400 points)</li>
+      <li><strong>Elite Void Bottom upgrade</strong> — Completes Elite set. (400 points)</li>
+      <li><strong>Void Mage Helm</strong> — Only if planning tribrid. (200 points)</li>
+    </ol>
+
+    <div class="tip">Play on the highest boat your combat level allows — points per hour scales significantly between novice (1–2 points) and veteran (4–5 points per game). At combat 85+, veteran boat is accessible and dramatically reduces grinding time. Bring high DPS gear for Pest Control games — your contribution to killing portals determines whether the game is won.</div>
+
+    <h3>Fastest Pest Control Strategies</h3>
+    <ul>
+      <li><strong>Portal focus</strong> — Kill the portals, not just the monsters. Portals ending the game quickly maximises your points per hour.</li>
+      <li><strong>Melee DPS on portals</strong> — High-strength melee with a fast weapon closes portals fastest. Use your Dragon Scimitar or Whip for PC games.</li>
+      <li><strong>Veteran boat</strong> — If you meet the 100+ combat requirement, veteran boat gives the best points per game. If just under 100 CB, consider delaying PC until you reach it.</li>
+      <li><strong>Stay near portals</strong> — Don't waste time running across the island. Pick the portal closest to the starting gate and commit to it each game.</li>
+    </ul>
+
+    <div class="info">Pest Control is a team minigame — you don't have to solo it. Joining a full boat where other players are also contributing means games complete in under 5 minutes reliably. Popular world hopping communities and FC chats maintain active Pest Control worlds.</div>
+  </div>
+
+  <!-- ═══ GEAR ═══ -->
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear & Spec Weapons</h2><p>Full void setups for each style, the helm switch, and the spec weapons that close fights</p></div>
+
+    <h3>Ranged Setup (Primary Fighting Style)</h3>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Head</div><div class="card-name">Void Ranger Helm</div><div class="card-note">Required for set bonus. Worn whenever fighting in ranged style. Switch to Void Melee Helm when swapping to melee.</div><span class="badge b-vd">Required</span></div>
+      <div class="card"><div class="card-slot">Body</div><div class="card-name">Elite Void Top</div><div class="card-note">Provides the full set bonus including 12.5% ranged damage. Never swap this out — it stays on through every style switch.</div><span class="badge b-vd">BIS</span></div>
+      <div class="card"><div class="card-slot">Legs</div><div class="card-name">Elite Void Robe Bottom</div><div class="card-note">Same as top — stays on at all times. The full Elite Void set bonus applies only when both pieces are worn.</div><span class="badge b-vd">BIS</span></div>
+      <div class="card"><div class="card-slot">Gloves</div><div class="card-name">Void Knight Gloves</div><div class="card-note">Required for set bonus. These never leave your hands throughout the fight.</div><span class="badge b-vd">Required</span></div>
+      <div class="card"><div class="card-slot">Weapon (Primary)</div><div class="card-name">Toxic Blowpipe</div><div class="card-note">Requires 75 Ranged. 3-tick attack speed — the fastest ranged weapon available. Charges with Zulrah's scales + any darts. Dragon or Amethyst darts maximise damage. Best sustained ranged DPS for this build.</div><span class="badge b-vd">Primary</span></div>
+      <div class="card"><div class="card-slot">Weapon (High Budget)</div><div class="card-name">Twisted Bow</div><div class="card-note">Scales damage with target's Magic level — devastating against high-magic-level opponents. Void's 10% accuracy multiplier on TBow is enormous. Best in slot for ranged damage on this build when affordable.</div><span class="badge b-red">BIS Expensive</span></div>
+      <div class="card"><div class="card-slot">Ammo (TBow)</div><div class="card-name">Dragon Arrows</div><div class="card-note">Required for Twisted Bow to reach maximum damage. Bring a large stack — hundreds per trip minimum.</div><span class="badge b-gold">TBow only</span></div>
+      <div class="card"><div class="card-slot">Cape</div><div class="card-name">Ava's Assembler</div><div class="card-note">Best ranged cape. +8 Ranged attack bonus, auto-collects ammo. Requires 70 Ranged and completion of Animal Magnetism + Dragon Slayer II (DS2 has unavoidable Defence XP — see below).</div><span class="badge b-red">Check DS2</span></div>
+      <div class="card"><div class="card-slot">Cape (Safe)</div><div class="card-name">Ava's Accumulator</div><div class="card-note">+4 Ranged attack. Requires only 50 Ranged and Animal Magnetism. No Defence XP involved. Safe for void pures who haven't done DS2.</div><span class="badge b-green">Safe Option</span></div>
+      <div class="card"><div class="card-slot">Boots</div><div class="card-name">Pegasian Boots</div><div class="card-note">Best ranged boots. No Defence requirement. Expensive but no obstacles to wearing them. Ranger Boots are the budget option (+4 Ranged attack, ~30M GP).</div><span class="badge b-red">BIS</span></div>
+      <div class="card"><div class="card-slot">Boots Budget</div><div class="card-name">Ranger Boots</div><div class="card-note">+4 Ranged attack. No Defence requirement. Good mid-tier choice before Pegasians. Still very effective.</div><span class="badge b-gold">Mid-tier</span></div>
+      <div class="card"><div class="card-slot">Amulet</div><div class="card-name">Amulet of Anguish</div><div class="card-note">+15 Ranged strength bonus. Best-in-slot ranged amulet. No Defence requirement. Swap to Amulet of Torture when switching to melee style.</div><span class="badge b-red">BIS Ranged</span></div>
+      <div class="card"><div class="card-slot">Ring</div><div class="card-name">Archers Ring (i)</div><div class="card-note">+8 Ranged attack imbued. Imbue via NMZ or BH points. Swap to Berserker Ring (i) when fighting in melee style.</div><span class="badge b-gold">Imbued</span></div>
+    </div>
+
+    <div class="danger">Ava's Assembler requires completing Dragon Slayer II, which awards unavoidable large Defence XP. This would push your Defence significantly above 42, breaking the void pure's set bonus requirements and adding unwanted combat levels. Most void pures use Ava's Accumulator instead and accept the minor ranged accuracy reduction.</div>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Melee Switch (Void Melee Helm Swap)</h3>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Head Switch</div><div class="card-name">Void Melee Helm</div><div class="card-note">The only item you swap when switching from ranged to melee. Activates melee set bonus. Body, legs, and gloves stay on.</div><span class="badge b-vd">One-item switch</span></div>
+      <div class="card"><div class="card-slot">Weapon (75 Atk)</div><div class="card-name">Abyssal Whip</div><div class="card-note">+82 Slash accuracy. Best melee weapon at 75 Attack. Combine with Dragon Defender for Attack and Strength bonus.</div><span class="badge b-vd">Primary Melee</span></div>
+      <div class="card"><div class="card-slot">Weapon (60 Atk)</div><div class="card-name">Dragon Scimitar</div><div class="card-note">Fast 4-tick speed. Good accuracy at 60 Attack. Best melee option for 60 Atk void pures.</div><span class="badge b-gold">60 Atk builds</span></div>
+      <div class="card"><div class="card-slot">Off-hand</div><div class="card-name">Dragon Defender</div><div class="card-note">+6 Attack, +3 Strength bonus. Essential for the Whip. Swap in when switching to melee style alongside the helm change.</div><span class="badge b-gold">Melee switch</span></div>
+    </div>
+
+    <h3>Spec Weapons</h3>
+    <div class="card-grid">
+      <div class="card"><div class="card-slot">Primary Spec (75 Atk)</div><div class="card-name">Armadyl Godsword</div><div class="card-note">50% spec bar. Single large hit, +20% damage boost. Can reach 60–75+ on a good roll. Paired with Vengeance, the recoil + AGS burst is devastating. Melee spec that bypasses ranged prayer.</div><span class="badge b-red">Core Finish</span></div>
+      <div class="card"><div class="card-slot">Primary Spec (60 Atk)</div><div class="card-name">Dragon Claws</div><div class="card-note">50% spec bar. 4-hit burst. Best spec at 60 Attack level. Same Veng + Claws combo as zerker builds.</div><span class="badge b-vd">60 Atk builds</span></div>
+      <div class="card"><div class="card-slot">Ranged Spec</div><div class="card-name">Magic Shortbow (i)</div><div class="card-note">55% spec bar. Two rapid arrows. Excellent prayer bypass — fires before opponents can switch to Protect from Missiles when used immediately after they activate Protect Melee.</div><span class="badge b-gold">Prayer bypass</span></div>
+      <div class="card"><div class="card-slot">Magic Spec</div><div class="card-name">Volatile Nightmare Staff</div><div class="card-note">55% spec bar. Magic-style spec that bypasses Protect from Melee. Combined with Vengeance and Void Mage Helm, this creates a magic spec that hits harder than most opponents expect from a ranged-focused account.</div><span class="badge b-blue">Tribrid</span></div>
+    </div>
+
+    <h3>The Blowpipe — Core Void Pure Weapon</h3>
+    <p>The Toxic Blowpipe deserves special attention. At 3-tick speed (0.6 seconds faster per attack cycle than a whip), it fires reliably and consistently. With Elite Void's 12.5% ranged damage bonus, Dragon Darts, and Rigour prayer active, the blowpipe reaches max hits that routinely challenge well-armoured opponents despite their Defence levels. The poison effect also applies ongoing damage after the fight ends if the opponent escapes.</p>
+    <p>Blowpipe charges deplete at 1 scale per 2 darts fired. Bring at least 500 scales per trip to avoid running dry mid-fight.</div>
+  </div>
+
+  <!-- ═══ FOOD ═══ -->
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p>Inventory layout, eating thresholds, and potion stack for a void pure</p></div>
+
+    <h3>Food Choices</h3>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-name">Shark</div><div class="food-heal">+20 HP</div><div class="food-use">Standard. Bring 8–10 per trip. Reliable and affordable.</div></div>
+      <div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">+18 HP (0-tick)</div><div class="food-use">Combo-eat food. Non-negotiable — always bring 5–6. 0-tick eat alongside sharks.</div></div>
+      <div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">+22 HP + overheal</div><div class="food-use">Pre-fight overheal to ~102 HP. Starting above max HP is critical at 42 Defence. Bring 2–3 for longer trips.</div></div>
+      <div class="food-card"><div class="food-name">Manta Ray</div><div class="food-heal">+22 HP</div><div class="food-use">Higher heal than sharks. Use for deep Wilderness trips where every HP is precious.</div></div>
+      <div class="food-card"><div class="food-name">Saradomin Brew</div><div class="food-heal">+16 HP per dose</div><div class="food-use">Lowers Attack, Strength, Ranged. Emergency only. Always re-pot with Super Restore immediately after brewing.</div></div>
+    </div>
+
+    <h3>Potions</h3>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-name">Ranging Potion</div><div class="food-use">Most important potion for this build. Boosts Ranged level for both accuracy and max hit. Drink before every fight. Re-sip at 4-dose intervals during extended fights.</div></div>
+      <div class="food-card"><div class="food-name">Super Combat Potion</div><div class="food-use">Boosts Attack, Strength, Defence simultaneously. Drink when you plan to use melee style. A single dose covers an entire fight.</div></div>
+      <div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-use">Restores Prayer. Bring 2 doses minimum — Piety + Rigour drain prayer fast. A void pure without prayer active is dramatically weaker.</div></div>
+      <div class="food-card"><div class="food-name">Super Restore</div><div class="food-use">Better than Prayer Potion if you've used Saradomin Brew — restores all combat stats including those reduced by brewing.</div></div>
+      <div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-use">One dose. Always. Escape tool that pays for itself with a single surviving fight.</div></div>
+    </div>
+
+    <h3>Combo Eating on a Void Pure</h3>
+    <p>With 42 Defence and ~80 HP, you're vulnerable in a similar band to a zerker but with less physical armour. Your combo eat threshold sits at <strong>35 HP</strong> — the same as a zerker. Below that, a single specced hit or good roll will kill you before your next action resolves.</p>
+
+    <div class="rotation">
+      <div class="rot-label">Standard combo eat — void pure threshold</div>
+      <div class="steps">
+        <div class="step bad">HP drops to 35 or below</div>
+        <div class="arr">→</div>
+        <div class="step hl">Click Shark</div>
+        <div class="arr">→</div>
+        <div class="step hl">Immediately click Karambwan</div>
+        <div class="arr">→</div>
+        <div class="step good">+38 HP in 1 tick</div>
+        <div class="arr">→</div>
+        <div class="step">Back to 73+ HP — resume fighting</div>
+      </div>
+    </div>
+
+    <h3>Standard Void Pure Inventory</h3>
+    <div class="inventory">
+      🐠 2× Anglerfish (pre-fight overheal) &nbsp;|&nbsp; 🐟 7× Shark &nbsp;|&nbsp; 🐟 5× Karambwan &nbsp;|&nbsp; ⚗️ 1× Ranging Potion (4 dose) &nbsp;|&nbsp; ⚗️ 1× Super Combat Potion (4 dose) &nbsp;|&nbsp; ⚗️ 2× Prayer Potion doses &nbsp;|&nbsp; ⚗️ 1× Stamina Potion &nbsp;|&nbsp; 🗡️ Spec weapon (AGS or Dragon Claws) &nbsp;|&nbsp; 🏹 Magic Shortbow (i) + Rune Arrows (prayer bypass spec) &nbsp;|&nbsp; 🗡️ Abyssal Whip + Dragon Defender (melee switch) &nbsp;|&nbsp; 🪄 Ice Barrage runes if tribriding &nbsp;|&nbsp; 💧 Blowpipe scales (500+ per trip)
+    </div>
+
+    <div class="warn">A void pure running out of Blowpipe charges mid-fight is catastrophic — you'll have no ranged weapon and must fight entirely in melee. Always check your scales before leaving. Bring at minimum 500 Zulrah scales per trip, ideally more for longer sessions.</div>
+  </div>
+
+  <!-- ═══ ROTATIONS ═══ -->
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Combat Rotations</h2><p>Phase-by-phase fight structure for hybrid and tribrid void pure combat</p></div>
+
+    <p>The void pure's rotations are more complex than any other build in this codex. You're managing two or three combat styles, a Vengeance cooldown, prayer switching, and eating — all simultaneously. Internalise each phase before attempting live fights.</p>
+
+    <div class="phase">
+      <div class="phase-label">Phase 1 — Pre-Fight Setup</div>
+      <h4>Always Before Engaging</h4>
+      <div class="rotation">
+        <div class="rot-label">Pre-fight checklist</div>
+        <div class="steps">
+          <div class="step hl">Eat Anglerfish (overheal to 102 HP)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Drink Ranging Potion</div>
+          <div class="arr">→</div>
+          <div class="step hl">Drink Super Combat Potion</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Rigour (ranged) or Piety (melee) based on opening style</div>
+          <div class="arr">→</div>
+          <div class="step purple">Cast Vengeance (if 94+ Magic)</div>
+          <div class="arr">→</div>
+          <div class="step">Engage with Blowpipe or chosen weapon</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 2 — Opening Style Choice</div>
+      <h4>Reading the Opponent and Choosing Your First Style</h4>
+      <p>Unlike other builds that default to melee, a void pure decides opening style based on what the opponent is likely to pray against. Most players expect melee from a close-range opponent — so opening with Blowpipe ranged can catch them with no Protect Missiles active.</p>
+      <div class="rotation">
+        <div class="rot-label">Ranged opener (surprise approach)</div>
+        <div class="steps">
+          <div class="step">Approach with Blowpipe equipped</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Rigour</div>
+          <div class="arr">→</div>
+          <div class="step hl">Blowpipe fires (3-tick speed)</div>
+          <div class="arr">→</div>
+          <div class="step">Opponent activates Protect Missiles</div>
+          <div class="arr">→</div>
+          <div class="step hl">Swap to Void Melee Helm (1 item swap)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Equip Whip + Dragon Defender</div>
+          <div class="arr">→</div>
+          <div class="step hl">Switch to Piety</div>
+          <div class="arr">→</div>
+          <div class="step good">Melee hits through their Protect Missiles</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 3 — The Prayer Exchange</div>
+      <h4>Continuous Style Switching Based on Opponent Prayer</h4>
+      <p>The mid-fight loop of a void pure is watching the opponent's overhead prayer and switching style to the one they're not protecting against. Because you only swap the helm (one item), this is significantly faster than other hybrid builds.</p>
+      <div class="rotation">
+        <div class="rot-label">Continuous style switching loop</div>
+        <div class="steps">
+          <div class="step">They pray Melee → switch to Blowpipe + Void Ranger Helm</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Rigour</div>
+          <div class="arr">→</div>
+          <div class="step">They pray Missiles → swap Void Melee Helm</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Piety</div>
+          <div class="arr">→</div>
+          <div class="step good">Always hitting with unprotected style</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 4 — Vengeance + Spec Stack</div>
+      <h4>The Kill Combo</h4>
+      <p>When opponent is at 60–70 HP and food-poor, land the Veng + AGS (or Claws) burst. Time the Vengeance trigger carefully — let them land a hit while Veng is active, then immediately spec.</p>
+      <div class="rotation">
+        <div class="rot-label">Veng + AGS kill burst</div>
+        <div class="steps">
+          <div class="step purple">Vengeance active</div>
+          <div class="arr">→</div>
+          <div class="step">Opponent hits you for 28 → Veng recoils 21</div>
+          <div class="arr">→</div>
+          <div class="step hl">Equip AGS</div>
+          <div class="arr">→</div>
+          <div class="step hl">AGS spec fires — hits 55</div>
+          <div class="arr">→</div>
+          <div class="step good">21 + 55 = 76 burst. Most HP pools dead.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 5 — Tribrid Freeze + Kill (Advanced)</div>
+      <h4>Ice Barrage into Melee While Frozen</h4>
+      <div class="rotation">
+        <div class="rot-label">Freeze → melee burst</div>
+        <div class="steps">
+          <div class="step hl">Equip Void Mage Helm</div>
+          <div class="arr">→</div>
+          <div class="step hl">Cast Ice Barrage (freezes 5 ticks)</div>
+          <div class="arr">→</div>
+          <div class="step hl">Swap to Void Melee Helm + Whip</div>
+          <div class="arr">→</div>
+          <div class="step hl">Activate Piety</div>
+          <div class="arr">→</div>
+          <div class="step good">Melee while frozen — opponent can't run</div>
+          <div class="arr">→</div>
+          <div class="step hl">AGS spec if they survive</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Escape Rotation</h3>
+    <div class="rotation">
+      <div class="rot-label">Cutting losses</div>
+      <div class="steps">
+        <div class="step bad">3 food or fewer left</div>
+        <div class="arr">→</div>
+        <div class="step hl">Drink Stamina Potion</div>
+        <div class="arr">→</div>
+        <div class="step">Sprint toward boundary</div>
+        <div class="arr">→</div>
+        <div class="step">Eat while running</div>
+        <div class="arr">→</div>
+        <div class="step hl">Protect Item on most valuable piece</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BATTLES ═══ -->
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p>Seven annotated fights covering the core void pure combat scenarios</p></div>
+
+    <!-- FIGHT 1 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">I</div>
+        <div class="battle-title">vs. Med-Level (75/99/75) — Blowpipe Opening Surprise</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (void pure, combat 90, Elite Void + Blowpipe, Abyssal Whip switch) vs BandosFighter (75/99/75, combat 104, Bandos gear, Abyssal Whip). They outrank you by 14 combat levels — but they expect melee.</div>
+        <div class="log-line"><span class="you">You</span> <span>approach with Blowpipe equipped, Rigour active. They don't switch prayer — expecting melee.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Blowpipe hits:</span> <span class="dmg">27</span><span>, </span><span class="dmg">24</span><span>, </span><span class="dmg">31</span><span> over three ticks. They've taken 82 damage before activating any prayer. Down to ~20 HP from Anglerfish start.</span></div>
+        <div class="log-line"><span class="them">BandosFighter</span> <span>finally activates Protect Missiles and combo eats — back to 58 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>immediately swap to Void Melee Helm and Whip. Activate Piety. They don't switch prayers fast enough —</span> <span class="dmg">34</span><span> through Protect Missiles.</span></div>
+        <div class="log-line"><span class="them">BandosFighter</span> <span>switches to Protect Melee. Hits you for</span> <span class="dmg">29</span><span>. You're at 73 HP — Anglerfish overheal absorbed it.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>swap back to Blowpipe + Ranger Helm. Rigour. Three more hits:</span> <span class="dmg">22</span><span>, </span><span class="dmg">19</span><span>, </span><span class="dmg">28</span><span>. They eat twice. Running low.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Veng trigger → AGS spec:</span> <span class="dmg">19 Veng + 58 AGS</span><span> = 77 total.</span> <span class="good">Kill from 62 HP. 104 CB account eliminated by a 90 CB void pure.</span></div>
+        <div class="lesson"><strong>The Blowpipe opener worked:</strong> 82 damage before they activated prayer is a fight-deciding head start. A zerker opening with melee would have faced Protect Melee from tick one. The ranged surprise attack created a food debt they never recovered from. The single-item helm switch kept style changes within the same tick window — no multi-item fumbling.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 2 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">II</div>
+        <div class="battle-title">vs. 1-Defence Pure — Style Switch Nullifies G Maul</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (void pure) vs PureKiller (1-def pure, Dragon Scimitar + Granite Maul, combat 78). They're 12 combat levels below you. Their strategy: g maul spec burst kill. Your strategy: keep them praying the wrong thing.</div>
+        <div class="log-line"><span class="them">PureKiller</span> <span>activates Protect Melee immediately.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>stay on Blowpipe — Protect Melee doesn't block ranged. Blowpipe fires:</span> <span class="dmg">25</span><span>, </span><span class="dmg">29</span><span>. They eat.</span></div>
+        <div class="log-line"><span class="them">PureKiller</span> <span>switches to Protect Missiles.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>swap to Void Melee Helm + Whip instantly. Piety. One tick of delay — their prayer change doesn't help them:</span> <span class="dmg">33</span><span>.</span></div>
+        <div class="log-line"><span class="them">PureKiller</span> <span>is at ~40 HP. Their g maul spec fires:</span> <span class="dmg">28 + 22</span><span>. You drop to 52 HP. Combo eat — back to 90 HP.</span></div>
+        <div class="log-line"><span class="them">PureKiller</span> <span>has used both g maul specs. No food left either.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Whip:</span> <span class="dmg">30</span><span>. AGS spec:</span> <span class="dmg">52</span><span>.</span> <span class="good">Kill. 82 damage from 40 HP — they never had a chance once specs were gone.</span></div>
+        <div class="lesson"><strong>Style switching neutralised their kit:</strong> A 1-def pure's entire strategy is g maul burst from close range while you're trapped on Protect Melee. The constant Blowpipe harassment forced them to eat and prayer-swap repeatedly. By the time their specs fired, they had no food to capitalise on the damage — and your 42 Defence tanked the g maul better than 1 Defence would have.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 3 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">III</div>
+        <div class="battle-title">vs. Zerker — Even Matchup, Execution Wins</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You (void pure, 90 CB) vs ZerkerPro (60 Atk zerker, 88 CB, Dragon Scimitar, Dragon Claws). Very close combat level. Both accounts have Vengeance-level plays available. This fight is pure mechanics.</div>
+        <div class="log-line"><span class="them">ZerkerPro</span> <span>opens with Dragon Scimitar. Activates Protect Melee right away.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Blowpipe — ranged, unblocked by their prayer:</span> <span class="dmg">22</span><span>, </span><span class="dmg">18</span><span>, </span><span class="dmg">26</span><span>. They eat twice. Their food is draining.</span></div>
+        <div class="log-line"><span class="them">ZerkerPro</span> <span>switches to Protect Missiles.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Void Melee Helm swap + Whip. Piety. They're one tick behind your switch:</span> <span class="dmg">29</span><span>.</span></div>
+        <div class="log-line"><span class="them">ZerkerPro</span> <span>Dragon Claws spec at 70 HP you:</span> <span class="dmg">24 + 12 + 6 + 6</span><span> = 48. You're at 54 HP. Combo eat — back to 92 HP.</span></div>
+        <div class="log-line"><span class="them">ZerkerPro</span> <span>has used their spec. 3 food left, ~50 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Vengeance active. They hit you for</span> <span class="dmg">26</span><span>; they receive</span> <span class="dmg">19</span><span> recoil. AGS spec:</span> <span class="dmg">54</span><span>.</span> <span class="good">19 + 54 = 73 burst. Kill from 50 HP.</span></div>
+        <div class="lesson"><strong>Why void won a coin-flip fight:</strong> The Blowpipe harassment before ZerkerPro could react to prayer cost them 3 sharks early. Once they burned their Dragon Claws spec (which you survived with combo eat + Anglerfish head start), the fight was functionally over. The Veng + AGS close is identical to the zerker's combo — but you'd preserved your spec bar while they burned theirs in panic.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 4 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">IV</div>
+        <div class="battle-title">Tribrid — Freeze into Melee Burst</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: You're running a tribrid void setup with Ice Barrage, Blowpipe, and Abyssal Whip vs MageDefender (who uses Protect from Magic throughout, relying on magic immunity). You bait them with Barrage, freeze them, and punish with melee while frozen.</div>
+        <div class="log-line"><span class="them">MageDefender</span> <span>activates Protect from Magic immediately, expecting mage spam.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>switch to Void Mage Helm and cast Ice Barrage anyway — the 45% accuracy bonus means it still hits reliably through Protect from Magic (reduces to 0 damage but the freeze lands).</span></div>
+        <div class="log-line"><span class="them">MageDefender</span> <span>is frozen. Cannot move for 5 ticks.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>instantly swap Void Melee Helm + Whip + Dragon Defender. Activate Piety. Their Protect Magic doesn't block melee —</span> <span class="dmg">36</span><span>,</span> <span class="dmg">29</span><span>.</span></div>
+        <div class="log-line"><span class="them">MageDefender</span> <span>unfreezes and switches to Protect Melee. They eat twice — taking the melee hits was expensive.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>swap back to Blowpipe — ranged through their Protect Melee:</span> <span class="dmg">24</span><span>,</span> <span class="dmg">27</span><span>.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Veng + AGS to close:</span> <span class="dmg">22 + 61</span><span> = 83 total.</span> <span class="good">Kill. The freeze window converted 5 free ticks of melee into the fight's deciding damage.</span></div>
+        <div class="lesson"><strong>The freeze's value:</strong> An Ice Barrage that deals 0 damage (blocked by Protect Magic) still freezes for 5 ticks. Those 5 ticks where MageDefender couldn't move let you land 2 full melee hits for 65 combined damage — damage they could never have avoided and didn't have a prayer to block. Tribrid isn't about doing three things — it's about the opponent being unable to protect against all three simultaneously.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 5 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">V</div>
+        <div class="battle-title">vs. Maxed Main — Escape Using Blowpipe Run-and-Gun</div>
+        <div class="outcome o-esc">Escaped</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: A 126 CB main (Torva, Scythe) catches you at level 20 Wilderness. Fight is unwinnable. But you have the Blowpipe — which lets you deal damage while running, unlike melee users who must stop to attack.</div>
+        <div class="log-line"><span class="them">MaxedMain</span> <span>Scythe hits:</span> <span class="dmg">39 + 25 + 14</span><span>. You drop to 24 HP (from 102 Anglerfish overheal). Still alive.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>combo eat (+38 HP → 62 HP). Drink Stamina. Start running south.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>equip Blowpipe while running. Fire two Blowpipe shots mid-sprint:</span> <span class="dmg">18</span><span>, </span><span class="dmg">22</span><span>. This forces MaxedMain to eat slightly — and slows their pursuit.</span></div>
+        <div class="log-line"><span class="them">MaxedMain</span> <span>hits once more for</span> <span class="dmg">31</span><span>. You eat a Shark while still running. 31 HP.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>cross the level 10 Wilderness line. They stop chasing. You'd dealt 40 damage to them while escaping — not enough to threaten them, but the Blowpipe harassment made the chase less comfortable.</span></div>
+        <div class="good">Escaped. Gear safe. Protect Item on Anguish active throughout.</div>
+        <div class="lesson"><strong>The Blowpipe run-and-gun advantage:</strong> Melee-focused builds must stop moving to attack. Ranged weapons allow you to fire while running — and the Blowpipe's fast 3-tick speed means you land shots every other step. Against a pursuer, this forces them to eat (slowing their pursuit or wasting their combat resources) while you're already moving away. Not every escape goes cleanly, but the Blowpipe makes the worst-case scenario survivable.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 6 -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">VI</div>
+        <div class="battle-title">vs. Another Void Pure — The Mirror Match</div>
+        <div class="outcome o-win">Victory</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: Both players are void pures with Elite Void, Blowpipes, and AGS. Identical kits. These fights come down entirely to who reads and reacts to prayer switches faster.</div>
+        <div class="log-line"><span class="them">VoidEnemy</span> <span>opens Blowpipe. You're already on Ranger Helm and Rigour — Protect Missiles activated.</span></div>
+        <div class="log-line"><span class="them">VoidEnemy</span> <span>instantly swaps Void Melee Helm. Whip:</span> <span class="dmg">31</span><span>. One tick behind your prayer read.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>swap back to Ranger Helm. Blowpipe:</span> <span class="dmg">26</span><span>, </span><span class="dmg">22</span><span>. They eat twice.</span></div>
+        <div class="log-line"><span class="them">VoidEnemy</span> <span>Veng + AGS attempt: they take</span> <span class="dmg">24</span><span> Veng recoil (from your Blowpipe hit) and AGS fires for</span> <span class="dmg">49</span><span>. 73 combined. You survive on 29 HP because of Anglerfish overheal.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>combo eat from 29 HP — back to 67 HP. Their spec bar is empty. They have 2 food.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Blowpipe three more hits:</span> <span class="dmg">18</span><span>, </span><span class="dmg">29</span><span>, </span><span class="dmg">24</span><span>. They're at ~15 HP with no food.</span></div>
+        <div class="log-line"><span class="you">You</span> <span>Blowpipe final:</span> <span class="dmg">18</span><span>.</span> <span class="good">Kill.</span></div>
+        <div class="lesson"><strong>Two things decided it:</strong> (1) The Anglerfish overheal at 102 HP meant their 73-damage burst that would have killed most void pures at 80 HP left you at 29 HP — survivable. (2) You didn't panic-spec after surviving their AGS. You continued pressuring with Blowpipe until they were genuinely low and out of food, then the Blowpipe itself closed it without spending your spec at all.</div>
+      </div>
+    </div>
+
+    <!-- FIGHT 7 - LOSS -->
+    <div class="battle">
+      <div class="battle-head">
+        <div class="battle-num">VII</div>
+        <div class="battle-title">Learning Death — Forgetting to Switch Styles</div>
+        <div class="outcome o-lose">Defeat</div>
+      </div>
+      <div class="battle-body">
+        <div class="battle-setup">Setup: A fight that demonstrates the single most common mistake void pures make — getting locked into one style and forgetting to switch.</div>
+        <div class="log-line"><span>Fight starts. You open with Blowpipe — they activate Protect Missiles immediately.</span></div>
+        <div class="log-line"><span>Instead of swapping, you keep firing Blowpipe through Protect Missiles. All hits land for</span> <span class="dmg">0</span><span>. Six wasted ticks.</span></div>
+        <div class="log-line"><span class="them">Opponent</span> <span>hits you freely for</span> <span class="dmg">28</span><span>,</span> <span class="dmg">22</span><span>,</span> <span class="dmg">31</span><span> while you deal no damage. You're at 21 HP.</span></div>
+        <div class="log-line"><span>Panic combo eat — back to 59 HP. You finally swap to melee helm. But now they switch to Protect Melee.</span></div>
+        <div class="log-line"><span>You swap back to Blowpipe — they're already on Protect Missiles again.</span></div>
+        <div class="log-line"><span>You panic and fire through Protect Missiles again. Three more zeroes. They AGS spec from your confusion for</span> <span class="dmg">63</span><span>.</span> <span class="dmg">Dead from 59 HP.</span></div>
+        <div class="lesson"><strong>The mistake:</strong> Continuing to fire through a protection prayer deals literally zero damage — it's not "reduced," it's zero. Every tick you spend firing into Protect Missiles while they fight back freely is a tick you're conceding. The void pure's power is entirely in style switching. A void pure that doesn't switch styles is just a player wearing weaker armour than their opponent and hitting for nothing. The moment you see a protection prayer — switch styles. Immediately. No delay.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MATCHUPS ═══ -->
+  <div class="tab-panel" id="p-matchups">
+    <div class="s-head"><h2>Matchup Guide</h2><p>How to approach every common opponent type as a void pure</p></div>
+
+    <h3>vs. 1-Defence Pures</h3>
+    <p><strong>Favourable — your style versatility shuts down their strategy.</strong> A 1-def pure's plan is g maul spec burst while you're stuck dealing with their prayer. Your constant Blowpipe harassment forces them to eat and prayer-switch repeatedly, exhausting their food before their specs can land on a meaningful HP pool.</p>
+    <ul>
+      <li>Open with Blowpipe — pure players usually activate Protect Melee first, leaving ranged unblocked</li>
+      <li>Your 42 Defence tanks their g maul spec better than 1 Defence would</li>
+      <li>Blowpipe poison applies after their escape — can finish off a fleeing pure</li>
+      <li>Never stay in one style long enough for them to prayer-lock you</li>
+    </ul>
+
+    <h3>vs. Zerkers</h3>
+    <p><strong>Even matchup — execution decides it.</strong> Zerkers have comparable offensive output and both builds can access Veng + spec. Your advantage is the Blowpipe harassment before they can settle into a prayer. Their advantage is marginally better armour and a stronger melee Strength setup in the Berserker Helm + Torso vs Void Melee.</p>
+    <ul>
+      <li>Open Blowpipe — most zerkers activate Protect Melee, leaving ranged open</li>
+      <li>Once they switch to Protect Missiles, swap styles instantly — you can do it in one item vs their five</li>
+      <li>Save your spec for after they've burned theirs — same patience rule as all other guides</li>
+      <li>Anglerfish overheal is critical — their Dragon Claws spec can reach 70+ damage</li>
+    </ul>
+
+    <h3>vs. Med-Level (75/99/75)</h3>
+    <p><strong>Favourable with good play.</strong> Med-levels have Bandos and a higher base defence than you, but their combat style is more predictable (whip + DDS spec). The Blowpipe surprise opener consistently puts them on the back foot before they can establish their whip rhythm.</p>
+    <ul>
+      <li>Their DDS spec is not prayer-bypassable — if they spec you in melee, you take full damage. Combo eat pre-emptively when they equip DDS</li>
+      <li>You fight 10–15 combat levels below them — they'll sometimes underestimate you. Capitalise on the surprise</li>
+      <li>Vengeance + AGS burst is your kill combo — their whip hits provide good Veng triggers</li>
+    </ul>
+
+    <h3>vs. Other Void Pures</h3>
+    <p><strong>Highest skill test — identical kits, pure execution.</strong> Both players will be switching styles continuously. The player who reads and reacts to prayer changes one tick faster wins every exchange. Pre-eat with Anglerfish and never skip the overheal — surviving their Veng + AGS by 2 HP because you started at 102 HP instead of 80 HP is the entire fight.</p>
+
+    <h3>vs. Maxed Mains (126 CB)</h3>
+    <p><strong>Do not fight. Escape with Blowpipe run-and-gun.</strong> A Scythe with Torva hits three times per attack through your 42 Defence for 80–100+ combined damage per swing. Uniquely for a void pure, you can fire the Blowpipe while running — harass them slightly to discourage pursuit, but your goal is exclusively escape.</p>
+
+    <h3>Matchup Quick Reference</h3>
+    <table class="data-table">
+      <tr><th>Opponent</th><th>Opening</th><th>Strategy</th><th>Difficulty</th></tr>
+      <tr><td>1-Def Pure</td><td>Blowpipe (they pray Melee)</td><td>Style switch, Blowpipe drain, AGS close</td><td class="hi">Favourable</td></tr>
+      <tr><td>Zerker</td><td>Blowpipe surprise</td><td>Fast style switch, Veng + spec timing</td><td class="med">Even</td></tr>
+      <tr><td>Med-Level (75/99/75)</td><td>Blowpipe surprise</td><td>Style switch, Veng + AGS burst</td><td class="hi">Favourable</td></tr>
+      <tr><td>Void Pure Mirror</td><td>Ranger Helm, read their opener</td><td>Faster prayer reads, Anglerfish overheal</td><td class="med">Skill-decided</td></tr>
+      <tr><td>Ranged Pure (non-void)</td><td>Void Melee Helm, Piety</td><td>Close gap, prayer switch</td><td class="med">Medium</td></tr>
+      <tr><td>Mage Freezer</td><td>Void Mage Helm, keep moving</td><td>Dodge freeze, burst on freeze land</td><td class="med">Situational</td></tr>
+      <tr><td>Maxed Main (126)</td><td>Protect Item</td><td>Blowpipe run-and-gun escape</td><td class="lo">Escape only</td></tr>
+    </table>
+  </div>
+
+  <!-- ═══ TIPS ═══ -->
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips & Common Mistakes</h2><p>What separates effective void pures from players wearing expensive armour for nothing</p></div>
+
+    <h3>The Void Pure Commandments</h3>
+    <ul class="tips-list">
+      <li><div class="tip-n">01</div><div><strong>Switch styles the moment you see a protection prayer.</strong> Firing through Protect Missiles deals zero damage — not reduced, zero. Every tick you waste dealing zero damage is a tick they hit you for free. Style switch is instant on a void pure (one helm). There is no excuse for delay.</div></li>
+      <li><div class="tip-n">02</div><div><strong>Never exceed 42 Defence.</strong> Dragon Slayer II gives large unavoidable Defence XP and is specifically incompatible with a void pure build. Many other quests also award Defence XP. Check every reward window before accepting. Verify before each quest completion.</div></li>
+      <li><div class="tip-n">03</div><div><strong>Keep all four Void pieces on at all times.</strong> The set bonus drops to zero if you remove any single piece. Void Top, Void Bottom, Void Gloves, and a Void Helm must all be equipped simultaneously. Only the helm swaps between styles.</div></li>
+      <li><div class="tip-n">04</div><div><strong>Anglerfish overheal every fight, no exceptions.</strong> The 22 HP above your max HP is the margin that decides whether Veng + AGS kills you or you survive to kill them. Against other void pures or zerkers, those 22 HP are frequently the entire fight.</div></li>
+      <li><div class="tip-n">05</div><div><strong>Both Piety and Rigour must be active for the correct style.</strong> Blowpipe without Rigour is 18% weaker. Whip without Piety is 23% weaker. Switching styles means switching prayers simultaneously. F3 for prayer, F2 for inventory — practise doing both in the same tick.</div></li>
+      <li><div class="tip-n">06</div><div><strong>Cast Vengeance before engaging, not at engagement.</strong> The 30-second cooldown starts at cast. Walking to your target counts as the wait. By the time you've exchanged opening blows, Veng should be ready to re-cast for a second trigger.</div></li>
+      <li><div class="tip-n">07</div><div><strong>The Blowpipe surprise opener is your primary advantage.</strong> Most opponents activate Protect Melee at the start of a fight because most builds open in melee. Your ranged opener catches them unprepared. Don't telegraph it by equipping the Blowpipe too early while they can still see you approaching.</div></li>
+      <li><div class="tip-n">08</div><div><strong>Don't spec until they're low and food-poor.</strong> Same rule as every other guide. An AGS spec at 90 HP opponent wastes your biggest finishing tool. Wait for the kill window: 60–70 HP, 2 or fewer food remaining.</div></li>
+      <li><div class="tip-n">09</div><div><strong>Monitor Blowpipe scales constantly.</strong> Running out of scales mid-fight removes your primary weapon. Never leave for a trip with fewer than 500 scales loaded. Check the Blowpipe's charge before entering the Wilderness — not after.</div></li>
+      <li><div class="tip-n">10</div><div><strong>Clan Wars before the Wilderness — and more Clan Wars than any other build.</strong> The void pure has the most complex combat rotation of any build in this codex. Three styles, one helm switch, Vengeance timing, prayer management, and combo eating all happening in parallel. Drill until every action is autonomous. This takes more time than simpler builds — respect the learning curve.</div></li>
+      <li><div class="tip-n">11</div><div><strong>Tribrid freeze is a skill ceiling, not a starting point.</strong> Learn hybrid (two styles) to fluency before attempting tribrid. Adding a magic freeze switch while still fumbling the melee-ranged swap will kill you consistently. Tribrid is the reward for mastering hybrid, not a shortcut past it.</div></li>
+      <li><div class="tip-n">12</div><div><strong>Know the difference between tanking and mistake avoidance.</strong> A void pure with 42 Defence can survive a few hits but cannot outlast a well-geared defence account in a prolonged exchange. Fights must be decisive. If you're trading hits without landing your style switches, you're playing a different build badly — not the void pure well.</div></li>
+    </ul>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <h3>Critical Mistakes</h3>
+    <div class="danger">Firing through a protection prayer. Protection prayers completely negate the style they protect against. Zero damage, zero. This is the most common and most costly mistake on a void pure. Switch styles — immediately, every time, no exceptions.</div>
+    <div class="warn">Removing any Void piece mid-fight. Taking off your Void Top to equip a Bandos Chestplate, or swapping Void Gloves for Barrows Gloves, instantly drops the entire set bonus to zero. The set bonus is worth more than any individual piece substitution. Keep all four pieces on.</div>
+    <div class="warn">Opening with melee against melee-prayer opponents. If you close the gap and engage with a whip, you'll face Protect from Melee instantly. You've wasted the surprise advantage that makes the void pure effective. Open ranged — let them establish the wrong prayer, then switch.</div>
+    <div class="warn">Skipping the overheal. The void pure's most common death scenario is taking a Veng + spec burst that lands for 73–80 damage. At 80 HP (base), this is lethal. At 102 HP (Anglerfish), it leaves you at 22–29 HP — survivable with a combo eat. The Anglerfish costs almost nothing. Never skip it.</div>
+    <div class="warn">Running out of Blowpipe scales in the Wilderness. With no scales, the Blowpipe is unusable and you're left with melee only — a significantly weaker void pure. Check your scales before every trip. Every time.</div>
+  </div>
+
+  <!-- ═══ LOCATIONS ═══ -->
+  <div class="tab-panel" id="p-locations">
+    <div class="s-head"><h2>Where to Fight</h2><p>Optimal locations for void pure PvP and the correct progression from practice to high-stakes combat</p></div>
+
+    <h3>Before Anything Else — Pest Control</h3>
+    <p>You cannot play a void pure without the void armour. Before any PvP consideration, you need to complete your Pest Control grind. Prioritise in this order:</p>
+    <ol>
+      <li>Regular Void Ranger Helm + Void Top + Void Bottom + Void Gloves (the first 750 points)</li>
+      <li>Void Melee Helm (200 points — unlocks melee switching)</li>
+      <li>Elite Void Top and Bottom upgrades (800 points — critical DPS upgrade)</li>
+      <li>Void Mage Helm (200 points — only if planning tribrid)</li>
+    </ol>
+    <p>Until Elite Void is complete, your ranged damage is 2.5% lower than the build's potential. It's worth completing before serious PKing begins.</p>
+
+    <h3>Clan Wars — Non-Negotiable Practice</h3>
+    <p>The void pure has the most complex combat rotation of any account in this codex. Before entering the Wilderness, drill these four sequences until they require zero conscious thought:</p>
+    <ul>
+      <li><strong>Blowpipe → see Protect Missiles → Void Melee Helm + Whip switch in one tick</strong></li>
+      <li><strong>Melee → see Protect Melee → Void Ranger Helm + Blowpipe switch in one tick</strong></li>
+      <li><strong>Veng trigger → AGS spec on same/next tick</strong></li>
+      <li><strong>Combo eat at 35 HP while maintaining style awareness</strong></li>
+    </ul>
+    <p>Spend significantly more time in Clan Wars than with other builds. The void pure is unforgiving — every mistake is immediately punished by a player who understands that protection prayers deal zero damage to the appropriate style.</p>
+
+    <h3>Last Man Standing (LMS)</h3>
+    <p>Standardised gear removes the gear variable. LMS is excellent for drilling style switching in real combat without equipment risk. Players use void and hybrid builds extensively in LMS — the practice directly transfers to Wilderness void pure play.</p>
+
+    <h3>Bounty Hunter</h3>
+    <p>Matched targets, structured stakes, BH points for imbuing rings. Start here with budget gear (500k risk) once Clan Wars mechanics are solid. BH is excellent for practicing the Blowpipe surprise opener in a live environment where the stakes are low enough to iterate and learn from mistakes.</p>
+
+    <h3>Edgeville Wilderness</h3>
+    <p>At combat 88–92, you'll encounter other void pures, zerkers, and mid-level accounts regularly. The style switching advantage is most visible here — opponents aren't expecting three-style pressure from a sub-100 combat account. Stay in levels 1–10 initially. Edgeville bank is close for fast restocking.</p>
+
+    <h3>Revenant Caves and Wilderness Bosses</h3>
+    <p>The void pure's multi-style capability makes it excellent for hunting PvM players who are focused on boss mechanics rather than PvP. The Blowpipe's fast DPS closes fights quickly against unprepared opponents carrying boss loot. The Wilderness Bosses area (Chaos Elemental, Callisto/Artio, Venenatis/Spindel) is profitable hunting ground at higher Wilderness levels.</p>
+
+    <h3>Risk Progression Table</h3>
+    <table class="data-table">
+      <tr><th>Stage</th><th>Location</th><th>Gear Risk</th><th>Prerequisite</th></tr>
+      <tr><td>Building</td><td>Pest Control</td><td class="hi">Zero (PvM grind)</td><td>42 Defence, 40+ Combat</td></tr>
+      <tr><td>Drilling</td><td>Clan Wars</td><td class="hi">Zero</td><td>Full Elite Void obtained</td></tr>
+      <tr><td>First Live</td><td>Bounty Hunter</td><td class="med">200k–500k GP</td><td>Style switch drilled</td></tr>
+      <tr><td>Developing</td><td>Edgeville 1–10</td><td class="med">1–5M GP</td><td>BH comfortable</td></tr>
+      <tr><td>Experienced</td><td>Full Edgeville gear</td><td>5–20M GP</td><td>Matchup reads solid</td></tr>
+      <tr><td>Advanced</td><td>Rev Caves / Bosses</td><td>15–50M GP</td><td>Tribrid capable</td></tr>
+    </table>
+
+    <h3>Connecting to Other Guides</h3>
+    <p>The void pure is the most mechanically demanding build in this codex. If you've mastered it, the skills transfer directly to the <a href="endgame.html">Endgame guide</a> — tribrid switching, Vengeance timing, and prayer reading at tick precision are exactly the same skills used by 126 CB tribrid accounts. The void pure is, in many ways, endgame PvP mechanics practiced at a lower combat level. What you learn here carries upward without exception.</p>
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  <span class="orn">· · ✦ · ·</span>
+  All mechanics accurate to standard OSRS. Elite Void provides +12.5% ranged damage — regular Void provides +10%. Dragon Slayer II awards unavoidable Defence XP and is incompatible with void pure builds. Ava's Accumulator (no Defence req) is the recommended cape. Blowpipe requires Zulrah scales — always check charges before trips. Grand Exchange prices vary.
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+</body>
+</html>
