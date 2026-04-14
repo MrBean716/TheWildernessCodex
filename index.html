@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS PvP Guides — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#c9a84c; --gold-light:#e8c97a; --gold-dim:#8a6e2f;
+  --dark:#0d0b08; --dark2:#151209; --dark3:#1e1a10;
+  --text:#e8dcc8; --text-dim:#9e8e72; --text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22); --border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--dark); color:var(--text);
+  font-family:'EB Garamond',serif; font-size:18px;
+  line-height:1.75; overflow-x:hidden; min-height:100vh;
+}
+body::before{
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:0.5;
+}
+
+/* NAV */
+.site-nav{
+  position:sticky; top:0; z-index:200;
+  background:rgba(10,9,6,0.97);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1100px; margin:0 auto;
+  display:flex; align-items:center;
+  padding:0 2rem;
+}
+.nav-logo{
+  font-family:'Cinzel',serif; font-size:0.72rem;
+  letter-spacing:0.2em; color:var(--gold);
+  text-decoration:none; padding:1rem 1.25rem 1rem 0;
+  margin-right:1.25rem; border-right:1px solid var(--border);
+  white-space:nowrap; transition:color 0.2s;
+}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{
+  background:none; border:none; border-bottom:2px solid transparent;
+  color:var(--text-dim); font-family:'Cinzel',serif;
+  font-size:0.63rem; letter-spacing:0.12em; text-transform:uppercase;
+  padding:0.85rem 0.9rem; cursor:pointer; white-space:nowrap;
+  text-decoration:none; display:block;
+  transition:color 0.2s, border-color 0.2s;
+}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light); border-bottom-color:var(--gold);}
+
+/* HERO */
+.hero{
+  position:relative; text-align:center;
+  padding:6rem 2rem 5rem; overflow:hidden;
+}
+.hero-glow{
+  position:absolute; top:-150px; left:50%;
+  transform:translateX(-50%);
+  width:900px; height:600px;
+  background:radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events:none; z-index:0;
+}
+.hero-glow2{
+  position:absolute; bottom:-100px; left:50%;
+  transform:translateX(-50%);
+  width:600px; height:400px;
+  background:radial-gradient(ellipse, rgba(139,32,32,0.04) 0%, transparent 65%);
+  pointer-events:none; z-index:0;
+}
+.hero-content{position:relative; z-index:1;}
+
+.eyebrow{
+  display:flex; align-items:center; justify-content:center;
+  gap:1rem; margin-bottom:1.75rem;
+}
+.eyebrow::before,.eyebrow::after{
+  content:''; flex:1; height:1px; max-width:180px;
+  background:linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+.eyebrow span{
+  font-family:'Cinzel',serif; font-size:0.65rem;
+  letter-spacing:0.35em; color:var(--gold-dim);
+  text-transform:uppercase;
+}
+
+.hero-title{
+  font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(2.2rem,6vw,4.5rem);
+  color:var(--gold-light); line-height:1.15;
+  text-shadow:0 0 80px rgba(201,168,76,0.25), 0 2px 8px rgba(0,0,0,0.9);
+  margin-bottom:0.75rem;
+  animation:fadeUp 1s ease both;
+}
+.hero-sub{
+  font-family:'Cinzel',serif; font-size:0.85rem;
+  letter-spacing:0.25em; color:var(--gold-dim);
+  text-transform:uppercase; margin-bottom:1.5rem;
+  animation:fadeUp 1s ease 0.15s both;
+}
+.hero-desc{
+  font-size:1.1rem; color:var(--text-dim);
+  max-width:580px; margin:0 auto 3rem;
+  font-style:italic; line-height:1.8;
+  animation:fadeUp 1s ease 0.3s both;
+}
+
+/* GUIDE CARDS */
+.guide-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:1.5rem; max-width:1100px; margin:0 auto;
+  padding:0 2rem; position:relative; z-index:1;
+  animation:fadeUp 1s ease 0.45s both;
+}
+
+.guide-card{
+  position:relative; overflow:hidden;
+  background:rgba(255,255,255,0.025);
+  border-radius:6px;
+  text-decoration:none; display:block;
+  transition:transform 0.25s, border-color 0.25s;
+}
+.guide-card::before{
+  content:''; position:absolute; inset:0;
+  border-radius:6px; z-index:0;
+  transition:opacity 0.25s;
+}
+.guide-card:hover{transform:translateY(-4px);}
+
+.card-beginner{ border:1px solid rgba(58,158,58,0.3); }
+.card-beginner::before{ background:linear-gradient(135deg, rgba(45,106,45,0.12), transparent 60%); }
+.card-beginner:hover{ border-color:rgba(58,158,58,0.6); }
+
+.card-mid{ border:1px solid rgba(201,168,76,0.3); }
+.card-mid::before{ background:linear-gradient(135deg, rgba(201,168,76,0.1), transparent 60%); }
+.card-mid:hover{ border-color:var(--border-bright); }
+
+.card-endgame{ border:1px solid rgba(192,57,43,0.3); }
+.card-endgame::before{ background:linear-gradient(135deg, rgba(139,32,32,0.15), transparent 60%); }
+.card-endgame:hover{ border-color:rgba(192,57,43,0.6); }
+
+.card-pure{ border:1px solid rgba(155,111,199,0.3); }
+.card-pure::before{ background:linear-gradient(135deg, rgba(155,111,199,0.12), transparent 60%); }
+.card-pure:hover{ border-color:rgba(155,111,199,0.65); }
+.tier-pure{ color:#c9a6e8; }
+.card-pure .card-name{ color:#e0c8f8; }
+.card-pure .card-build{ background:rgba(155,111,199,0.15); color:#c9a6e8; border:1px solid rgba(155,111,199,0.35); }
+.card-pure .card-features li::before{ background:#c9a6e8; }
+.card-pure .card-cta{ color:#c9a6e8; }
+
+.card-zerker{ border:1px solid rgba(212,135,58,0.3); }
+.card-zerker::before{ background:linear-gradient(135deg, rgba(212,135,58,0.12), transparent 60%); }
+.card-zerker:hover{ border-color:rgba(212,135,58,0.65); }
+.tier-zerker{ color:#eaa060; }
+.card-zerker .card-name{ color:#f5c896; }
+.card-zerker .card-build{ background:rgba(212,135,58,0.15); color:#eaa060; border:1px solid rgba(212,135,58,0.35); }
+.card-zerker .card-features li::before{ background:#eaa060; }
+.card-zerker .card-cta{ color:#eaa060; }
+
+.card-void{ border:1px solid rgba(47,184,168,0.3); }
+.card-void::before{ background:linear-gradient(135deg, rgba(47,184,168,0.1), transparent 60%); }
+.card-void:hover{ border-color:rgba(47,184,168,0.65); }
+.tier-void{ color:#5dd4c7; }
+.card-void .card-name{ color:#a0ede6; }
+.card-void .card-build{ background:rgba(47,184,168,0.12); color:#5dd4c7; border:1px solid rgba(47,184,168,0.32); }
+.card-void .card-features li::before{ background:#5dd4c7; }
+.card-void .card-cta{ color:#5dd4c7; }
+
+.card-obby{ border:1px solid rgba(196,60,30,0.32); }
+.card-obby::before{ background:linear-gradient(135deg, rgba(196,60,30,0.1), transparent 60%); }
+.card-obby:hover{ border-color:rgba(196,60,30,0.65); }
+.tier-obby{ color:#e06040; }
+.card-obby .card-name{ color:#f5a090; }
+.card-obby .card-build{ background:rgba(196,60,30,0.12); color:#e06040; border:1px solid rgba(196,60,30,0.32); }
+.card-obby .card-features li::before{ background:#e06040; }
+.card-obby .card-cta{ color:#e06040; }
+
+.guide-card-inner{
+  position:relative; z-index:1;
+  padding:2rem 1.75rem 1.75rem;
+}
+.card-tier{
+  font-family:'Cinzel',serif; font-size:0.58rem;
+  letter-spacing:0.3em; text-transform:uppercase;
+  margin-bottom:0.75rem; display:block;
+}
+.tier-beginner{color:#6db56d;}
+.tier-mid{color:var(--gold);}
+.tier-endgame{color:#e88888;}
+
+.card-name{
+  font-family:'Cinzel',serif; font-size:1.3rem;
+  font-weight:600; line-height:1.25;
+  margin-bottom:0.6rem;
+}
+.card-beginner .card-name{color:#a8e0a8;}
+.card-mid .card-name{color:var(--gold-light);}
+.card-endgame .card-name{color:#f0a0a0;}
+
+.card-build{
+  font-family:'Cinzel',serif; font-size:0.7rem;
+  letter-spacing:0.1em; margin-bottom:1rem;
+  padding:4px 10px; border-radius:3px;
+  display:inline-block;
+}
+.card-beginner .card-build{ background:rgba(45,106,45,0.2); color:#8ecb8e; border:1px solid rgba(45,106,45,0.3); }
+.card-mid .card-build{ background:rgba(201,168,76,0.12); color:var(--gold); border:1px solid var(--border); }
+.card-endgame .card-build{ background:rgba(139,32,32,0.2); color:#d47070; border:1px solid rgba(139,32,32,0.3); }
+
+.card-desc{
+  font-size:0.92rem; color:var(--text-dim);
+  line-height:1.65; margin-bottom:1.5rem;
+  font-style:italic;
+}
+.card-features{
+  list-style:none; margin-bottom:1.5rem;
+}
+.card-features li{
+  font-size:0.85rem; color:var(--text-dim);
+  padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex; align-items:center; gap:8px;
+}
+.card-features li::before{
+  content:''; width:4px; height:4px;
+  border-radius:50%; flex-shrink:0;
+}
+.card-beginner .card-features li::before{ background:#6db56d; }
+.card-mid .card-features li::before{ background:var(--gold); }
+.card-endgame .card-features li::before{ background:#e88888; }
+
+.card-cta{
+  font-family:'Cinzel',serif; font-size:0.68rem;
+  letter-spacing:0.15em; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+.card-beginner .card-cta{ color:#6db56d; }
+.card-mid .card-cta{ color:var(--gold); }
+.card-endgame .card-cta{ color:#e88888; }
+.cta-arrow{ font-size:1rem; transition:transform 0.2s; }
+.guide-card:hover .cta-arrow{ transform:translateX(4px); }
+
+/* DIVIDER */
+.section-divider{
+  max-width:1100px; margin:5rem auto;
+  padding:0 2rem;
+  display:flex; align-items:center; gap:1.5rem;
+}
+.section-divider::before,.section-divider::after{
+  content:''; flex:1; height:1px;
+  background:linear-gradient(to right, transparent, var(--border), transparent);
+}
+.section-divider span{
+  font-family:'Cinzel',serif; font-size:0.65rem;
+  letter-spacing:0.3em; color:var(--gold-dim);
+  text-transform:uppercase; white-space:nowrap;
+}
+
+/* ABOUT SECTION */
+.about{
+  max-width:1100px; margin:0 auto;
+  padding:0 2rem; position:relative; z-index:1;
+}
+.about-grid{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:3rem; align-items:start;
+}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;}}
+
+.about-text h2{
+  font-family:'Cinzel',serif; font-size:1.6rem;
+  color:var(--gold-light); font-weight:600;
+  margin-bottom:1rem;
+}
+.about-text p{
+  color:var(--text-dim); font-size:0.97rem;
+  line-height:1.8; margin-bottom:0.9rem;
+}
+
+.about-facts{display:flex; flex-direction:column; gap:12px;}
+.fact{
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border);
+  border-radius:4px; padding:1rem 1.25rem;
+  display:flex; align-items:flex-start; gap:14px;
+}
+.fact-icon{
+  font-family:'Cinzel',serif; font-size:1.1rem;
+  color:var(--gold-dim); flex-shrink:0; line-height:1.4;
+}
+.fact-label{
+  font-family:'Cinzel',serif; font-size:0.68rem;
+  letter-spacing:0.12em; color:var(--gold-dim);
+  text-transform:uppercase; margin-bottom:3px;
+}
+.fact-text{font-size:0.88rem; color:var(--text-dim); line-height:1.5;}
+
+/* QUICK STATS */
+.quick-stats{
+  max-width:1100px; margin:0 auto 0;
+  padding:0 2rem;
+}
+.stats-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+}
+.q-stat{
+  background:rgba(255,255,255,0.02);
+  border:1px solid var(--border); border-radius:4px;
+  padding:1.25rem; text-align:center;
+}
+.q-val{
+  font-family:'Cinzel Decorative',cursive;
+  font-size:2rem; color:var(--gold-light); line-height:1;
+  margin-bottom:4px;
+}
+.q-label{
+  font-family:'Cinzel',serif; font-size:0.58rem;
+  letter-spacing:0.2em; color:var(--gold-dim);
+  text-transform:uppercase;
+}
+
+/* FOOTER */
+footer{
+  text-align:center; padding:3rem 2rem 2rem;
+  color:var(--text-faint); font-size:0.8rem;
+  font-style:italic; border-top:1px solid var(--border);
+  margin-top:5rem; position:relative; z-index:1;
+}
+footer .orn{
+  font-family:'Cinzel',serif; font-size:0.65rem;
+  letter-spacing:0.4em; color:var(--gold-dim);
+  opacity:0.4; display:block; margin-bottom:0.75rem;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@media(max-width:640px){
+  body{font-size:16px;}
+  .hero{padding:4rem 1rem 3rem;}
+  .guide-cards{padding:0 1rem; gap:1rem;}
+  .nav-inner{padding:0 1rem;}
+  .about,.quick-stats,.section-divider{padding:0 1rem;}
+}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk cur">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="eyebrow"><span>Old School RuneScape</span></div>
+    <h1 class="hero-title">The Wilderness<br>Codex</h1>
+    <p class="hero-sub">Your Complete PvP Handbook</p>
+    <p class="hero-desc">Accurate mechanics. Honest fight examples. 47 guides covering every PvP build in the game — from your first steps in Edgeville to max-gear tribrid combat in the deep Wilderness.</p>
+  </div>
+</section>
+
+<!-- GUIDE CARDS -->
+<div class="guide-cards">
+
+  <a href="beginner.html" class="guide-card card-beginner">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-beginner">Tier I</span>
+      <div class="card-name">Beginner's Path</div>
+      <span class="card-build">40/70/40 · ~70 Combat</span>
+      <p class="card-desc">Your first steps into the Wilderness. Learn the fundamentals of PvP before you risk anything valuable.</p>
+      <ul class="card-features">
+        <li>Dragon Scimitar & Rune armour</li>
+        <li>Basic prayer usage & combo eating</li>
+        <li>Edgeville 1-click bank strategy</li>
+        <li>How to escape ganks safely</li>
+        <li>5 annotated beginner fights</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="osrs-pvp-guide.html" class="guide-card card-mid">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-mid">Tier II</span>
+      <div class="card-name">Med-Level Mastery</div>
+      <span class="card-build">75/99/75 · ~104 Combat</span>
+      <p class="card-desc">The sweet spot build. 99 Strength hits hard, 75 Defence tanks, and the Abyssal Whip dominates.</p>
+      <ul class="card-features">
+        <li>Abyssal Whip + Dragon Defender</li>
+        <li>DDS spec timing & closing kills</li>
+        <li>Budget to Bandos gear progression</li>
+        <li>F-key setup & switch practice</li>
+        <li>5 detailed fight scenarios</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="endgame.html" class="guide-card card-endgame">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-endgame">Tier III</span>
+      <div class="card-name">Endgame Dominance</div>
+      <span class="card-build">99/99/99 · 126 Combat</span>
+      <p class="card-desc">Maximum build, max risk, maximum reward. Scythe of Vitur, Twisted Bow hybriding, and Vengeance stacks.</p>
+      <ul class="card-features">
+        <li>Scythe of Vitur & Twisted Bow</li>
+        <li>Hybrid & tribrid switching</li>
+        <li>Vengeance + spec stacking</li>
+        <li>Advanced prayer flicking</li>
+        <li>High-value target hunting</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="pure.html" class="guide-card card-pure">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-pure">Specialist</span>
+      <div class="card-name">1-Defence Pure</div>
+      <span class="card-build">1 Defence · 99 Str · Combat 60–85</span>
+      <p class="card-desc">Glass cannon PKing. No defence, maximum offence. Granite Maul specs that arrive faster than any eat response.</p>
+      <ul class="card-features">
+        <li>G Maul 0-tick spec mechanics</li>
+        <li>All pure build variants (Obby, 60 Atk, 75 Atk)</li>
+        <li>Prayer reading & MSB switch</li>
+        <li>Matchup guide vs every build type</li>
+        <li>6 annotated fight examples</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="zerker.html" class="guide-card card-zerker">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-zerker">Specialist</span>
+      <div class="card-name">Zerker Pure</div>
+      <span class="card-build">45 Defence · 99 Str · Combat 82–100</span>
+      <p class="card-desc">The most feared mid-bracket build. Fighter Torso, Berserker Helm, Dragon Claws, and Vengeance stacks at sub-100 combat.</p>
+      <ul class="card-features">
+        <li>45 Defence ceiling explained</li>
+        <li>Dragon Claws 4-hit spec mechanics</li>
+        <li>Quest route & XP trap avoidance</li>
+        <li>Veng + Claws burst rotations</li>
+        <li>7 annotated fight examples</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="void.html" class="guide-card card-void">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-void">Specialist</span>
+      <div class="card-name">Void Pure</div>
+      <span class="card-build">42 Defence · 99 Ranged · Combat 85–95</span>
+      <p class="card-desc">The hybrid specialist. One helm swap changes your combat style. Style-switch faster than any opponent can update their protection prayer.</p>
+      <ul class="card-features">
+        <li>Void 10% multiplier mechanic explained</li>
+        <li>Pest Control grind & purchase order</li>
+        <li>Blowpipe opener & prayer-reading loop</li>
+        <li>Tribrid freeze + melee burst</li>
+        <li>7 annotated fight examples</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="obby.html" class="guide-card card-obby">
+    <div class="guide-card-inner">
+      <span class="card-tier tier-obby">Specialist</span>
+      <div class="card-name">Obby Mauler</div>
+      <span class="card-build">1 Attack · 1 Defence · 99 Strength · Combat ~42</span>
+      <p class="card-desc">The most extreme build in OSRS. One weapon, one stat, one spec — arriving before any opponent can react. Fight opponents whose entire HP bar costs less than a single G Maul hit.</p>
+      <ul class="card-features">
+        <li>0-tick G Maul spec mechanic explained</li>
+        <li>Obsidian set + Berserker Necklace interaction</li>
+        <li>Ultra-low bracket target selection</li>
+        <li>Minimum HP training strategy</li>
+        <li>6 annotated fight examples</li>
+      </ul>
+      <div class="card-cta"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="gmaul.html" class="guide-card card-gmaul">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#d85080;">Specialist</span>
+      <div class="card-name" style="color:#f0a0c0;">G Maul Pure</div>
+      <span class="card-build" style="background:rgba(176,48,96,0.15);color:#d85080;border:1px solid rgba(176,48,96,0.35);">60 Attack · 1 Defence · 99 Strength</span>
+      <p class="card-desc">Dragon Scimitar chips them down. The Granite Maul 0-tick double spec closes fights before any eating response is possible.</p>
+      <ul class="card-features">
+        <li>Scimitar grind + G Maul double spec</li>
+        <li>Prayer bypass with MSB (i)</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#d85080;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="60atk.html" class="guide-card card-60atk">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#6090e0;">Specialist</span>
+      <div class="card-name" style="color:#a0c0f8;">60 Attack Pure</div>
+      <span class="card-build" style="background:rgba(58,107,196,0.15);color:#6090e0;border:1px solid rgba(58,107,196,0.35);">60 Attack · 1 Defence · 99 Strength</span>
+      <p class="card-desc">The most popular 1-Defence pure. Dragon Scimitar sustained DPS meets Dragon Claws 4-hit burst — 60–80 combined damage on a good spec.</p>
+      <ul class="card-features">
+        <li>Dragon Claws spec mechanic & timing</li>
+        <li>Scimitar grind strategy</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#6090e0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="75atk.html" class="guide-card card-75atk">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#3ab87a;">Specialist</span>
+      <div class="card-name" style="color:#80e0b0;">75 Attack Pure</div>
+      <span class="card-build" style="background:rgba(30,140,92,0.15);color:#3ab87a;border:1px solid rgba(30,140,92,0.35);">75 Attack · 1 Defence · 99 Strength</span>
+      <p class="card-desc">Abyssal Whip accuracy obliterates the grind phase. AGS or Dragon Claws delivers crushing single-tick burst finishes with optional Vengeance stacking.</p>
+      <ul class="card-features">
+        <li>Abyssal Whip vs Dragon Scimitar</li>
+        <li>AGS vs Dragon Claws comparison</li>
+        <li>Veng+AGS burst combo</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#3ab87a;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="ranger.html" class="guide-card card-ranger">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#4caf50;">Specialist</span>
+      <div class="card-name" style="color:#90d890;">Pure Ranger</div>
+      <span class="card-build" style="background:rgba(46,125,50,0.15);color:#4caf50;border:1px solid rgba(46,125,50,0.35);">1 Defence · 99 Ranged · Mobile Combat</span>
+      <p class="card-desc">Mobility as a weapon. Fire the Toxic Blowpipe while running, kite melee attackers, and bypass Protect Melee entirely because ranged doesn't care about it.</p>
+      <ul class="card-features">
+        <li>Kiting mechanics explained</li>
+        <li>Karil's armour — no Defence req</li>
+        <li>Blowpipe run-and-gun escape</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#4caf50;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="mage.html" class="guide-card card-mage">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#7755cc;">Specialist</span>
+      <div class="card-name" style="color:#b090f0;">Pure Mage</div>
+      <span class="card-build" style="background:rgba(85,51,170,0.15);color:#7755cc;border:1px solid rgba(85,51,170,0.35);">1 Defence · 94+ Magic · Ancient Magicks</span>
+      <p class="card-desc">Control is the weapon. Ice spells freeze opponents for 5 ticks — burst freely while they stand helpless. The only build that stops opponents from running.</p>
+      <ul class="card-features">
+        <li>Ice Barrage freeze mechanics</li>
+        <li>Re-freeze timing (5 tick immunity)</li>
+        <li>Ancestral vs Ahrim's (Defence trap)</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#7755cc;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="hybrid.html" class="guide-card card-hybrid">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#c4960a;">Specialist</span>
+      <div class="card-name" style="color:#e8c060;">Hybrid Pure</div>
+      <span class="card-build" style="background:rgba(139,105,20,0.15);color:#c4960a;border:1px solid rgba(139,105,20,0.35);">1 Defence · 99 Strength · 99 Ranged</span>
+      <p class="card-desc">The prayer nullifier. Train Melee and Ranged together — switch styles the instant an opponent activates a protection prayer. They can never block all your damage.</p>
+      <ul class="card-features">
+        <li>Prayer reading loop explained</li>
+        <li>Melee ↔ Ranged switch sequence</li>
+        <li>Two-style vs tribrid variants</li>
+        <li>5 annotated fight examples</li>
+      </ul>
+      <div class="card-cta" style="color:#c4960a;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="void2.html" class="guide-card" style="border:1px solid rgba(26,158,144,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#40c8b8;">Pure Build</span>
+      <div class="card-name" style="color:#90ece6;">Void Pure II</div>
+      <span class="card-build" style="background:rgba(26,158,144,0.15);color:#40c8b8;border:1px solid rgba(26,158,144,0.35);">42 Def · Hybrid · One-Helm Swap</span>
+      <p class="card-desc">Deep dive into Void mechanics — the one-helm swap advantage, Elite vs Regular Void maths, Pest Control grind, and Veng+spec burst.</p>
+      <ul class="card-features"><li>Exact Void % bonus calculations</li><li>One-helm swap vs 5-item zerker switch</li><li>Full Pest Control purchase guide</li></ul>
+      <div class="card-cta" style="color:#40c8b8;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="initiate.html" class="guide-card" style="border:1px solid rgba(136,153,170,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#aabbcc;">Niche Build</span>
+      <div class="card-name" style="color:#d0dde8;">Initiate Pure</div>
+      <span class="card-build" style="background:rgba(136,153,170,0.15);color:#aabbcc;border:1px solid rgba(136,153,170,0.35);">25 Def · Smite Focus · +12 Prayer</span>
+      <p class="card-desc">25 Defence for maximum prayer bonus below Dragon armour. Smite drain as a kill strategy — drain their prayer to zero, then G Maul spec freely.</p>
+      <ul class="card-features"><li>Initiate armour prayer bonus</li><li>Smite drain rotation</li><li>Fight examples</li></ul>
+      <div class="card-cta" style="color:#aabbcc;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="13def.html" class="guide-card" style="border:1px solid rgba(74,111,165,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#7098c8;">Niche Build</span>
+      <div class="card-name" style="color:#a8c4f0;">13 Def Pure</div>
+      <span class="card-build" style="background:rgba(74,111,165,0.15);color:#7098c8;border:1px solid rgba(74,111,165,0.35);">13 Def · Black Armour · +3 CB</span>
+      <p class="card-desc">The 1-Defence pure with slight tanking improvement. 13 Defence costs ~3 combat levels for marginal survivability in long grinding fights.</p>
+      <ul class="card-features"><li>Honest trade-off analysis</li><li>Black armour unlocks</li><li>When to choose vs 1 Def</li></ul>
+      <div class="card-cta" style="color:#7098c8;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="maxobby.html" class="guide-card" style="border:1px solid rgba(196,60,30,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#e06040;">Prayer Build</span>
+      <div class="card-name" style="color:#f5a090;">Maxed Obby Mauler</div>
+      <span class="card-build" style="background:rgba(196,60,30,0.15);color:#e06040;border:1px solid rgba(196,60,30,0.32);">1 Atk · 1 Def · 99 Str · 44 Prayer · Fire Cape</span>
+      <p class="card-desc">Obby Mauler taken to the ceiling. Fire Cape, Berserker Necklace, imbued ring, 44 Prayer — G Maul spec max hit reaches ~57.</p>
+      <ul class="card-features"><li>BIS Obby gear optimisation</li><li>Berserker Necklace maths</li><li>Prayer investment decision</li></ul>
+      <div class="card-cta" style="color:#e06040;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="prayerpure.html" class="guide-card" style="border:1px solid rgba(122,85,204,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#a07de0;">Prayer Build</span>
+      <div class="card-name" style="color:#c8b0f8;">Prayer Pure</div>
+      <span class="card-build" style="background:rgba(122,85,204,0.15);color:#a07de0;border:1px solid rgba(122,85,204,0.35);">1 Def · 99 Str · 70 Prayer · Piety</span>
+      <p class="card-desc">Offensive prayer at pure-tier combat levels. Piety's +23% Strength at combat 85 deals more per tick than most accounts ten levels higher.</p>
+      <ul class="card-features"><li>Every prayer unlock & CB cost</li><li>Piety vs Smite decision</li><li>Prayer management in fights</li></ul>
+      <div class="card-cta" style="color:#a07de0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="rangetank.html" class="guide-card" style="border:1px solid rgba(46,107,62,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#50a060;">Niche Build</span>
+      <div class="card-name" style="color:#90d090;">Range Tank</div>
+      <span class="card-build" style="background:rgba(46,107,62,0.15);color:#50a060;border:1px solid rgba(46,107,62,0.35);">99 Def · 99 Ranged · TBow</span>
+      <p class="card-desc">99 Defence reduces melee hits to single digits. Fire Twisted Bow for 40–60 damage while opponents' scimitars barely scratch you.</p>
+      <ul class="card-features"><li>TBow scaling with Magic level</li><li>Masori BIS ranged gear</li><li>Melee defensive switch</li></ul>
+      <div class="card-cta" style="color:#50a060;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="medlevel2.html" class="guide-card" style="border:1px solid rgba(139,34,82,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#c04070;">Advanced Build</span>
+      <div class="card-name" style="color:#e090b0;">Med-Level Advanced</div>
+      <span class="card-build" style="background:rgba(139,34,82,0.15);color:#c04070;border:1px solid rgba(139,34,82,0.35);">75/99/75 · Veng · Hybrid · Flicking</span>
+      <p class="card-desc">75/99/75 at its ceiling — Vengeance stacking, tick-precise prayer flicking, Blowpipe hybrid opener, and AGS specs combined.</p>
+      <ul class="card-features"><li>Veng+AGS burst sequences</li><li>Tick-precise prayer flicking</li><li>Blowpipe surprise opener</li></ul>
+      <div class="card-cta" style="color:#c04070;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="ironpk.html" class="guide-card" style="border:1px solid rgba(92,92,92,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#909090;">Niche Build</span>
+      <div class="card-name" style="color:#c8c8c8;">1 Def Iron PK</div>
+      <span class="card-build" style="background:rgba(92,92,92,0.15);color:#909090;border:1px solid rgba(92,92,92,0.35);">Ironman · No GE · Self-Obtained Gear</span>
+      <p class="card-desc">Every item earned. PKing on an Ironman where losing gear costs hours of re-farming, not GP. The most self-sufficient challenge in OSRS PvP.</p>
+      <ul class="card-features"><li>How to obtain every gear piece</li><li>Ironman risk management</li><li>Self-fish food strategy</li></ul>
+      <div class="card-cta" style="color:#909090;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="tribrid.html" class="guide-card" style="border:1px solid rgba(184,58,0,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#e05820;">Advanced Build</span>
+      <div class="card-name" style="color:#f5a078;">Tribrid Main</div>
+      <span class="card-build" style="background:rgba(184,58,0,0.15);color:#e05820;border:1px solid rgba(184,58,0,0.32);">126 Combat · All Styles · Max Gear</span>
+      <p class="card-desc">The apex of OSRS PvP. Scythe + TBow + Ice Barrage in a single fight. Freeze, burst, kite, re-freeze, Veng+AGS — no prayer blocks all three simultaneously.</p>
+      <ul class="card-features"><li>Full tribrid gear sets</li><li>Freeze → Scythe burst sequence</li><li>Veng+AGS kill combo</li><li>Style switching under pressure</li></ul>
+      <div class="card-cta" style="color:#e05820;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <!-- NEW CARDS -->
+  <a href="main.html" class="guide-card" style="border:1px solid rgba(107,124,147,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#8fa0b8;">Main Build</span>
+      <div class="card-name" style="color:#b0c0d8;">Main Account</div>
+      <span class="card-build" style="background:rgba(107,124,147,0.15);color:#8fa0b8;border:1px solid rgba(107,124,147,0.32);">No Restrictions · Progressive Gear</span>
+      <p class="card-desc">No stat caps, no build restrictions. Train everything, wear the best gear you can afford, and fight at whatever CB bracket your stats put you in.</p>
+      <ul class="card-features"><li>Four gear tiers: Rune → Dragon → Bandos → Torva</li><li>Whip + AGS progression</li><li>Defence reduces opponent DPS</li></ul>
+      <div class="card-cta" style="color:#8fa0b8;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="maxmain.html" class="guide-card" style="border:1px solid rgba(139,105,20,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#c9a840;">Main Build</span>
+      <div class="card-name" style="color:#e8c860;">Max Main</div>
+      <span class="card-build" style="background:rgba(139,105,20,0.15);color:#c9a840;border:1px solid rgba(139,105,20,0.32);">126 CB · 99 All Stats · Full BIS</span>
+      <p class="card-desc">Every weapon available, every armour wearable. Scythe, TBow, and Ice Barrage in one fight — limited only by gear budget and execution.</p>
+      <ul class="card-features"><li>Scythe of Vitur + Twisted Bow</li><li>Full tribrid BIS</li><li>Veng+AGS 80–100+ burst</li></ul>
+      <div class="card-cta" style="color:#c9a840;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="60defmed.html" class="guide-card" style="border:1px solid rgba(122,78,45,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#b07840;">Med-Level Build</span>
+      <div class="card-name" style="color:#d09858;">60 Def Med</div>
+      <span class="card-build" style="background:rgba(122,78,45,0.15);color:#b07840;border:1px solid rgba(122,78,45,0.32);">75 Atk · 99 Str · 60 Def · ~CB100</span>
+      <p class="card-desc">Dragon armour tier. Dragon Boots (+4 Str) unlock at exactly 60 Defence — one of the biggest single upgrades available at this bracket.</p>
+      <ul class="card-features"><li>Dragon Boots — key unlock</li><li>Berserker Helm still BIS</li><li>Dragon Claws spec</li></ul>
+      <div class="card-cta" style="color:#b07840;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="70defmed.html" class="guide-card" style="border:1px solid rgba(45,90,122,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#4a88b0;">Med-Level Build</span>
+      <div class="card-name" style="color:#6aa8d0;">70 Def Med</div>
+      <span class="card-build" style="background:rgba(45,90,122,0.15);color:#4a88b0;border:1px solid rgba(45,90,122,0.32);">75 Atk · 99 Str · 70 Def · ~CB104</span>
+      <p class="card-desc">Barrows armour tier. Full Barrows set available. Bandos still best for DPS. Karil's unlocked for ranged — the strongest defensive package before Bandos tier.</p>
+      <ul class="card-features"><li>Barrows + Bandos choice</li><li>Ahrim's for magic builds</li><li>Karil's ranged switch</li></ul>
+      <div class="card-cta" style="color:#4a88b0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="50atkzerker.html" class="guide-card" style="border:1px solid rgba(160,96,32,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#cc8030;">Zerker Build</span>
+      <div class="card-name" style="color:#e8a050;">50 Atk Zerker</div>
+      <span class="card-build" style="background:rgba(160,96,32,0.15);color:#cc8030;border:1px solid rgba(160,96,32,0.32);">50 Atk · 99 Str · 45 Def · ~CB88</span>
+      <p class="card-desc">Below the Dragon Scimitar threshold. Rune Scimitar chips at 99 Strength while the G Maul double spec closes fights at a slightly lower bracket than standard Zerker.</p>
+      <ul class="card-features"><li>Rune Scimitar + G Maul combo</li><li>~4 CB lower than standard Zerker</li><li>0-tick double spec identical</li></ul>
+      <div class="card-cta" style="color:#cc8030;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="75atkzerker.html" class="guide-card" style="border:1px solid rgba(107,62,138,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#9a60c0;">Zerker Build</span>
+      <div class="card-name" style="color:#b880e0;">75 Atk Zerker</div>
+      <span class="card-build" style="background:rgba(107,62,138,0.15);color:#9a60c0;border:1px solid rgba(107,62,138,0.32);">75 Atk · 99 Str · 45 Def · ~CB97</span>
+      <p class="card-desc">Abyssal Whip accuracy on a Zerker frame. AGS spec or Dragon Claws close. Veng+AGS produces 80–100+ damage in a single tick — the Zerker's offensive ceiling.</p>
+      <ul class="card-features"><li>Whip +82 slash accuracy</li><li>Veng+AGS kill combo</li><li>MSB opener before prayer</li></ul>
+      <div class="card-cta" style="color:#9a60c0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="zerkertribrid.html" class="guide-card" style="border:1px solid rgba(26,106,138,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#2a9abf;">Zerker Build</span>
+      <div class="card-name" style="color:#40b8d8;">Zerker Tribrid</div>
+      <span class="card-build" style="background:rgba(26,106,138,0.15);color:#2a9abf;border:1px solid rgba(26,106,138,0.32);">45 Def · All 3 Styles · Freeze+Melee+Range</span>
+      <p class="card-desc">Zerker framework with full tribrid capability. Blowpipe bypasses Protect Melee, Ice Burst freezes into Scimitar hits, Veng+Claws closes — no prayer blocks all three.</p>
+      <ul class="card-features"><li>Freeze → melee while frozen</li><li>One-helm style switching</li><li>Fighter Torso always on</li></ul>
+      <div class="card-cta" style="color:#2a9abf;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="voidzerker.html" class="guide-card" style="border:1px solid rgba(42,136,112,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#40b898;">Void Build</span>
+      <div class="card-name" style="color:#58d8b8;">Void Zerker</div>
+      <span class="card-build" style="background:rgba(42,136,112,0.15);color:#40b898;border:1px solid rgba(42,136,112,0.32);">45 Def · Void Armour · 99 Str</span>
+      <p class="card-desc">Zerker survivability meets Void's percentage multiplier. 45 Defence clears the 42-Def Void minimum and unlocks the Berserker Helm bonus unavailable to strict Void Pures.</p>
+      <ul class="card-features"><li>Void set bonus on Zerker</li><li>Berserker Helm unlocked at 45</li><li>Elite Void +12.5% ranged</li></ul>
+      <div class="card-cta" style="color:#40b898;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="babypure.html" class="guide-card" style="border:1px solid rgba(90,122,42,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#7aaa3a;">Pure Build</span>
+      <div class="card-name" style="color:#98c850;">Baby Pure</div>
+      <span class="card-build" style="background:rgba(90,122,42,0.15);color:#7aaa3a;border:1px solid rgba(90,122,42,0.32);">Sub-50 CB · F2P Bracket · G Maul</span>
+      <p class="card-desc">Maximum asymmetry at minimum investment. Your CB looks harmless — your G Maul spec doesn't. In F2P worlds where opponents have 20–35 HP, one spec can end the fight.</p>
+      <ul class="card-features"><li>Obsidian set + Berserker Necklace</li><li>0-tick double G Maul spec</li><li>F2P world strategy</li></ul>
+      <div class="card-cta" style="color:#7aaa3a;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="lowhppure.html" class="guide-card" style="border:1px solid rgba(122,32,32,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#b03030;">Pure Build</span>
+      <div class="card-name" style="color:#d05050;">Low-HP Pure</div>
+      <span class="card-build" style="background:rgba(122,32,32,0.15);color:#b03030;border:1px solid rgba(122,32,32,0.32);">1 Def · Min HP · 99 Str · Ultra-Low CB</span>
+      <p class="card-desc">Deliberately minimise HP via NMZ Absorption (4:1 Str:HP) to stay at ultra-low CB while hitting like a 99 Str pure. Fight opponents 10–15 CB above you who don't expect your damage.</p>
+      <ul class="card-features"><li>NMZ Absorption training method</li><li>CB bracket manipulation</li><li>Anglerfish overheal critical</li></ul>
+      <div class="card-cta" style="color:#b03030;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="puretribrid.html" class="guide-card" style="border:1px solid rgba(176,96,32,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#d88040;">Pure Build</span>
+      <div class="card-name" style="color:#f0a060;">Pure Tribrid</div>
+      <span class="card-build" style="background:rgba(176,96,32,0.15);color:#d88040;border:1px solid rgba(176,96,32,0.32);">1 Def · 99 Str · 99 Range · 94 Magic</span>
+      <p class="card-desc">The apex of 1-Defence PvP. Freeze opponents into your melee range, Blowpipe through Protect Melee, Veng+spec to close — no single prayer blocks all three.</p>
+      <ul class="card-features"><li>Hybrid fluency required</li><li>Ice Burst 5-tick freeze opener</li><li>Veng+Claws kill combo</li></ul>
+      <div class="card-cta" style="color:#d88040;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="voidranger.html" class="guide-card" style="border:1px solid rgba(13,122,112,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#18b0a0;">Void Build</span>
+      <div class="card-name" style="color:#30d0c0;">Void Ranger</div>
+      <span class="card-build" style="background:rgba(13,122,112,0.15);color:#18b0a0;border:1px solid rgba(13,122,112,0.32);">42 Def · 99 Ranged · Elite Void · Ranged-Primary</span>
+      <p class="card-desc">Stay on Blowpipe and Void Ranger Helm — only swap to Void Melee Helm when opponents activate Protect Missiles. Simpler than full hybrid Void, nearly as effective.</p>
+      <ul class="card-features"><li>Elite Void +12.5% ranged dmg</li><li>One-helm reactive switch</li><li>MSB spec finisher</li></ul>
+      <div class="card-cta" style="color:#18b0a0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="voidtribrid.html" class="guide-card" style="border:1px solid rgba(26,90,138,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#2a80c0;">Void Build</span>
+      <div class="card-name" style="color:#48a0e0;">Void Tribrid</div>
+      <span class="card-build" style="background:rgba(26,90,138,0.15);color:#2a80c0;border:1px solid rgba(26,90,138,0.32);">42 Def · All 3 Void Helms · 94 Magic</span>
+      <p class="card-desc">Void Mage Helm's +45% magic accuracy means Ice Barrage freezes land even through Protect Magic. Swap to Void Melee for free Whip hits while frozen.</p>
+      <ul class="card-features"><li>Freeze through Protect Magic</li><li>Three-helm rotation</li><li>Veng+AGS kill combo</li></ul>
+      <div class="card-cta" style="color:#2a80c0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="30def.html" class="guide-card" style="border:1px solid rgba(90,74,138,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#7a68b8;">Low-Def Build</span>
+      <div class="card-name" style="color:#9888d8;">30 Def Build</div>
+      <span class="card-build" style="background:rgba(90,74,138,0.15);color:#7a68b8;border:1px solid rgba(90,74,138,0.32);">30 Def · Proselyte · +17 Prayer Bonus</span>
+      <p class="card-desc">Proselyte armour's +17 prayer bonus — best prayer armour below Dragon. Built for Smite drain strategies and extended prayer-active fights.</p>
+      <ul class="card-features"><li>+17 prayer bonus (vs Initiate +12)</li><li>Smite drain rotation</li><li>No Defence XP from Slug Menace</li></ul>
+      <div class="card-cta" style="color:#7a68b8;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="40def.html" class="guide-card" style="border:1px solid rgba(106,58,106,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#9a58a8;">Low-Def Build</span>
+      <div class="card-name" style="color:#b870c8;">40 Def Build</div>
+      <span class="card-build" style="background:rgba(106,58,106,0.15);color:#9a58a8;border:1px solid rgba(106,58,106,0.32);">40 Def · Rune · Black d'hide · ~CB85</span>
+      <p class="card-desc">Rune armour and Black d'hide unlocked. Neitiznot Helm (+3 Str) available here — better than Rune Full Helm. Only 5 Defence levels from the Berserker Helm.</p>
+      <ul class="card-features"><li>Neitiznot Helm at 40 Def</li><li>Black d'hide (70 Ranged req)</li><li>5 levels from Berserker Helm</li></ul>
+      <div class="card-cta" style="color:#9a58a8;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="50def.html" class="guide-card" style="border:1px solid rgba(42,90,122,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#3a82b0;">Low-Def Build</span>
+      <div class="card-name" style="color:#58a0d0;">50 Def Build</div>
+      <span class="card-build" style="background:rgba(42,90,122,0.15);color:#3a82b0;border:1px solid rgba(42,90,122,0.32);">50 Def · Splitbark (magic) · ~CB90</span>
+      <p class="card-desc">Transitional bracket between Zerker (45 Def) and Dragon armour (60 Def). Splitbark armour for magic builds. Most players continue to 60 for Dragon Boots.</p>
+      <ul class="card-features"><li>Splitbark — only major unlock</li><li>Honest: transitional bracket</li><li>Dragon Boots 10 levels away</li></ul>
+      <div class="card-cta" style="color:#3a82b0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="magetank.html" class="guide-card" style="border:1px solid rgba(58,26,106,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#6a3ab0;">Tank Build</span>
+      <div class="card-name" style="color:#8858d0;">Mage Tank</div>
+      <span class="card-build" style="background:rgba(58,26,106,0.15);color:#6a3ab0;border:1px solid rgba(58,26,106,0.32);">99 Def · 99 Magic · Ancestral · Ice Barrage</span>
+      <p class="card-desc">Pures hit for 6–10 per swing against 99 Defence. Your Ice Barrage deals 20–28. Tank melee contact freely — the attrition fight where they deal 6 and you deal 25.</p>
+      <ul class="card-features"><li>Ancestral + Occult +22% magic dmg</li><li>vs Pures: barely need to eat</li><li>Protect Missiles for TBow opponents</li></ul>
+      <div class="card-cta" style="color:#6a3ab0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="attacklessrange.html" class="guide-card" style="border:1px solid rgba(42,106,58,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#3a9a52;">Niche Build</span>
+      <div class="card-name" style="color:#58b870;">Attackless Range</div>
+      <span class="card-build" style="background:rgba(42,106,58,0.15);color:#3a9a52;border:1px solid rgba(42,106,58,0.32);">1 Atk · 1 Def · 99 Ranged · Ultra-Low CB</span>
+      <p class="card-desc">Train Ranged only. No melee at all. Blowpipe at ultra-low CB where opponents barely survive a sustained volley — kiting is mandatory, not optional.</p>
+      <ul class="card-features"><li>Karil's armour (70 Ranged, no Def)</li><li>Kiting is primary mechanic</li><li>~CB55 bracket</li></ul>
+      <div class="card-cta" style="color:#3a9a52;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="attacklessmage.html" class="guide-card" style="border:1px solid rgba(74,26,122,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#7a3ab0;">Niche Build</span>
+      <div class="card-name" style="color:#9858d0;">Attackless Mage</div>
+      <span class="card-build" style="background:rgba(74,26,122,0.15);color:#7a3ab0;border:1px solid rgba(74,26,122,0.32);">1 Atk · 1 Def · 99 Magic · ~CB60</span>
+      <p class="card-desc">Train Magic only via Lunar spells (no combat XP). Ice Rush freezes at ~CB60 where opponents have 25–35 HP — two casts can end the fight entirely.</p>
+      <ul class="card-features"><li>Lunar Magic = no combat XP</li><li>Ice Rush at 70 Magic</li><li>Ancestral no Def req</li></ul>
+      <div class="card-cta" style="color:#7a3ab0;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="skillerpk.html" class="guide-card" style="border:1px solid rgba(74,74,74,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#787878;">Niche Build</span>
+      <div class="card-name" style="color:#a0a0a0;">Skiller PK</div>
+      <span class="card-build" style="background:rgba(74,74,74,0.15);color:#787878;border:1px solid rgba(74,74,74,0.32);">0 Combat Stats · Challenge Build</span>
+      <p class="card-desc">No combat stats trained. Vengeance via Lunar Magic reflects hits passively. Not a competitive build — a challenge and curiosity that surprises everyone in the Wilderness.</p>
+      <ul class="card-features"><li>Lunar Magic (no combat XP)</li><li>Vengeance = best PvP tool</li><li>Roleplay / challenge</li></ul>
+      <div class="card-cta" style="color:#787878;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="questlocked.html" class="guide-card" style="border:1px solid rgba(90,64,16,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#9a7020;">Reference Guide</span>
+      <div class="card-name" style="color:#c09030;">Quest-Locked Builds</div>
+      <span class="card-build" style="background:rgba(90,64,16,0.15);color:#9a7020;border:1px solid rgba(90,64,16,0.32);">Design Philosophy · All Builds</span>
+      <p class="card-desc">Almost every PvP build is quest-locked. What it means, why it matters, which quests are XP traps, the Barrows Gloves path, and all seven common quest-lock archetypes.</p>
+      <ul class="card-features"><li>Dragon Slayer I — permanent 1-Def killer</li><li>Barrows Gloves RFD route</li><li>7 common archetypes</li><li>No second chances</li></ul>
+      <div class="card-cta" style="color:#9a7020;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="ironmanzerker.html" class="guide-card" style="border:1px solid rgba(74,58,10,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#8a6a18;">Ironman Build</span>
+      <div class="card-name" style="color:#a88828;">Ironman Zerker</div>
+      <span class="card-build" style="background:rgba(74,58,10,0.15);color:#8a6a18;border:1px solid rgba(74,58,10,0.32);">45 Def · 60 Atk · 99 Str · Self-Obtained</span>
+      <p class="card-desc">The zerker build on an Ironman. Every piece earned — Fighter Torso from Barbarian Assault, Berserker Helm from Fremennik Trials, Dragon Claws from Chambers of Xeric.</p>
+      <ul class="card-features"><li>Torso from BA minigame</li><li>Claws from CoX (hard)</li><li>Risk management critical</li></ul>
+      <div class="card-cta" style="color:#8a6a18;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="ironmanmed.html" class="guide-card" style="border:1px solid rgba(26,74,42,0.3);">
+    <div class="guide-card-inner">
+      <span class="card-tier" style="color:#2a7a42;">Ironman Build</span>
+      <div class="card-name" style="color:#48a060;">Ironman Med</div>
+      <span class="card-build" style="background:rgba(26,74,42,0.15);color:#2a7a42;border:1px solid rgba(26,74,42,0.32);">75 Atk · 99 Str · 75 Def · Self-Obtained</span>
+      <p class="card-desc">75/99/75 on an Ironman. Whip from Abyssal Demons, Bandos from General Graardor, Dragon Boots from Spiritual Mages — no Grand Exchange, no shortcuts.</p>
+      <ul class="card-features"><li>Whip from 85 Slayer</li><li>Bandos from GWD</li><li>Years-long project</li></ul>
+      <div class="card-cta" style="color:#2a7a42;"><span>Open Guide</span><span class="cta-arrow">→</span></div>
+    </div>
+  </a>
+
+</div>
+
+<div class="section-divider"><span>Build Comparison</span></div>
+
+<!-- QUICK STATS -->
+<div class="quick-stats">
+  <div class="stats-grid">
+    <div class="q-stat">
+      <div class="q-val">47</div>
+      <div class="q-label">Complete Guides</div>
+    </div>
+    <div class="q-stat">
+      <div class="q-val">100+</div>
+      <div class="q-label">Fight Examples</div>
+    </div>
+    <div class="q-stat">
+      <div class="q-val">0</div>
+      <div class="q-label">Made-up Mechanics</div>
+    </div>
+    <div class="q-stat">
+      <div class="q-val">126</div>
+      <div class="q-label">Max Combat Level</div>
+    </div>
+    <div class="q-stat">
+      <div class="q-val">0.6s</div>
+      <div class="q-label">Per Game Tick</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>About These Guides</span></div>
+
+<!-- ABOUT -->
+<div class="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Why This Codex?</h2>
+      <p>PvP guides online are full of fabricated mechanics, inflated damage numbers, and builds that require stats the account doesn't have. These guides are different: every mechanic is accurate, every damage range is realistic, and every fight example reflects what actually happens in the game.</p>
+      <p>The three guides form a complete progression — you can start at Beginner, follow through to Mid-Level, and eventually tackle Endgame when you're ready. Each builds on the last, so core skills like combo eating and prayer management learned early carry forward.</p>
+      <p>Whether you're dying to Edgeville pkers or planning high-value hunts in the deep Wilderness, these guides are written to make you genuinely better — not just to sound impressive.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact">
+        <div class="fact-icon">⚔</div>
+        <div>
+          <div class="fact-label">Accuracy First</div>
+          <div class="fact-text">Every item requirement, stat threshold, and mechanic is verified against real OSRS game data. No AGS specs that "hit 72" on a beginner account.</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">☠</div>
+        <div>
+          <div class="fact-label">Honest Losses Included</div>
+          <div class="fact-text">Every guide includes a fight you lose — because learning from defeats is more valuable than pretending every fight is a clean kill.</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">🧭</div>
+        <div>
+          <div class="fact-label">Progressive Skill Building</div>
+          <div class="fact-text">Combo eating, prayer switching, and F-key discipline are introduced at Beginner and refined through each tier. Skills compound.</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">💰</div>
+        <div>
+          <div class="fact-label">Budget to BIS Coverage</div>
+          <div class="fact-text">Each guide covers multiple gear tiers so you can start fighting immediately and upgrade as you earn GP from kills.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="orn">· · ✦ · ·</span>
+  All mechanics accurate to standard OSRS. Game tick = 0.6 seconds. Prices vary — always check the Grand Exchange before purchasing gear.
+</footer>
+
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+</body>
+</html>

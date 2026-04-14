@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS 1 Defence Iron PK Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#5c5c5c;--ac-light:#909090;--ac-dim:#333333;
+  --ac-bg:rgba(92,92,92,0.11);--ac-border:rgba(92,92,92,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#909090;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#5c5c5c;border-color:#5c5c5c;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #5c5c5c;color:#909090;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#5c5c5c;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#909090;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#909090;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#333333;margin:1.25rem 0 0.5rem;}
+a{color:#909090;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#5c5c5c,transparent);}
+.phase-label{color:#909090;}
+.battle-head{background:rgba(92,92,92,0.07);}
+.battle-num{border-color:var(--ac-border);color:#909090;}
+.you{color:#909090;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#333333;}
+.tip-n{color:#333333;}
+.ornament{color:#333333;}
+footer .orn{color:#333333;}
+::-webkit-scrollbar-thumb{background:#333333;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#333333,transparent);}
+.eyebrow span{color:#333333;}
+h1{text-shadow:0 0 60px rgba(92,92,92,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#333333;}
+.tier-badge{background:var(--ac-bg);color:#909090;border:1px solid var(--ac-border);}
+.card-slot{color:#333333;}
+.rot-label{color:#333333;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#909090;margin-bottom:3px;}
+.step.hl{background:rgba(92,92,92,0.14);border-color:var(--ac-border);color:#909090;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk cur">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(92,92,92,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Niche Build</span></div>
+    <h1>1 Defence Iron PK</h1>
+    <p class="hero-build">Ironman · 1 Defence · Self-Obtained Gear Only</p>
+    <p class="hero-desc">Every item earned. Every kill a statement. Ironman PKing strips away the Grand Exchange and forces complete self-sufficiency — from the Sharks you fish to the Granite Maul you farm from Gargoyles.</p>
+    <span class="tier-badge">Iron PK · Self-Sufficient Challenge Build</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Account</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">Ironman</div><div class="stat-sub">No trading</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Gear</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">Earned</div><div class="stat-sub">No GE</div></div>
+      <div class="stat-card"><div class="stat-label">Risk</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">High</div><div class="stat-sub">No replacement</div></div>
+      <div class="stat-card"><div class="stat-label">Spec</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">Granite Maul</div><div class="stat-sub">Gargoyle drop</div></div>
+      <div class="stat-card"><div class="stat-label">Food</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">Self-fished</div><div class="stat-sub">Sharks/Karambwan</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('restrictions',this)">Ironman Restrictions</button>
+    <button class="tab-btn" onclick="show('gear',this)">Obtainable Gear</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fights</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>1 Defence Iron PK</h2><p>PKing on an Ironman account — every item earned, never traded</p></div>
+
+    <p>The <strong>1 Defence Iron PK</strong> is one of OSRS's most challenging and rewarding PvP builds. As an Ironman, you cannot trade with other players or use the Grand Exchange — every piece of gear must be obtained through content: bosses, minigames, skilling, or quests. This constraint fundamentally changes how you approach gear progression, risk management, and target selection.</p>
+    <p>The appeal is twofold: the self-sufficiency challenge, and the immense satisfaction of landing kills using entirely self-obtained gear. An Ironman PKer who kills an opponent wearing bought gear with fully earned equipment has achieved something most players never attempt.</p><div class="danger">Ironman PvP operates under extreme risk — you can never replace lost gear by buying it. Every item you bring into the Wilderness must have been earned and can never be traded back if lost. Risk only what you can realistically re-obtain.</div>
+  </div>
+  <div class="tab-panel" id="p-restrictions">
+    <div class="s-head"><h2>Ironman Restrictions</h2><p>What you cannot do and how it shapes your build</p></div>
+
+    <h3>What Changes vs Normal Accounts</h3>
+    <ul>
+    <li><strong>No Grand Exchange.</strong> Dragon Scimitar, Fighter Torso, all spec weapons — must be earned through quests, minigames, or drops.</li>
+    <li><strong>No trading.</strong> If you die with your Amulet of Fury, you must re-obtain the onyx, re-cut it, re-craft it.</li>
+    <li><strong>Gear replacement time.</strong> Re-farming Dragon Claws from Chambers of Xeric could take dozens of hours.</li>
+    <li><strong>No Karambwan from GE.</strong> Must be fished yourself — ironman food prep is significant time investment.</li>
+    </ul>
+    <h3>What's Obtainable and How</h3><table class="data-table"><tr><th>Item</th><th>Source</th><th>Difficulty</th></tr><tr><td>Dragon Scimitar</td><td>Monkey Madness I quest</td><td class="hi">Moderate — standard quest</td></tr><tr><td>Fighter Torso</td><td>Barbarian Assault minigame</td><td class="hi">Moderate — team minigame</td></tr><tr><td>Granite Maul</td><td>Gargoyle drops (Slayer)</td><td class="hi">Moderate — Slayer task</td></tr><tr><td>Amulet of Fury</td><td>Onyx from TzHaar shop / crafting</td><td class="med">Significant GP or gems</td></tr><tr><td>Berserker Ring</td><td>Dagannoth Rex (King Slayer)</td><td class="med">Boss farming</td></tr><tr><td>Dragon Claws</td><td>Chambers of Xeric</td><td class="lo">High-level raid</td></tr><tr><td>Toxic Blowpipe</td><td>Zulrah</td><td class="med">Mid-level boss</td></tr><tr><td>Sharks</td><td>Fishing (76 Fishing) or Tempoross</td><td class="hi">Skilling</td></tr><tr><td>Karambwan</td><td>Fishing (65 Fishing, Tai Bwo Wannai Trio quest)</td><td class="hi">Quest + Fishing</td></tr></table><div class="tip">The Fighter Torso is especially valuable for Iron PKers — it's earned through Barbarian Assault (no trade involved) and provides +4 Strength bonus. Barbarian Assault is a significant time investment but eliminates the need to trade for torso alternatives.</div>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Obtainable Gear</h2><p>Realistic gear goals for an Iron PKer and how to get each piece</p></div>
+<div class="card-grid"><div class="card"><div class="card-slot">Head</div><div class="card-name">Obsidian Helm</div><div class="card-note">No req. Purchased from TzHaar-Ket-Omé shop with Tokkul. Farmable without trading.</div><span class="badge b-ac">Obtainable</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Fighter Torso</div><div class="card-note">Barbarian Assault. No trade. Self-obtainable.</div><span class="badge b-green">Best route</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Obsidian Platelegs</div><div class="card-note">TzHaar shop. No trade required.</div><span class="badge b-ac">Obtainable</span></div><div class="card"><div class="card-slot">Weapon</div><div class="card-name">Dragon Scimitar</div><div class="card-note">Monkey Madness I quest reward. No trade.</div><span class="badge b-green">Quest reward</span></div><div class="card"><div class="card-slot">Spec</div><div class="card-name">Granite Maul</div><div class="card-note">Gargoyle drops (Slayer). Farmable.</div><span class="badge b-green">Farmable</span></div><div class="card"><div class="card-slot">Amulet</div><div class="card-name">Amulet of Fury</div><div class="card-note">Craft from onyx (TzHaar shop Tokkul or gem drop). Hard but self-obtainable.</div><span class="badge b-gold">Significant work</span></div><div class="card"><div class="card-slot">Cape</div><div class="card-name">Fire Cape</div><div class="card-note">TzTok-Jad. No trade. Entirely self-obtained.</div><span class="badge b-green">Self-obtainable</span></div><div class="card"><div class="card-slot">Boots</div><div class="card-name">Granite Boots</div><div class="card-note">50 Str req. Drop from Gargoyles (Slayer). Same task as Granite Maul.</div><span class="badge b-green">Farmable</span></div></div><div class="tip">The Granite Maul and Granite Boots both drop from Gargoyles — the same Slayer task gives you both. Combined with the Obsidian set from TzHaar shops, the core Iron PKer setup is achievable through Slayer and quests alone.</div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>Same as base pure builds — adjusted for Iron risk awareness</p></div>
+
+    <p>The combat rotations for an Iron PKer are identical to their equivalent non-Iron builds. A 60 Attack Iron PKer follows the same scimitar + G Maul rotation as any other 60 Attack pure. See the <a href="60atk.html">60 Attack Pure guide</a> or <a href="gmaul.html">G Maul Pure guide</a> for the relevant rotations.</p>
+    <p>The key difference is <strong>when to fight</strong> vs when to escape. As an Ironman, your risk calculation is asymmetric — losing gear costs hours or days of re-farming, not GP. Be more conservative about engagements than a normal account would be.</p>    <div class="rotation"><div class="rot-label">Iron PKer risk assessment</div><div class="steps"><span class="step ".rstrip()>Identify potential target</span><span class="arr">→</span><span class="step hl".rstrip()>Do I have all Protect prayers ready?</span><span class="arr">→</span><span class="step hl".rstrip()>Is spec bar full?</span><span class="arr">→</span><span class="step hl".rstrip()>Can I replace gear if I lose it?</span><span class="arr">→</span><span class="step hl".rstrip()>Anglerfish overhealed?</span><span class="arr">→</span><span class="step ".rstrip()>All good → engage</span></div></div>
+<div class="warn">If any of those checks fails, don't fight. An Iron PKer who dies with a self-farmed Fire Cape, Granite Maul, and Fighter Torso loses hours of gameplay. Pick your fights conservatively.</div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p></p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">vs. F2P Player — Clean Iron Kill</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Iron PKer (self-obtained gear, G Maul + Obsidian set, combat 42) vs F2PMain (rune armour, ~35 HP).</div><div class="log-line">Pot up with self-cooked Sharks. Engage.</div><div class="log-line">G Maul spec #1: <span class="dmg">38</span>. They're at ~0 HP.</div><div class="log-line"><span class="good-c">One-shot. All gear self-obtained. This is what Iron PKing is about.</span></div><div class="lesson"><strong>Lesson:</strong> Every piece of gear used in this kill was earned through the Ironman's own effort. The TzHaar shop Tokkul for the Obsidian set, the Gargoyle drops for the Granite Maul, the Barbarian Assault grind for the Torso — all self-sufficient.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">Escape Decision — Correct Risk Management</div><div class="outcome o-esc">Escaped</div></div><div class="battle-body"><div class="battle-setup">Potential fight against a stocked opponent. Iron PKer correctly escapes.</div><div class="log-line">Opponent spotted with full rune and 10+ sharks visible. CB similar.</div><div class="log-line">Iron PKer assessment: if this fight goes wrong, re-farming gear costs 8+ hours.</div><div class="log-line"><span class="you">You</span> Stamina Potion. Walk away.</div><div class="log-line"><span class="good-c">Correct decision. Gear preserved. Better target found later.</span></div><div class="lesson"><strong>Lesson:</strong> Iron PKing requires more conservative target selection than normal accounts. A normal pure can re-buy gear in minutes with GP from kills. An Iron PKer re-farms gear over days. Escaping a risky fight is never weakness — it's smart resource management.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>Only bring gear you can realistically re-obtain in a reasonable timeframe.</strong> Don't risk your Dragon Claws (100+ CoX runs to get) in the same trip you'd risk your Granite Maul (farmable in an afternoon).</div></li><li><div class="tip-n">02</div><div><strong>Self-fish your food.</strong> Karambwan and Sharks fished by your own account are free in terms of GP but cost time. Build a fish bank before PKing trips.</div></li><li><div class="tip-n">03</div><div><strong>The Obsidian shop is your best friend.</strong> Tokkul is farmable via TzHaar Fight Cave and Inferno. The Obsidian set + Berserker Necklace (if you can access it) is entirely self-obtainable and forms a complete PKing setup.</div></li><li><div class="tip-n">04</div><div><strong>Barbarian Assault for the Torso.</strong> It's a team minigame — join a BA FC. The +4 Strength bonus is essential and there's no other way to get it without trading.</div></li><li><div class="tip-n">05</div><div><strong>Treat every trip as a business decision.</strong> What's the expected value? Potential kill loot (which you can't use as an Ironman anyway) vs potential gear loss. Iron PKing is primarily for the challenge and achievement, not GP.</div></li><li><div class="tip-n">06</div><div><strong>The Fire Cape is entirely self-obtainable.</strong> TzTok-Jad is fully soloable at 99 Strength with prayer flicking. Earning the Fire Cape as an Ironman PKer and bringing it into the Wilderness is a badge of honour.</div></li></ul>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Ironman accounts cannot trade players or use the Grand Exchange. All gear must be self-obtained through quests, bosses, skilling, or minigames. Dragon Claws from Chambers of Xeric and Toxic Blowpipe from Zulrah are the highest-effort gear upgrades for Iron PKers.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

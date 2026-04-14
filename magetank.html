@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Mage Tank PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#3a1a6a;--ac-light:#6a3ab0;--ac-dim:#200d42;
+  --ac-bg:rgba(58,26,106,0.11);--ac-border:rgba(58,26,106,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#6a3ab0;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#3a1a6a;border-color:#3a1a6a;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #3a1a6a;color:#6a3ab0;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a1a6a;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#6a3ab0;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#6a3ab0;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#200d42;margin:1.25rem 0 0.5rem;}
+a{color:#6a3ab0;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#3a1a6a,transparent);}
+.phase-label{color:#6a3ab0;}
+.battle-head{background:rgba(58,26,106,0.07);}
+.battle-num{border-color:var(--ac-border);color:#6a3ab0;}
+.you{color:#6a3ab0;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#200d42;}
+.tip-n{color:#200d42;}
+.ornament{color:#200d42;}
+footer .orn{color:#200d42;}
+::-webkit-scrollbar-thumb{background:#200d42;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#200d42,transparent);}
+.eyebrow span{color:#200d42;}
+h1{text-shadow:0 0 60px rgba(58,26,106,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#200d42;}
+.tier-badge{background:var(--ac-bg);color:#6a3ab0;border:1px solid var(--ac-border);}
+.card-slot{color:#200d42;}
+.rot-label{color:#200d42;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#6a3ab0;margin-bottom:3px;}
+.step.hl{background:rgba(58,26,106,0.14);border-color:var(--ac-border);color:#6a3ab0;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk cur">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(58,26,106,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Tank Build</span></div>
+    <h1>Mage Tank</h1>
+    <p class="hero-build">70–99 Defence · 99 Magic · Ancestral · Ancient Magicks</p>
+    <p class="hero-desc">High Defence makes melee hits negligible — pures hit for 6–10 while your Ice Barrage deals 20–28. Tank melee contact freely while casting, freeze to prevent escape, and outlast any opponent relying primarily on melee.</p>
+    <span class="tier-badge">Mage Tank · Defensive Magic Build</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">99</div><div class="stat-sub">Max tank</div></div>
+      <div class="stat-card"><div class="stat-label">Magic</div><div class="stat-val">99</div><div class="stat-sub">Ice Barrage</div></div>
+      <div class="stat-card"><div class="stat-label">Magic Dmg</div><div class="stat-val">+22%</div><div class="stat-sub">Ancestral+Occult</div></div>
+      <div class="stat-card"><div class="stat-label">vs Pures</div><div class="stat-val">Immune</div><div class="stat-sub">Melee barely hits</div></div>
+      <div class="stat-card"><div class="stat-label">Prayer</div><div class="stat-val">77</div><div class="stat-sub">Augury</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~115</div><div class="stat-sub">High CB</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fights</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>Mage Tank</h2><p>High Defence + 99 Magic — tank melee while dealing magic damage freely</p></div>
+
+    <p>The <strong>Mage Tank</strong> builds high Defence (70–99) alongside 99 Magic. Unlike most magic builds that operate at low Defence, the Mage Tank intentionally trains Defence to near-maximum — making melee hits negligible while firing Ice Barrage, Trident of the Swamp, or Vengeance-stacked spells freely.</p>
+    <p>The core asymmetry: at 99 Defence, melee attacks from pures and zerkers hit for 3–8 average damage per hit. Your magic spells through Ancestral robes deal 20–30 per cast. You're winning an attritional fight where they deal 6 while you deal 25.</p><table class="data-table"><tr><th>Opponent</th><th>Their Avg Melee Hit vs 99 Def</th><th>Your Avg Magic Hit</th><th>Food Economy</th></tr><tr><td>1-Def Pure (99 Str)</td><td class="hi">~8–12</td><td class="hi">~22 (Barrage)</td><td class="hi">Strongly favourable</td></tr><tr><td>Zerker (45 Def)</td><td class="med">~10–14</td><td class="hi">~22</td><td class="hi">Strongly favourable</td></tr><tr><td>Med-Level (75 Def)</td><td class="med">~16–20</td><td class="hi">~22</td><td class="med">Even</td></tr><tr><td>Maxed Main (99 Def)</td><td class="lo">~12–16 (Torva)</td><td class="med">~22</td><td class="med">Depends on styles</td></tr></table><div class="info">The Mage Tank trades combat level efficiency for extreme defensive durability. You'll fight at 110–120+ CB against all opponent types but your Defence makes every fight heavily favourable against melee-focused accounts.</div>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear</h2><p>Maximum magic damage inside maximum defence gear</p></div>
+<h3>Primary Magic Setup</h3><div class="card-grid"><div class="card"><div class="card-slot">Head</div><div class="card-name">Ancestral Hat</div><div class="card-note">75 Magic req. +6% magic damage.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Ancestral Robe Top</div><div class="card-note">75 Magic req. +6% magic damage.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Ancestral Robe Bottom</div><div class="card-note">75 Magic req.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Weapon</div><div class="card-name">Kodai Wand</div><div class="card-note">75 Magic req. Best magic weapon. Infinite water runes.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Off-hand</div><div class="card-name">Mage's Book</div><div class="card-note">+15 magic attack, +10 prayer bonus.</div><span class="badge b-gold">Standard</span></div><div class="card"><div class="card-slot">Amulet</div><div class="card-name">Occult Necklace</div><div class="card-note">+10% magic damage. BIS magic amulet.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Cape</div><div class="card-name">Imbued God Cape</div><div class="card-note">+2% magic damage.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Boots</div><div class="card-name">Infinity Boots</div><div class="card-note">50 Magic req, no Defence req.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Ring</div><div class="card-name">Seers Ring (i)</div><div class="card-note">+12 Magic imbued.</div><span class="badge b-gold">Standard</span></div></div><h3>Defensive Switch</h3><div class="card-grid"><div class="card"><div class="card-slot">Body switch</div><div class="card-name">Torva Platebody</div><div class="card-note">75 Def req. Switch when opponents go ranged.</div><span class="badge b-ac">Tank switch</span></div><div class="card"><div class="card-slot">Head switch</div><div class="card-name">Neitiznot Faceguard</div><div class="card-note">75 Def req. For melee situations.</div><span class="badge b-ac">Tank switch</span></div></div><div class="warn">Ancestral robes have no Defence requirement — only 75 Magic. Ahrim's robes require 70 Defence as well as 70 Magic. Always use Ancestral for the magic damage bonus; Ahrim's provides no magic damage increase.</div>
+  </div>
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p></p></div>
+<div class="food-grid"><div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">Heals +22 + overheal</div><div class="food-use">Pre-fight. At 99 HP, overheal to 121.</div></div><div class="food-card"><div class="food-name">Manta Ray</div><div class="food-heal">Heals +22 HP</div><div class="food-use">Better than sharks at high CB.</div></div><div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">Heals +18 HP (0-tick)</div><div class="food-use">5–6 per trip.</div></div></div><div class="food-grid"><div class="food-card"><div class="food-name">Magic Potion</div><div class="food-heal">Boosts Magic</div><div class="food-use">Before every fight.</div></div><div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-heal">Restores Prayer</div><div class="food-use">2–3 doses. Augury + Protect prayers drain fast.</div></div><div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-heal">Run energy</div><div class="food-use">Always.</div></div></div><div class="inventory">🐠 3× Anglerfish · 🐟 6× Manta Ray · 🐟 5× Karambwan · ⚗️ Magic Pot · ⚗️ 3× Prayer Pot · ⚗️ Stamina</div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>Tank melee hits while casting freely</p></div>
+
+    <div class="phase"><div class="phase-label">Core Strategy</div><h4>Tank and Cast</h4>    <div class="rotation"><div class="rot-label">Mage Tank loop</div><div class="steps"><span class="step hl".rstrip()>Magic Pot + Augury active</span><span class="arr">→</span><span class="step hl".rstrip()>Cast Ice Barrage — freeze</span><span class="arr">→</span><span class="step good".rstrip()>Burst while frozen</span><span class="arr">→</span><span class="step ".rstrip()>Opponent melee hits for 6–10 — barely noticeable</span><span class="arr">→</span><span class="step hl".rstrip()>Re-freeze after immunity</span></div></div>
+<div class="tip">At 99 Defence, most melee pures deal 6–12 damage per hit on average. Your 99 HP base means you can take 10+ hits before needing to eat — a massive advantage compared to any pure build facing your magic damage.</div></div>
+    <div class="phase"><div class="phase-label">vs Ranged Opponents</div><h4>Protect Missiles Switch</h4>    <div class="rotation"><div class="rot-label">Ranged defence</div><div class="steps"><span class="step bad".rstrip()>Opponent switches to ranged</span><span class="arr">→</span><span class="step hl".rstrip()>Activate Protect from Missiles</span><span class="arr">→</span><span class="step hl".rstrip()>Switch to Torva + melee weapon</span><span class="arr">→</span><span class="step ".rstrip()>Tank melee while Protect Missiles blocks ranged</span></div></div>
+</div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p></p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">vs. Pure — Attrition Win</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Mage Tank (110 CB, 99 Def) vs ScimPure (1 Def, 80 CB, Dragon Scimitar).</div><div class="log-line">ScimPure scimitar hits: <span class="dmg">6, 9, 4, 11, 7</span>. Average 7.4 over 5 hits.</div><div class="log-line">Your Ice Barrage: <span class="dmg">24</span>. Freeze. Blood Barrage: <span class="dmg">20, 18, 22</span>.</div><div class="log-line">ScimPure has eaten 4 sharks. You've taken 37 damage total — haven't eaten once.</div><div class="log-line">Re-freeze. More casts. <span class="good-c">Kill. You never needed to eat.</span></div><div class="lesson"><strong>Lesson:</strong> The attrition was completely one-sided. Their scimitar hit for 7.4 average vs your 99 Defence — you took 37 damage in a 12-tick fight and never ate. Your Barrage dealt 84 damage in the same time. The food economy was irrelevant because you simply didn't need food.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">vs. Ranged TBow — The Hard Matchup</div><div class="outcome o-esc">Escaped</div></div><div class="battle-body"><div class="battle-setup">Range Tank with TBow vs Mage Tank. TBow bypasses your defence.</div><div class="log-line">TBow fires: <span class="dmg">52</span>. Your 99 Defence does nothing — TBow is ranged.</div><div class="log-line">Activate Protect Missiles. TBow blocked. Switch to melee.</div><div class="log-line">Extended fight — TBow blocked, but their melee also hits hard at 126 CB.</div><div class="log-line">Food running low. Escape with Stamina Potion.</div><div class="log-line"><span class="good-c">Escaped. Learned: prepare a Protect Missiles switch for TBow opponents.</span></div><div class="lesson"><strong>Lesson:</strong> The Mage Tank's weakness is ranged — 99 Defence doesn't reduce ranged damage. Protect from Missiles is essential when opponents switch to TBow or Blowpipe. Always carry the prayer points for this switch.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>99 Defence doesn't protect against ranged or magic.</strong> Only melee attacks are reduced by Defence. Protect from Missiles when opponents go ranged.</div></li><li><div class="tip-n">02</div><div><strong>Ancestral provides magic damage bonus — Ahrim's doesn't.</strong> Ancestral robes have no Defence requirement, only 75 Magic. Always use Ancestral for offensive magic builds.</div></li><li><div class="tip-n">03</div><div><strong>Ice Barrage freeze is still your best opener.</strong> Even against melee pures whose hits are negligible, the freeze prevents escape and forces them to take full magic damage while locked in place.</div></li><li><div class="tip-n">04</div><div><strong>This build is expensive.</strong> Ancestral set, Kodai Wand, Imbued God Cape — significant GP investment. Consider whether you prefer Range Tank (rangetank.html) or Mage Tank based on your GP and playstyle.</div></li><li><div class="tip-n">05</div><div><strong>The Occult Necklace is non-negotiable.</strong> +10% magic damage on every cast. At 99 Magic with Ice Barrage, this is the single highest-impact amulet slot item.</div></li></ul>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Ancestral robes require 75 Magic (no Defence req). Ahrim's robes require 70 Defence AND 70 Magic — Ancestral is better. Ice Barrage requires 94 Magic and Desert Treasure I. 99 Defence reduces melee damage only — ranged attacks bypass Defence.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

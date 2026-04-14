@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSRS Pure Mage PvP Guide — The Wilderness Codex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ac:#5533aa;--ac-light:#7755cc;--ac-dim:#331a77;
+  --ac-bg:rgba(85,51,170,0.11);--ac-border:rgba(85,51,170,0.4);
+}
+
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6e2f;
+  --dark:#0d0b08;--dark2:#151209;
+  --text:#e8dcc8;--text-dim:#9e8e72;--text-faint:#4a4030;
+  --border:rgba(201,168,76,0.22);--border-bright:rgba(201,168,76,0.55);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'EB Garamond',serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5;}
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(10,9,6,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;padding:1rem 1.25rem 1rem 0;margin-right:1.25rem;border-right:1px solid var(--border);white-space:nowrap;transition:color 0.2s;}
+.nav-logo:hover{color:var(--gold-light);}
+.nav-links-wrap{position:relative;flex:1;min-width:0;}
+.nav-links{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;padding:0.55rem 52px;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-links-wrap::after{content:'❯';position:absolute;right:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to right,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:1;}
+.nav-links-wrap.at-end::after{opacity:0;}
+.nav-links-wrap::before{content:'❮';position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--gold);background:linear-gradient(to left,transparent,rgba(10,9,6,0.97) 45%);pointer-events:none;transition:opacity 0.2s;opacity:0;}
+.nav-links-wrap.at-start::before{opacity:0;}
+.nav-links-wrap.scrolled::before{opacity:1;}
+.nav-lnk{color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.75rem;white-space:nowrap;text-decoration:none;border-radius:2px;transition:color 0.2s,background 0.2s;}
+.nav-lnk:hover{color:var(--gold-light);}
+.nav-lnk.cur{color:var(--gold-light);background:rgba(201,168,76,0.1);}
+.nav-link{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 0.9rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:block;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--gold-light);}
+.nav-link.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+.wrapper{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 2rem 5rem;}
+.hero{text-align:center;padding:4.5rem 0 3rem;position:relative;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;pointer-events:none;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;max-width:150px;}
+h1{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.9rem,5vw,3.2rem);color:var(--gold-light);line-height:1.2;text-shadow:0 2px 6px rgba(0,0,0,0.9);margin-bottom:0.5rem;animation:fadeUp 0.9s ease both;}
+.hero-build{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-desc{font-size:1.05rem;color:var(--text-dim);max-width:590px;margin:0 auto 2rem;font-style:italic;animation:fadeUp 0.9s ease 0.2s both;}
+.tier-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;padding:5px 16px;border-radius:3px;text-transform:uppercase;animation:fadeUp 0.9s ease 0.3s both;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:8px;margin:1.25rem 0;}
+.stat-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px;text-align:center;}
+.stat-label{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.stat-val{font-family:'Cinzel Decorative',cursive;font-size:1.7rem;color:var(--gold-light);line-height:1.1;}
+.stat-sub{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-top:3px;}
+.tab-nav{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:2.5rem;padding-bottom:1rem;}
+.tab-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.65rem 1.2rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s,background 0.2s,transform 0.1s;}
+.tab-btn:hover{transform:translateY(-1px);}
+.tab-panel{display:none;animation:fadeUp 0.35s ease both;}
+.tab-panel.active{display:block;}
+.s-head{padding:2.5rem 0 1.75rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.s-head h2{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold-light);font-weight:600;margin-bottom:0.4rem;}
+.s-head p{color:var(--text-dim);font-style:italic;font-size:0.97rem;margin:0;}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;margin:1.25rem 0 0.5rem;}
+p{margin-bottom:1rem;}
+strong{color:var(--gold-light);font-weight:600;}
+ul,ol{padding-left:1.5rem;margin-bottom:1rem;}
+li{margin-bottom:0.4rem;}
+a{text-decoration:none;}
+a:hover{color:var(--gold-light);}
+.tip,.warn,.info,.danger,.build-note{border-radius:3px;padding:0.9rem 1.2rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.6;}
+.tip{background:rgba(45,106,45,0.1);border-left:3px solid #3a9e3a;color:#8ecb8e;}
+.warn{background:rgba(139,32,32,0.1);border-left:3px solid #8b2020;color:#d47070;}
+.info{background:rgba(26,61,107,0.18);border-left:3px solid #4a90d9;color:#9ac4f0;}
+.danger{background:rgba(120,0,0,0.18);border-left:3px solid #c0392b;color:#e88888;}
+.tip::before{content:'⚔ TIP';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#3a9e3a;}
+.warn::before{content:'⚠ WARNING';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c04040;}
+.info::before{content:'◆ NOTE';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#4a90d9;}
+.danger::before{content:'☠ DANGER';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#c0392b;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin:1rem 0;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:4px;padding:11px 13px;transition:border-color 0.2s,background 0.2s;}
+.card-slot{font-family:'Cinzel',serif;font-size:0.57rem;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3px;}
+.card-name{font-size:0.93rem;font-weight:600;color:var(--gold-light);margin-bottom:3px;}
+.card-note{font-size:0.8rem;color:var(--text-dim);line-height:1.4;font-style:italic;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-top:4px;}
+.b-green{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.b-gold{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border-bright);}
+.b-red{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.b-blue{background:rgba(26,61,107,0.25);color:#7ab0e0;border:1px solid rgba(74,144,217,0.3);}
+.b-gray{background:rgba(255,255,255,0.05);color:var(--text-dim);border:1px solid var(--border);}
+.rotation{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.35rem;margin:1rem 0;}
+.rot-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;}
+.steps{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.step{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.84rem;color:var(--text);white-space:nowrap;}
+.step.hl{background:rgba(201,168,76,0.14);border-color:var(--border-bright);color:var(--gold-light);}
+.step.good{background:rgba(45,106,45,0.14);border-color:rgba(58,158,58,0.35);color:#8ecb8e;}
+.step.bad{background:rgba(139,32,32,0.14);border-color:rgba(139,32,32,0.35);color:#d47070;}
+.arr{color:var(--gold-dim);font-size:0.82rem;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin:1rem 0;}
+.food-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:11px 13px;}
+.food-heal{font-size:0.78rem;color:#6db56d;margin-bottom:3px;}
+.food-use{font-size:0.78rem;color:var(--text-dim);font-style:italic;line-height:1.4;}
+.phase{position:relative;padding-left:1.4rem;margin-bottom:1.75rem;}
+.phase::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:2px;}
+.phase-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:3px;}
+.phase h4{font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);margin-bottom:0.5rem;}
+.battle{border:1px solid var(--border);border-radius:5px;margin-bottom:1.5rem;overflow:hidden;}
+.battle-head{border-bottom:1px solid var(--border);padding:0.85rem 1.35rem;display:flex;align-items:center;gap:11px;}
+.battle-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-bright);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.72rem;flex-shrink:0;}
+.battle-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold-light);flex:1;}
+.outcome{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:3px 9px;border-radius:3px;text-transform:uppercase;}
+.o-win{background:rgba(45,106,45,0.2);color:#6db56d;border:1px solid rgba(45,106,45,0.4);}
+.o-lose{background:rgba(139,32,32,0.2);color:#d47070;border:1px solid rgba(139,32,32,0.4);}
+.o-esc{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border-bright);}
+.battle-body{padding:1.1rem 1.35rem;}
+.battle-setup{font-size:0.86rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.log-line{font-size:0.88rem;line-height:2.1;}
+.dmg{color:#d47070;font-weight:700;}
+.good-c{color:#6db56d;font-weight:600;}
+.lesson{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--text-dim);font-style:italic;}
+.tips-list{list-style:none;margin:1rem 0;}
+.tips-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:0.92rem;line-height:1.6;}
+.tips-list li:last-child{border-bottom:none;}
+.tip-n{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold-dim);min-width:21px;padding-top:2px;font-weight:600;}
+.inventory{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:4px;padding:0.9rem 1.2rem;font-size:0.87rem;color:var(--text-dim);font-style:italic;line-height:2;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.87rem;margin:1rem 0;}
+.data-table th{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dim);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(201,168,76,0.07);color:var(--text-dim);vertical-align:top;}
+.data-table td:first-child{color:var(--gold-light);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.hi{color:#6db56d;}.lo{color:#d47070;}.med{color:var(--gold-light);}
+.ornament{text-align:center;font-size:0.8rem;letter-spacing:0.5em;opacity:0.35;margin:2.5rem 0;}
+footer{text-align:center;padding:3rem 0 2rem;color:var(--text-faint);font-size:0.79rem;font-style:italic;border-top:1px solid var(--border);margin-top:4rem;}
+footer .orn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;opacity:0.4;display:block;margin-bottom:0.6rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(11px);}to{opacity:1;transform:translateY(0);}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+@media(max-width:640px){body{font-size:16px;}.wrapper{padding:0 1rem 4rem;}.nav-inner{padding:0 1rem;}}
+
+.tab-btn:hover{color:#7755cc;border-color:var(--ac-border);background:var(--ac-bg);transform:translateY(-1px);}
+.tab-btn.active{color:var(--dark);background:#5533aa;border-color:#5533aa;font-weight:600;}
+.build-note{background:var(--ac-bg);border-left:3px solid #5533aa;color:#7755cc;}
+.build-note::before{content:'✦ BUILD SPECIFIC';font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;display:block;margin-bottom:4px;color:#5533aa;}
+.card:hover{border-color:var(--ac-border);background:var(--ac-bg);}
+.b-ac{background:var(--ac-bg);color:#7755cc;border:1px solid var(--ac-border);}
+h3{font-family:'Cinzel',serif;font-size:1.02rem;color:#7755cc;letter-spacing:0.05em;margin:2rem 0 0.7rem;}
+h4{font-family:'Cinzel',serif;font-size:0.88rem;color:#331a77;margin:1.25rem 0 0.5rem;}
+a{color:#7755cc;text-decoration:none;}
+.phase::before{background:linear-gradient(to bottom,#5533aa,transparent);}
+.phase-label{color:#7755cc;}
+.battle-head{background:rgba(85,51,170,0.07);}
+.battle-num{border-color:var(--ac-border);color:#7755cc;}
+.you{color:#7755cc;font-weight:600;}
+.them{color:#9ac4f0;font-weight:600;}
+.lesson strong{color:#331a77;}
+.tip-n{color:#331a77;}
+.ornament{color:#331a77;}
+footer .orn{color:#331a77;}
+::-webkit-scrollbar-thumb{background:#331a77;border-radius:3px;}
+.eyebrow::before,.eyebrow::after{background:linear-gradient(to right,transparent,#331a77,transparent);}
+.eyebrow span{color:#331a77;}
+h1{text-shadow:0 0 60px rgba(85,51,170,0.22),0 2px 6px rgba(0,0,0,0.9);}
+.hero-build{color:#331a77;}
+.tier-badge{background:var(--ac-bg);color:#7755cc;border:1px solid var(--ac-border);}
+.card-slot{color:#331a77;}
+.rot-label{color:#331a77;}
+.food-card .food-name{font-family:'Cinzel',serif;font-size:0.75rem;color:#7755cc;margin-bottom:3px;}
+.step.hl{background:rgba(85,51,170,0.14);border-color:var(--ac-border);color:#7755cc;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Wilderness Codex</a>
+    <div class="nav-links-wrap"><div class="nav-links">
+        <a href="index.html" class="nav-lnk">Home</a>
+        <a href="main.html" class="nav-lnk">Main</a>
+        <a href="maxmain.html" class="nav-lnk">Max Main</a>
+        <a href="osrs-pvp-guide.html" class="nav-lnk">Med-Level</a>
+        <a href="60defmed.html" class="nav-lnk">60 Def Med</a>
+        <a href="70defmed.html" class="nav-lnk">70 Def Med</a>
+        <a href="medlevel2.html" class="nav-lnk">Med Advanced</a>
+        <a href="endgame.html" class="nav-lnk">Endgame</a>
+        <a href="zerker.html" class="nav-lnk">Zerker</a>
+        <a href="50atkzerker.html" class="nav-lnk">50 Atk Zerker</a>
+        <a href="60atkzerker.html" class="nav-lnk">60 Atk Zerker</a>
+        <a href="75atkzerker.html" class="nav-lnk">75 Atk Zerker</a>
+        <a href="zerkertribrid.html" class="nav-lnk">Zerker Tribrid</a>
+        <a href="voidzerker.html" class="nav-lnk">Void Zerker</a>
+        <a href="pure.html" class="nav-lnk">1-Def Pure</a>
+        <a href="babypure.html" class="nav-lnk">Baby Pure</a>
+        <a href="lowhppure.html" class="nav-lnk">Low-HP Pure</a>
+        <a href="gmaul.html" class="nav-lnk">G Maul Pure</a>
+        <a href="60atk.html" class="nav-lnk">60 Atk Pure</a>
+        <a href="75atk.html" class="nav-lnk">75 Atk Pure</a>
+        <a href="puretribrid.html" class="nav-lnk">Pure Tribrid</a>
+        <a href="ranger.html" class="nav-lnk">Pure Ranger</a>
+        <a href="mage.html" class="nav-lnk cur">Pure Mage</a>
+        <a href="hybrid.html" class="nav-lnk">Hybrid Pure</a>
+        <a href="obby.html" class="nav-lnk">Obby Mauler</a>
+        <a href="maxobby.html" class="nav-lnk">Maxed Obby</a>
+        <a href="void.html" class="nav-lnk">Void Pure</a>
+        <a href="void2.html" class="nav-lnk">Void Pure II</a>
+        <a href="voidranger.html" class="nav-lnk">Void Ranger</a>
+        <a href="voidtribrid.html" class="nav-lnk">Void Tribrid</a>
+        <a href="13def.html" class="nav-lnk">13 Def</a>
+        <a href="initiate.html" class="nav-lnk">Initiate Pure</a>
+        <a href="30def.html" class="nav-lnk">30 Def</a>
+        <a href="40def.html" class="nav-lnk">40 Def</a>
+        <a href="50def.html" class="nav-lnk">50 Def</a>
+        <a href="prayerpure.html" class="nav-lnk">Prayer Pure</a>
+        <a href="rangetank.html" class="nav-lnk">Range Tank</a>
+        <a href="magetank.html" class="nav-lnk">Mage Tank</a>
+        <a href="attacklessrange.html" class="nav-lnk">Attackless Range</a>
+        <a href="attacklessmage.html" class="nav-lnk">Attackless Mage</a>
+        <a href="skillerpk.html" class="nav-lnk">Skiller PK</a>
+        <a href="questlocked.html" class="nav-lnk">Quest-Locked</a>
+        <a href="ironpk.html" class="nav-lnk">Iron PK</a>
+        <a href="ironmanzerker.html" class="nav-lnk">Ironman Zerker</a>
+        <a href="ironmanmed.html" class="nav-lnk">Ironman Med</a>
+        <a href="tribrid.html" class="nav-lnk">Tribrid Main</a>
+        <a href="beginner.html" class="nav-lnk">Beginner</a>
+      </div></div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="hero">
+    <div class="hero-glow" style="background:radial-gradient(ellipse,rgba(85,51,170,0.09) 0%,transparent 65%);"></div>
+    <div class="eyebrow"><span>Specialist Build</span></div>
+    <h1>The Pure Mage</h1>
+    <p class="hero-build">1 Defence · 94+ Magic · Ancient Magicks</p>
+    <p class="hero-desc">Control is the weapon. Ice spells freeze opponents in place for 5 ticks — then you burst freely while they stand helpless. The only PvP build that can prevent an opponent from running.</p>
+    <span class="tier-badge">Pure Mage · Freeze & Burst Specialist</span>
+    <div class="stat-row" style="margin-top:2rem;">
+      <div class="stat-card"><div class="stat-label">Magic</div><div class="stat-val">94+</div><div class="stat-sub">Ice Barrage</div></div>
+      <div class="stat-card"><div class="stat-label">Defence</div><div class="stat-val">1</div><div class="stat-sub">Never trained</div></div>
+      <div class="stat-card"><div class="stat-label">Freeze</div><div class="stat-val" style="font-size:0.95rem;font-family:'Cinzel',serif;letter-spacing:0.06em;">5 ticks</div><div class="stat-sub">Ice spells</div></div>
+      <div class="stat-card"><div class="stat-label">Max Hit</div><div class="stat-val">30</div><div class="stat-sub">Ice Barrage</div></div>
+      <div class="stat-card"><div class="stat-label">Control</div><div class="stat-val">✓</div><div class="stat-sub">Freeze ability</div></div>
+      <div class="stat-card"><div class="stat-label">Combat</div><div class="stat-val">~80</div><div class="stat-sub">±5 CB</div></div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="show('spells',this)">Spells & Staves</button>
+    <button class="tab-btn" onclick="show('gear',this)">Gear</button>
+    <button class="tab-btn" onclick="show('food',this)">Food & Pots</button>
+    <button class="tab-btn" onclick="show('rotations',this)">Rotations</button>
+    <button class="tab-btn" onclick="show('battles',this)">Fight Examples</button>
+    <button class="tab-btn" onclick="show('matchups',this)">Matchups</button>
+    <button class="tab-btn" onclick="show('tips',this)">Tips & Mistakes</button>
+    <button class="tab-btn" onclick="show('locations',this)">Where to Fight</button>
+  </div>
+  <div class="tab-panel active" id="p-overview">
+    <div class="s-head"><h2>The Pure Mage</h2><p>1 Defence, 94+ Magic — freeze, bind, and burst with Ancient Magicks</p></div>
+
+    <p>The <strong>Pure Mage</strong> is the most utility-focused pure build. Magic in PvP isn't just about damage — it's about <strong>control</strong>. Ice spells freeze opponents in place, preventing movement and escape. Bind and Entangle reduce mobility. At high Magic levels with Ancient Magicks, you can lock opponents in position while dealing 20–28 damage per cast and stacking burst spells before they can respond.</p>
+    <p>Pure Mage is unique in that it can <strong>prevent opponents from running</strong> — a capability no melee or ranged pure has. Against low-Defence accounts with limited prayer, a freeze + burst sequence can be lethal before the target reaches a bank tile.</p><div class="info">Ice Barrage (94 Magic) freezes for 5 ticks (3 seconds) and deals up to 30 damage. Ice Rush (70 Magic) freezes for 5 ticks and deals up to 20 damage. The freeze duration is identical — Ice Barrage just deals more damage.</div><table class="data-table"><tr><th>Spell</th><th>Magic Level</th><th>Freeze Duration</th><th>Max Hit</th><th>Rune Cost</th></tr><tr><td>Ice Rush</td><td>70</td><td>5 ticks</td><td>20</td><td class="hi">Low</td></tr><tr><td>Ice Burst</td><td>82</td><td>5 ticks</td><td>22</td><td class="med">Moderate</td></tr><tr><td>Ice Blitz</td><td>82</td><td>5 ticks</td><td>26</td><td class="med">Moderate</td></tr><tr><td>Ice Barrage</td><td>94</td><td>5 ticks</td><td class="hi">30</td><td class="lo">High</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-spells">
+    <div class="s-head"><h2>Spells & Staves</h2><p>Ancient Magicks, the freeze toolkit, and weapon choices</p></div>
+<h3>Spell Progression</h3><p>Ancient Magicks requires completion of <strong>Desert Treasure I</strong>. Once unlocked, you switch to the Ancient Magicks spellbook — your standard spellbook is inaccessible while on Ancient Magicks (you must switch at the Altar of Zaros or via items).</p>
+    <h3>The Freeze Spells</h3>
+    <p>The four ice spells (Rush, Burst, Blitz, Barrage) all freeze opponents for 5 ticks. After the freeze expires, opponents are immune to freeze for 5 more ticks. This freeze-immune window is important — if you freeze immediately on re-application, it will fail and the attempt is wasted.</p><div class="warn">After freezing an opponent, wait exactly 5 ticks after the freeze ends before attempting to re-freeze. Attempting during the immunity window wastes your cast and runes.</div><h3>Staves & Weapons</h3><div class="card-grid"><div class="card"><div class="card-slot">Staff</div><div class="card-name">Trident of the Swamp</div><div class="card-note">75 Magic req. Auto-casts its own spell dealing up to 28 damage. Better for sustained DPS outside of burst situations.</div><span class="badge b-gold">Strong option</span></div><div class="card"><div class="card-slot">Staff</div><div class="card-name">Kodai Wand</div><div class="card-note">75 Magic req. Best-in-slot magic weapon. Infinite water runes, high magic attack bonus. Essential for Ice Barrage build.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Staff Budget</div><div class="card-name">Ancient Staff</div><div class="card-note">50 Magic req. Provides access to Ancient Magicks auto-cast. Budget option before Kodai Wand.</div><span class="badge b-green">Budget</span></div><div class="card"><div class="card-slot">Off-hand</div><div class="card-name">Tome of Fire</div><div class="card-note">No Magic req. +5 magic damage bonus for fire spells. Not useful for ice spells.</div><span class="badge b-gray">Not recommended</span></div><div class="card"><div class="card-slot">Off-hand</div><div class="card-name">Mage's Book</div><div class="card-note">+15 magic attack bonus. No Defence req. Best off-hand for accuracy when casting.</div><span class="badge b-ac">Best off-hand</span></div></div>
+  </div>
+  <div class="tab-panel" id="p-gear">
+    <div class="s-head"><h2>Gear</h2><p>Mage BIS at 1 Defence — every piece for magic accuracy and damage</p></div>
+<div class="card-grid"><div class="card"><div class="card-slot">Head</div><div class="card-name">Ancestral Hat</div><div class="card-note">75 Magic req, no Defence req. +6% magic damage. BIS magic helm.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Head budget</div><div class="card-name">Ahrim's Hood</div><div class="card-note">70 Magic, 70 Defence req — unavailable! Use Wizard Hat (no req) or Infinity Hat (50 Magic req) instead.</div><span class="badge b-red">Ahrim needs 70 Def</span></div><div class="card"><div class="card-slot">Head (correct)</div><div class="card-name">Infinity Hat</div><div class="card-note">50 Magic req, no Defence req. Best budget magic helmet for 1-Defence.</div><span class="badge b-gold">Budget BIS</span></div><div class="card"><div class="card-slot">Body</div><div class="card-name">Ancestral Robe Top</div><div class="card-note">75 Magic req, no Defence req. +6% magic damage. BIS.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Body budget</div><div class="card-name">Mystic Robe Top</div><div class="card-note">40 Magic req, no Defence req. Solid magic bonus. Use until Ancestral.</div><span class="badge b-gold">Budget</span></div><div class="card"><div class="card-slot">Legs</div><div class="card-name">Ancestral Robe Bottom</div><div class="card-note">75 Magic req, no Defence req. BIS legs.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Amulet</div><div class="card-name">Occult Necklace</div><div class="card-note">+10% magic damage. No Defence req. BIS magic amulet. Massive DPS upgrade.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Cape</div><div class="card-name">Imbued God Cape</div><div class="card-note">+2 magic attack, +2% magic damage. Requires completing Mage Arena II. No Defence req.</div><span class="badge b-red">BIS</span></div><div class="card"><div class="card-slot">Boots</div><div class="card-name">Infinity Boots</div><div class="card-note">50 Magic req, no Defence req. Best magic boots available to 1-Defence.</div><span class="badge b-gold">Best</span></div><div class="card"><div class="card-slot">Ring</div><div class="card-name">Seers Ring (i)</div><div class="card-note">+12 Magic attack imbued. No Defence req. Imbue via NMZ or BH points.</div><span class="badge b-gold">Imbued</span></div></div><div class="warn">Ancestral robes have no Defence requirement — just 75 Magic. Ahrim's robes DO require 70 Defence (unavailable). Always check whether magic armour requires Defence before purchasing.</div>
+  </div>
+  <div class="tab-panel" id="p-food">
+    <div class="s-head"><h2>Food & Potions</h2><p></p></div>
+<div class="food-grid"><div class="food-card"><div class="food-name">Anglerfish</div><div class="food-heal">Heals +22 HP + overheal</div><div class="food-use">Pre-fight overheal. Pure Mages are fragile — extra HP is critical.</div></div><div class="food-card"><div class="food-name">Shark</div><div class="food-heal">Heals +20 HP</div><div class="food-use">Standard. 7–9 per trip.</div></div><div class="food-card"><div class="food-name">Karambwan</div><div class="food-heal">Heals +18 HP (0-tick)</div><div class="food-use">Always carry 5–6.</div></div></div><div class="food-grid"><div class="food-card"><div class="food-name">Magic Potion</div><div class="food-heal">Boosts Magic</div><div class="food-use">Drink before every fight. More Magic level = more accuracy and damage on Ice Barrage.</div></div><div class="food-card"><div class="food-name">Prayer Potion</div><div class="food-heal">Restores Prayer</div><div class="food-use">2 doses — Protect prayers and Augury drain fast.</div></div><div class="food-card"><div class="food-name">Stamina Potion</div><div class="food-heal">Run energy</div><div class="food-use">Keep opponents in freeze range.</div></div></div><div class="inventory">🐠 2× Anglerfish · 🐟 7× Shark · 🐟 5× Karambwan · ⚗️ Magic Potion · ⚗️ 2× Prayer Pot doses · ⚗️ Stamina · 🪄 Rune stack for Ice Barrage (Blood, Death, Water runes in bulk)</div>
+  </div>
+  <div class="tab-panel" id="p-rotations">
+    <div class="s-head"><h2>Rotations</h2><p>The freeze-burst sequence and re-freeze timing</p></div>
+
+    <div class="phase"><div class="phase-label">Phase 1</div><h4>Approach & Freeze</h4>    <div class="rotation"><div class="rot-label">Opening freeze</div><div class="steps"><span class="step hl".rstrip()>Close to cast range</span><span class="arr">→</span><span class="step hl".rstrip()>Magic Potion active</span><span class="arr">→</span><span class="step hl".rstrip()>Ice Barrage — freeze lands</span><span class="arr">→</span><span class="step good".rstrip()>Opponent frozen 5 ticks</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Phase 2</div><h4>Burst While Frozen</h4>    <div class="rotation"><div class="rot-label">Burst sequence while frozen</div><div class="steps"><span class="step ".rstrip()>Freeze active</span><span class="arr">→</span><span class="step hl".rstrip()>Cast Blood/Shadow Barrage for max damage</span><span class="arr">→</span><span class="step ".rstrip()>Opponent can't move or escape</span><span class="arr">→</span><span class="step ".rstrip()>Deal 20–28 per cast</span></div></div>
+</div>
+    <div class="phase"><div class="phase-label">Phase 3</div><h4>Re-Freeze Timing</h4>    <div class="rotation"><div class="rot-label">Re-freeze after immunity</div><div class="steps"><span class="step ".rstrip()>Freeze expires (5 ticks)</span><span class="arr">→</span><span class="step ".rstrip()>WAIT 5 ticks — immunity window</span><span class="arr">→</span><span class="step hl".rstrip()>Attempt re-freeze</span><span class="arr">→</span><span class="step good".rstrip()>Success — freeze again</span><span class="arr">→</span><span class="step ".rstrip()>Burst continues</span></div></div>
+<div class="tip">Counting ticks is essential for re-freezing. An early cast wastes runes and gives the opponent a free movement window. Count: freeze expires → 1-2-3-4-5 → cast.</div></div>
+  </div>
+  <div class="tab-panel" id="p-battles">
+    <div class="s-head"><h2>Fight Examples</h2><p></p></div>
+<div class="battle"><div class="battle-head"><div class="battle-num">I</div><div class="battle-title">vs. Melee Pure — Classic Freeze+Burst</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">You (Pure Mage, 94 Magic, Ice Barrage) vs ScimPure (99 Str, 60 Atk, 1 Def).</div><div class="log-line"><span class="them">ScimPure</span> approaches. You Ice Barrage at close range — freeze lands: <span class="dmg">24</span> damage.</div><div class="log-line">Frozen. You cast Blood Barrage three times: <span class="dmg">18</span>, <span class="dmg">22</span>, <span class="dmg">19</span> while they can't move.</div><div class="log-line">Freeze expires. ScimPure starts running. Wait 5 ticks. Re-freeze: <span class="dmg">26</span>.</div><div class="log-line">More bursts: <span class="dmg">21</span>, <span class="dmg">20</span>. They're at ~20 HP with 2 food.</div><div class="log-line">Final Ice Barrage: <span class="dmg">28</span>. <span class="good-c">Kill without them ever landing a melee hit.</span></div><div class="lesson"><strong>Lesson:</strong> The freeze prevented all melee contact. 5 casts during each freeze window dealt 84 damage before the target could respond. This is the ideal Pure Mage fight — frozen prey dealing 0 damage while you freely cast.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">II</div><div class="battle-title">vs. Ranger — Close Range Required</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Pure Ranger vs Pure Mage. Ranger has Protect Missiles. You close to melee range.</div><div class="log-line"><span class="them">RangeKing</span> activates Protect Missiles. All your spells: 0 damage.</div><div class="log-line"><span class="you">You</span> close to melee range. Cast Ice Barrage at point-blank — freeze lands.</div><div class="log-line">Casts while frozen: <span class="dmg">24</span>, <span class="dmg">20</span>, <span class="dmg">18</span>.</div><div class="log-line">RangeKing can't effectively kite while frozen. Re-freeze after immunity.</div><div class="log-line">Final cast: <span class="dmg">22</span>. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> Protect Missiles was their answer — but only works at range. Closing to melee distance removes the prayer's effectiveness against your spell accuracy since you're directly adjacent. At melee range, their Blowpipe has no minimum range advantage.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">III</div><div class="battle-title">vs. Melee Pure — Escaped via Good Prayer</div><div class="outcome o-esc">Escaped</div></div><div class="battle-body"><div class="battle-setup">Opponent activates Protect Magic and you can't land damage.</div><div class="log-line"><span class="them">PrayMelee</span> activates Protect Magic before you cast. All spells deal 0.</div><div class="log-line">You switch to a melee weapon if carrying one. If not — no damage options.</div><div class="log-line"><span class="you">You</span> Stamina Potion, sprint to bank. Combo eat while escaping.</div><div class="log-line"><span class="good-c">Escaped. No gear lost.</span></div><div class="lesson"><strong>Lesson:</strong> Protect Magic is a hard counter to Pure Mage with no answer other than a melee weapon switch. Always carry at minimum a cheap melee weapon as a backup. Against known prayer users, opening with a freeze before they activate prayer is the counter.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">IV</div><div class="battle-title">vs. Prayer Tank — Pre-Prayer Freeze</div><div class="outcome o-win">Victory</div></div><div class="battle-body"><div class="battle-setup">Prayer user who activates Protect Magic — but you freeze before they react.</div><div class="log-line"><span class="you">You</span> close quickly and cast Ice Barrage before they activate any prayer.</div><div class="log-line">Freeze lands: <span class="dmg">27</span>. They activate Protect Magic while frozen — too late for this freeze.</div><div class="log-line">Burst while frozen — Protect Magic blocks damage. Freeze expires.</div><div class="log-line"><span class="you">You</span> switch to melee weapon. Scimitar hits through their Protect Magic.</div><div class="log-line">Scimitar: <span class="dmg">29</span>, <span class="dmg">24</span>. They're low. Final Ice Barrage before prayer reactivates: <span class="dmg">25</span>. <span class="good-c">Kill.</span></div><div class="lesson"><strong>Lesson:</strong> The pre-prayer freeze bought burst ticks before they activated. When Protect Magic blocked your spells, the melee weapon switch kept pressure on. The final Ice Barrage in their prayer reaction gap closed the fight.</div></div></div><div class="battle"><div class="battle-head"><div class="battle-num">V</div><div class="battle-title">Learning Death — Miscounted Ticks</div><div class="outcome o-lose">Defeat</div></div><div class="battle-body"><div class="battle-setup">Re-freeze cast too early — immunity window wasted the attempt.</div><div class="log-line">Opponent freeze expires. You immediately cast Ice Barrage — <strong>immunity window still active</strong>. 0 damage, no freeze.</div><div class="log-line">They sprint away and combo eat during the window you wasted.</div><div class="log-line">You chase but their run energy beats yours. Distance opens up.</div><div class="log-line"><span class="dmg">Escaped. Your runes wasted.</span></div><div class="lesson"><strong>Lesson:</strong> Early re-freeze attempts during the immunity window waste resources and give opponents free movement ticks. Count carefully: freeze expires → wait 5 ticks → then cast. Those 5 ticks feel like an eternity in a live fight, but casting early means 0 results every time.</div></div></div>
+  </div>
+  <div class="tab-panel" id="p-matchups">
+    <div class="s-head"><h2>Matchups</h2><p></p></div>
+<table class="data-table"><tr><th>Opponent</th><th>Strategy</th><th>Their Counter</th><th>Difficulty</th></tr><tr><td>Melee pures</td><td>Freeze, burst while frozen, re-freeze</td><td>Protect Magic</td><td class="hi">Favourable</td></tr><tr><td>Pure Ranger</td><td>Close gap, freeze at melee range</td><td>Protect Missiles doesn't block magic</td><td class="hi">Favourable</td></tr><tr><td>Zerker</td><td>Freeze before they close, burst window</td><td>Protect Magic + melee switch</td><td class="med">Competitive</td></tr><tr><td>Void Pure</td><td>Freeze before they style-switch</td><td>Fast style switching</td><td class="med">Challenging</td></tr><tr><td>Prayer Tank</td><td>Pre-prayer freeze, melee switch backup</td><td>Protect Magic = 0 damage</td><td class="lo">Hard without melee switch</td></tr><tr><td>Maxed Mains</td><td>Escape using freeze on them, sprint</td><td>Torva/high def</td><td class="lo">Escape only</td></tr></table>
+  </div>
+  <div class="tab-panel" id="p-tips">
+    <div class="s-head"><h2>Tips & Mistakes</h2><p></p></div>
+<ul class="tips-list"><li><div class="tip-n">01</div><div><strong>Always count ticks before re-freezing.</strong> The 5-tick immunity window after freeze expires means any cast before the window closes deals 0 damage and no freeze. Count every time.</div></li><li><div class="tip-n">02</div><div><strong>Freeze before opponents activate Protect Magic.</strong> The pre-prayer freeze buys you burst ticks at full damage. Prioritise closing quickly and casting before they react.</div></li><li><div class="tip-n">03</div><div><strong>Always carry a cheap melee weapon.</strong> Protect Magic completely shuts down your offence. A Dragon Scimitar or even a Rune Scimitar in your inventory lets you continue fighting when magic is countered.</div></li><li><div class="tip-n">04</div><div><strong>Occult Necklace is essential.</strong> The +10% magic damage boost applies to every cast. At 99 Magic with Blood Barrage, this is a significant DPS increase — never fight without it.</div></li><li><div class="tip-n">05</div><div><strong>Rune management matters.</strong> Ice Barrage costs 1 Blood + 2 Death + 4 Water runes per cast. At 10 casts per fight, that's 40 Water runes, 20 Death runes, 10 Blood runes. Bring large stacks.</div></li><li><div class="tip-n">06</div><div><strong>Keep moving to avoid melee contact.</strong> At 1 Defence, any melee hit is dangerous. Cast while moving — you don't have to stand still to cast.</div></li></ul>
+  </div>
+  <div class="tab-panel" id="p-locations">
+    <div class="s-head"><h2>Where to Fight</h2><p></p></div>
+
+    <h3>Bounty Hunter</h3><p>The matched-level environment is excellent for Pure Mage. Your freeze gives you control over fights that other pures can't replicate.</p>
+    <h3>Clan Wars</h3><p>Practice re-freeze timing obsessively here. Counting 5 ticks between freeze attempts is the single most important mechanical skill of this build.</p>
+    <h3>Edgeville Wilderness</h3><p>Open terrain works well — you need space to maintain freeze distance and chase after freeze. Level 1–10 for teleport safety.</p><div class="info">Desert Treasure I is required for Ancient Magicks (Ice Barrage). The quest awards Magic XP as a reward — assign to Magic only. Completing Desert Treasure I is the single most important milestone for the Pure Mage build.</div>
+  </div>
+</div>
+<footer><span class="orn">· · ✦ · ·</span>Ice Barrage requires 94 Magic and Desert Treasure I completion. Re-freeze immunity window is 5 ticks after freeze expires — cast before this window ends for 0 effect. Ancestral robes require 75 Magic (no Defence req). Ahrim's robes require 70 Defence — not available to 1-Defence builds.</footer>
+<script>
+(function(){
+  var wrap=document.querySelector('.nav-links-wrap');
+  var links=document.querySelector('.nav-links');
+  if(!links||!wrap)return;
+  function check(){
+    var atEnd=links.scrollLeft+links.clientWidth>=links.scrollWidth-4;
+    var scrolled=links.scrollLeft>4;
+    wrap.classList.toggle('at-end',atEnd);
+    wrap.classList.toggle('scrolled',scrolled);
+  }
+  check();
+  links.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check,{passive:true});
+})();
+</script>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
